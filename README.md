@@ -24,7 +24,9 @@ histórico de transações entre as contas.
 #### SUGESTÃO DE ORGANIZAÇÃO DO PROJETO
 
 Elaboração do kanban com definição dos entregáveis
+
 \1. Elaboração do kanban(sugestão de utilização: Trello,Jira, etc)
+
 \2. Criação do backlog(com tarefas referente ao desenvolvimento)
 \3. Detalhamento descritivo das tarefas da squad dentro dos seus cards (e
 não apenas com títulos genéricos no card)-Nome para a squad
