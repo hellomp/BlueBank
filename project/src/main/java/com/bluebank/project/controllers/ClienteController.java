@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.api.model.Usuario;
-
 @RestController
 @RequestMapping("/cliente")
 public class ClienteController {
