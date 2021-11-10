@@ -10,6 +10,7 @@
 
 [Pedro Henrique Barros da Costa](https://github.com/PedroHenriquebc)
 
+<<<<<<< HEAD
 ### BlueBank
 
 O banco fictício BlueBank está construindo uma nova plataforma e precisa de
@@ -73,6 +74,8 @@ CRITÉRIOS DE AVALIAÇÃO
 
 
 
+=======
+>>>>>>> 092b2f817e522bd12cb670417bdefd075feecabc
 ## Ferramentas
 
 Java
