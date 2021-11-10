@@ -1,4 +1,4 @@
-package controllers;
+package com.bluebank.project.controllers;
 
 import java.util.List;
 
