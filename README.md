@@ -10,6 +10,8 @@
 
 [Pedro Henrique Barros da Costa](https://github.com/PedroHenriquebc)
 
+[Hellimateas Barros Chaves](https://github.com/Hellimateas)
+
 ### BlueBank
 
 O banco fictício BlueBank está construindo uma nova plataforma e precisa de
