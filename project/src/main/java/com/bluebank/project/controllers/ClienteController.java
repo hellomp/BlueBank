@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.api.model.Usuario;
+import com.bluebank.project.models.Cliente;
 
 @RestController
 @RequestMapping("/cliente")
@@ -32,7 +32,7 @@ public class ClienteController {
 	// obs retornar DTO sem senha
 	@PostMapping()
 	@ResponseStatus(HttpStatus.CREATED)
-	ResponseEntity<Cliente> cadastrarCliente(@Validated @ResponseBody Cliente cliente, BindingResult br)
+	ResponseEntity<Cliente> cadastrarCliente(@Validated @RequestBody Cliente cliente, BindingResult br)
 							throws DataIntegrityViolationException, Exception {
 		if(br.hasErrors()) throw new ConstraintException(br.getAllErrors().get(0).getDefaultMessage());
 		return ResponseEntity.body(ClasseDeServicedeCliente.cadastrarNovoCliente(cliente));
@@ -42,7 +42,7 @@ public class ClienteController {
 	@GetMapping("/{cpfcnpj")
 	@ResponseStatus(HttpStatus.OK)
 	ResponseEntity<Cliente> consultarCadastro(@PathVariable("cpfcnpj") String cpfcnpj) {
-		return ResponseEntity.body(ClasseDeServicedeCliente.consultarCadastroCliente(cpfcnpj));
+		return ResponseEntity.body(ClasseDeServicedeCliente.consultarCadastroCliente(cpfcnpj)).build();
 	}
 	
 	//atualizar cliente
@@ -51,8 +51,8 @@ public class ClienteController {
 	public ResponseEntity<Usuario> update(@PathVariable Integer id, @RequestBody Cliente cliente, BindingResult br)
 								   throws DataIntegrityViolationException, Exception {
 		if(br.hasErrors()) throw new ConstraintException(br.getAllErrors().get(0).getDefaultMessage());
-		Client clientAux = ClasseDeServicedeCliente.update(id, cliente);
-		return ResponseEntity.ok().body(newObj);
+		Cliente clientAux = ClasseDeServicedeCliente.update(id, cliente);
+		return ResponseEntity.body(clienteAux);
 	}
 	
 	//excluir coliente
@@ -60,6 +60,6 @@ public class ClienteController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	ResponseEntity<Void> excluirConta(@PathVariable("cpfcnpj") String cpfcnpj) {
 		ClasseDeServicedeCliente.excluirContaCliente(cpfcnpj);
-		return ResponseEntity.build();
+		return ResponseEntity.body().build();
 	}
 }
