@@ -1,6 +1,6 @@
-package com.bluebank.project.model;
+package com.bluebank.project.models;
 
-public class Clientes {
+public class Cliente {
 	private int id;
 	private String nome;
 	private int cpf;
@@ -11,12 +11,12 @@ public class Clientes {
 	private String senha;
 	private String tipo;
 	
-	
-	public Clientes() {
+	public Cliente() {
 		super();
+		
 	}
-	
-	public Clientes(int id, String nome, int cpf, int cnpj, String email, int cep, int telefone, String senha,
+
+	public Cliente(int id, String nome, int cpf, int cnpj, String email, int cep, int telefone, String senha,
 			String tipo) {
 		super();
 		this.id = id;
@@ -29,61 +29,79 @@ public class Clientes {
 		this.senha = senha;
 		this.tipo = tipo;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	public int getCpf() {
 		return cpf;
 	}
+
 	public void setCpf(int cpf) {
 		this.cpf = cpf;
 	}
+
 	public int getCnpj() {
 		return cnpj;
 	}
+
 	public void setCnpj(int cnpj) {
 		this.cnpj = cnpj;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public int getCep() {
 		return cep;
 	}
+
 	public void setCep(int cep) {
 		this.cep = cep;
 	}
+
 	public int getTelefone() {
 		return telefone;
 	}
+
 	public void setTelefone(int telefone) {
 		this.telefone = telefone;
 	}
+
 	public String getSenha() {
 		return senha;
 	}
+
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+
 	public String getTipo() {
 		return tipo;
 	}
+
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
+	
 	
 	
 

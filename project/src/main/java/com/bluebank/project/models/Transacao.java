@@ -62,31 +62,31 @@ public class Transacao {
     super();
   }
 
-  public Transacao(int id, Conta conta, TipoTransacao tipoTransacao, Date dataTransacao,
-      double saldoAnterior, double saldoAtual) {
-    this.id = id;
-    this.conta = conta;
-    this.tipoTransacao = tipoTransacao;
-    this.dataTransacao = dataTransacao;
-    this.saldoAnterior = saldoAnterior;
-    SaldoAtual = saldoAtual;
-  }
-
-  public Transacao(int id, Conta conta, TipoTransacao tipoTransacao, Date dataTransacao,
-      double saldoAnterior, double saldoAtual, Conta contaDestino, Date dataAgendTransacao,
-      Date dataExecTransacao, Emprestimo emprestimo, Double depositoEmprestimo) {
-    this.id = id;
-    this.conta = conta;
-    this.tipoTransacao = tipoTransacao;
-    this.dataTransacao = dataTransacao;
-    this.saldoAnterior = saldoAnterior;
-    SaldoAtual = saldoAtual;
-    this.contaDestino = contaDestino;
-    this.dataAgendTransacao = dataAgendTransacao;
-    this.dataExecTransacao = dataExecTransacao;
-    this.emprestimo = emprestimo;
-    this.depositoEmprestimo = depositoEmprestimo;
-  }
+//  public Transacao(int id, Conta conta, TipoTransacao tipoTransacao, Date dataTransacao,
+//      double saldoAnterior, double saldoAtual) {
+//    this.id = id;
+//    this.conta = conta;
+//    this.tipoTransacao = tipoTransacao;
+//    this.dataTransacao = dataTransacao;
+//    this.saldoAnterior = saldoAnterior;
+//    SaldoAtual = saldoAtual;
+//  }
+//
+//  public Transacao(int id, Conta conta, TipoTransacao tipoTransacao, Date dataTransacao,
+//      double saldoAnterior, double saldoAtual, Conta contaDestino, Date dataAgendTransacao,
+//      Date dataExecTransacao, Emprestimo emprestimo, Double depositoEmprestimo) {
+//    this.id = id;
+//    this.conta = conta;
+//    this.tipoTransacao = tipoTransacao;
+//    this.dataTransacao = dataTransacao;
+//    this.saldoAnterior = saldoAnterior;
+//    SaldoAtual = saldoAtual;
+//    this.contaDestino = contaDestino;
+//    this.dataAgendTransacao = dataAgendTransacao;
+//    this.dataExecTransacao = dataExecTransacao;
+//    this.emprestimo = emprestimo;
+//    this.depositoEmprestimo = depositoEmprestimo;
+//  }
 
   public int getId() {
     return id;
