@@ -3,10 +3,12 @@ package com.bluebank.project.models;
 import java.util.Date;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 
@@ -18,41 +20,39 @@ public class Conta {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@NotBlank
-	private int id_cliente;
-	@NotBlank
-	private int id_agencia;
-	@NotBlank
-	private ContaEnum tipo_conta;
-	@NotBlank
-	private Date dt_abertura;
-	private Date dt_encerramento;
-	@NotBlank
-	private double saldo_inicial;
-	@NotBlank
-	private double saldo_anterior;
-	private double saldo_atual;
 	
 	@ManyToOne
+	@JoinColumn(name = "id_cliente")
 	private Cliente cliente;
+	
+	@NotBlank
+	@Column(name = "id_agencia")
+	private int agencia;
+	
+	@NotBlank
+	@Column(name = "tipo_conta")
+	private ContaEnum tipoConta;
+	
+	@NotBlank
+	@Column(name = "dt_abertura")
+	private Date dataAbertura;
+	
+	@Column(name = "dt_encerramento")
+	private Date dataEncerramento;
+	
+	@NotBlank
+	@Column(name = "saldo_inicial")
+	private double sladoInicial;
+	
+	@NotBlank
+	@Column(name = "sado_anterior")
+	private double saldoAnterior;
+	
+	@Column(name = "saldo_atual")
+	private double saldoAtual;
 	
 	public Conta() {
 		
-	}
-
-	public Conta(int id, int id_cliente, int id_agencia, ContaEnum tipo_conta, Date dt_abertura, Date dt_encerramento,
-			double saldo_inicial, double saldo_anterior, double saldo_atual, Cliente cliente) {
-		super();
-		this.id = id;
-		this.id_cliente = id_cliente;
-		this.id_agencia = id_agencia;
-		this.tipo_conta = tipo_conta;
-		this.dt_abertura = dt_abertura;
-		this.dt_encerramento = dt_encerramento;
-		this.saldo_inicial = saldo_inicial;
-		this.saldo_anterior = saldo_anterior;
-		this.saldo_atual = saldo_atual;
-		this.cliente = cliente;
 	}
 
 	public int getId() {
@@ -63,70 +63,6 @@ public class Conta {
 		this.id = id;
 	}
 
-	public int getId_cliente() {
-		return id_cliente;
-	}
-
-	public void setId_cliente(int id_cliente) {
-		this.id_cliente = id_cliente;
-	}
-
-	public int getId_agencia() {
-		return id_agencia;
-	}
-
-	public void setId_agencia(int id_agencia) {
-		this.id_agencia = id_agencia;
-	}
-
-	public ContaEnum getTipo_conta() {
-		return tipo_conta;
-	}
-
-	public void setTipo_conta(ContaEnum tipo_conta) {
-		this.tipo_conta = tipo_conta;
-	}
-
-	public Date getDt_abertura() {
-		return dt_abertura;
-	}
-
-	public void setDt_abertura(Date dt_abertura) {
-		this.dt_abertura = dt_abertura;
-	}
-
-	public Date getDt_encerramento() {
-		return dt_encerramento;
-	}
-
-	public void setDt_encerramento(Date dt_encerramento) {
-		this.dt_encerramento = dt_encerramento;
-	}
-
-	public double getSaldo_inicial() {
-		return saldo_inicial;
-	}
-
-	public void setSaldo_inicial(double saldo_inicial) {
-		this.saldo_inicial = saldo_inicial;
-	}
-
-	public double getSaldo_anterior() {
-		return saldo_anterior;
-	}
-
-	public void setSaldo_anterior(double saldo_anterior) {
-		this.saldo_anterior = saldo_anterior;
-	}
-
-	public double getSaldo_atual() {
-		return saldo_atual;
-	}
-
-	public void setSaldo_atual(double saldo_atual) {
-		this.saldo_atual = saldo_atual;
-	}
-	
 	public Cliente getCliente() {
 		return cliente;
 	}
@@ -134,6 +70,63 @@ public class Conta {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
+
+	public int getIdAgencia() {
+		return agencia;
+	}
+
+	public void setIdAgencia(int idAgencia) {
+		this.agencia = idAgencia;
+	}
+
+	public ContaEnum getTipoConta() {
+		return tipoConta;
+	}
+
+	public void setTipoConta(ContaEnum tipoConta) {
+		this.tipoConta = tipoConta;
+	}
+
+	public Date getDataAbertura() {
+		return dataAbertura;
+	}
+
+	public void setDataAbertura(Date dataAbertura) {
+		this.dataAbertura = dataAbertura;
+	}
+
+	public Date getDataEncerramento() {
+		return dataEncerramento;
+	}
+
+	public void setDataEncerramento(Date dataEncerramento) {
+		this.dataEncerramento = dataEncerramento;
+	}
+
+	public double getSladoInicial() {
+		return sladoInicial;
+	}
+
+	public void setSladoInicial(double sladoInicial) {
+		this.sladoInicial = sladoInicial;
+	}
+
+	public double getSaldoAnterior() {
+		return saldoAnterior;
+	}
+
+	public void setSaldoAnterior(double saldoAnterior) {
+		this.saldoAnterior = saldoAnterior;
+	}
+
+	public double getSaldoAtual() {
+		return saldoAtual;
+	}
+
+	public void setSaldoAtual(double saldoAtual) {
+		this.saldoAtual = saldoAtual;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -153,13 +146,10 @@ public class Conta {
 
 	@Override
 	public String toString() {
-		return "Conta [id=" + id + ", id_cliente=" + id_cliente + ", id_agencia=" + id_agencia + ", tipo_conta="
-				+ tipo_conta + ", dt_abertura=" + dt_abertura + ", dt_encerramento=" + dt_encerramento
-				+ ", saldo_inicial=" + saldo_inicial + ", saldo_anterior=" + saldo_anterior + ", saldo_atual="
-				+ saldo_atual + "]";
+		return "Conta [id=" + id + ", cliente=" + cliente + ", idAgencia=" + agencia + ", tipoConta=" + tipoConta
+				+ ", dataAbertura=" + dataAbertura + ", dataEncerramento=" + dataEncerramento + ", sladoInicial="
+				+ sladoInicial + ", saldoAnterior=" + saldoAnterior + ", saldoAtual=" + saldoAtual + "]";
 	}
-
-	
 	
 	
 }
