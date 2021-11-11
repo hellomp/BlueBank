@@ -30,7 +30,7 @@ public class ContaController {
 		return ResponseEntity.ok().body(contaService.findById(id));
 	}
 	
-	@PostMapping("/cadastrar")
+	@PostMapping()
 	public ResponseEntity<Conta> create(@RequestBody Conta produto){
 		Conta produto2 = contaService.create(produto); 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().
