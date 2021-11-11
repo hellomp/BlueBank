@@ -1,17 +1,27 @@
 package com.bluebank.project.controllers;
 
+import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import com.bluebank.project.models.Cliente;
+import com.bluebank.project.models.Conta;
 
 @RestController
 @RequestMapping(path = "/conta")
@@ -21,32 +31,36 @@ public class ContaController {
 	@Autowired
 	private ContaService produtoService;
 	
-	@GetMapping("/todos")
-	public ResponseEntity<List <Conta>> mostrarTodos(){
-		return ResponseEntity.ok().body(contaService.mostrarProdutos());
-	}
 	
-	@GetMapping("/{id}")
-	public ResponseEntity<Conta> buscarProduto(@PathVariable Long id){
-		return ResponseEntity.ok().body(contaService.findById(id));
+	//criar cliente
+	// obs retornar DTO sem senha
+	@PostMapping()
+	@ResponseStatus(HttpStatus.CREATED)
+	ResponseEntity<Conta> cadastrarCliente(@Validated @RequestBody Conta conta, BindingResult br)
+							throws DataIntegrityViolationException, Exception {
+		if(br.hasErrors()) throw new ConstraintException(br.getAllErrors().get(0).getDefaultMessage());
+		return ResponseEntity.body(ClasseDeServicedeConta.cadastrarNovaConta(conta));
 	}
 	
 	@PostMapping()
-	public ResponseEntity<Conta> create(@RequestBody Conta produto){
-		Conta produto2 = contaService.create(produto); 
+	@ResponseStatus(HttpStatus.CREATED)
+	public ResponseEntity<Conta> cadastrarConta(@Validated @RequestBody Conta cliente, BindingResult br){
+		Conta conta = contaService.create(conta); 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().
-				path("/{id}").buildAndExpand(produto2.getId()).toUri(); 
+				path("/{id}").buildAndExpand(conta.getId()).toUri();
 		return ResponseEntity.created(uri).build(); 
 	}
 	
 	@PutMapping("/{id}")
+	@ResponseStatus(HttpStatus.ACCEPTED)
 	public ResponseEntity<Conta> update(@PathVariable Long id, @RequestBody Conta conta){
-		return ResponseEntity.ok().body(contaService.update(id, conta));
+		return ResponseEntity().body(contaService.update(id, conta));
 	}
 	
 	@DeleteMapping("/{id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public ResponseEntity<Conta> delete(@PathVariable Long id){
-		return ResponseEntity.ok().body(contaService.delete(id));
+		return ResponseEntity().body(contaService.delete(id));
 	}
 
 }
