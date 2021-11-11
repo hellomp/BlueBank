@@ -10,7 +10,7 @@ O quadro utilizado pela equipe possui, além das colunas `to-do`, `doing` e `don
 
 As tarefas podem passar ou não pelas colunas de revisão de código e de teste, isso depende da sua natureza e da sua complexidade. Tarefas em revisão de código aguardam uma avaliação conjunta dos membros do grupo sobre a implementação das suas funcionalidades. Tarefas em testes aguardam a verificação das suas funcionalidades em testes práticos.
 
-Esse quadro é renovado ao começo de cada `Sprint` e pode conter tarefas de mais de um `Épico` por Sprint (seguindo o SCRUM, explicado mais a diante)
+Esse quadro é renovado ao começo de cada `Sprint` e pode conter tarefas de mais de um `Épico` por Sprint (seguindo o `SCRUM`, explicado mais a diante)
 
 ### Backlog
 
@@ -24,6 +24,6 @@ As tarefas são o nível de abstração mais baixo da definição das ações qu
 
 ### SCRUM
 
-Adotamos uma versão simplificada do SCRUM, uma metodologia para a gestão dinâmica de projetos que consiste basicamente de pequenos avanços revisados e corrigidos ao longo do tempo, onde cada avanço é o que chamamos de `Sprint` e suas revisões e correções ocorrem mediante reuniões entre os membros da equipe.
+Adotamos uma versão simplificada do SCRUM, uma metodologia para a gestão de projetos com algum grau de dinamicidade que consiste basicamente de pequenos avanços revisados e corrigidos ao longo do tempo, onde cada avanço é o que chamamos de `Sprint` e suas revisões e correções ocorrem mediante reuniões entre os membros da equipe.
 
 Nossas reuniões ocorrem diariamente para discutir o andamento das atividades atribuídas aos membros do time, ocorrem também ao fim de cada sprint para avaliar o que foi feito e para planejar a sprint seguinte.
