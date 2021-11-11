@@ -24,4 +24,6 @@ As tarefas são o nível de abstração mais baixo da definição das ações qu
 
 ### SCRUM
 
-Adotamos uma versão simplificada do SCRUM, uma metodologia para a gestão dinâmica de projetos que consiste basicamente de pequenos avanços revisados e corrigidos ao longo do tempo, onde cada avanço é o que chamamos de `Sprint` e suas revisões e correções ocorrem mediante reuniões entre os membros da equipe. Nossas reuniões ocorrem diariamente para discutir o andamento das atividades atribuídas aos membros do time, ocorrem também ao fim de cada sprint para avaliar o que foi feito e para planejar a sprint seguinte.
+Adotamos uma versão simplificada do SCRUM, uma metodologia para a gestão dinâmica de projetos que consiste basicamente de pequenos avanços revisados e corrigidos ao longo do tempo, onde cada avanço é o que chamamos de `Sprint` e suas revisões e correções ocorrem mediante reuniões entre os membros da equipe.
+
+Nossas reuniões ocorrem diariamente para discutir o andamento das atividades atribuídas aos membros do time, ocorrem também ao fim de cada sprint para avaliar o que foi feito e para planejar a sprint seguinte.
