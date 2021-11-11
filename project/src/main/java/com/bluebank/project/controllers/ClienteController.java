@@ -1,9 +1,7 @@
 package com.bluebank.project.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bluebank.project.dtos.ClientDTO;
-import com.bluebank.project.mappers.ClientMapper;
+import com.bluebank.project.mappers.ClienteUpdater;
 import com.bluebank.project.models.Cliente;
 import com.bluebank.project.services.ClienteService;
 
@@ -30,13 +28,14 @@ public class ClienteController {
 	ClienteService clienteService;
 	
 	@Autowired
-	ClientMapper clientMapper;
+	ClienteUpdater clientMapper;
 //	public ClienteController() {
 //		
 //	}	
 	
 	//criar cliente
 	// obs retornar DTO sem senha
+	// tirar o @ResponseBody modifica algo ?
 //	@PostMapping()
 //	@ResponseStatus(HttpStatus.CREATED)
 //	public ResponseEntity<Cliente> cadastrarCliente(@Validated @RequestBody Cliente cliente, BindingResult br) {//throws DataIntegrityViolationException, Exception {
@@ -47,9 +46,11 @@ public class ClienteController {
 	@PostMapping()
 	@ResponseBody
 	@ResponseStatus(HttpStatus.CREATED)
-	public Cliente cadastrarCliente(@Validated @RequestBody Cliente cliente, BindingResult br) {//throws DataIntegrityViolationException, Exception {
+	public ClientDTO cadastrarCliente(@Validated @RequestBody Cliente cliente, BindingResult br) {//throws DataIntegrityViolationException, Exception {
 //		if(br.hasErrors()) throw new ConstraintException(br.getAllErrors().get(0).getDefaultMessage());
-		return clienteService.cadastrarNovoCliente(cliente);
+		ClientDTO clientDTO = new ClientDTO();
+		clientMapper.updateDtoFromClient(clienteService.cadastrarNovoCliente(cliente), clientDTO);
+		return clientDTO;
 	}
 	
 	//consultar cliente
@@ -60,9 +61,12 @@ public class ClienteController {
 //	}
 	
 	@GetMapping("/{cpfcnpj")
+	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
-	public Cliente consultarCadastro(@PathVariable("cpfcnpj") String cpfcnpj) {
-		return clienteService.consultarCadastroCliente(cpfcnpj);
+	public ClientDTO consultarCadastro(@PathVariable("cpfcnpj") String cpfcnpj) {
+		ClientDTO clientDTO = new ClientDTO();
+		clientMapper.updateDtoFromClient(clienteService.consultarCadastroCliente(cpfcnpj), clientDTO);
+		return clientDTO;
 	}
 	
 	//atualizar cliente
@@ -74,12 +78,15 @@ public class ClienteController {
 //		return ResponseEntity.body(clienteAux).build;
 //	}
 	
-	@PutMapping("/{id}")
+	@PutMapping("/{cpfcnpj}")
+	@ResponseBody
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	public Cliente atualizarCadastro(@PathVariable Long id, @RequestBody ClientDTO clientDTO) {//, BindingResult br) throws DataIntegrityViolationException, Exception {
+	public ClientDTO atualizarCadastro(@PathVariable("cpfcnpj") String cpfcnpj, @RequestBody ClientDTO clientDTO) {//, BindingResult br) throws DataIntegrityViolationException, Exception {
 //		if(br.hasErrors()) throw new ConstraintException(br.getAllErrors().get(0).getDefaultMessage());
 //		Cliente client = clientMapper.toClient(clientDTO);
-		return clienteService.atualizarCadastroCliente(clientDTO);
+//		ClientDTO clientDTO = new ClientDTO();
+		clientMapper.updateDtoFromClient(clienteService.atualizarCadastroCliente(cpfcnpj, clientDTO), clientDTO);
+		return clientDTO;
 	}
 	
 	//excluir coliente
@@ -90,7 +97,7 @@ public class ClienteController {
 //		return ResponseEntity.body().build();
 //	}
 	
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/{cpfcnpj}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void excluirConta(@PathVariable("cpfcnpj") String cpfcnpj) {
 		clienteService.excluirContaCliente(cpfcnpj);
