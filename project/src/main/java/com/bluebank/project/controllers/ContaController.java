@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -32,13 +33,11 @@ public class ContaController {
 	private ContaService produtoService;
 	
 	
-	//criar cliente
-	// obs retornar DTO sem senha
+	//criar conta
 	@PostMapping()
+	@ResponseBody
 	@ResponseStatus(HttpStatus.CREATED)
-	ResponseEntity<Conta> cadastrarCliente(@Validated @RequestBody Conta conta, BindingResult br)
-							throws DataIntegrityViolationException, Exception {
-		if(br.hasErrors()) throw new ConstraintException(br.getAllErrors().get(0).getDefaultMessage());
+	ResponseEntity<Conta> cadastrarConta(@Validated @RequestBody Conta conta, BindingResult br){
 		return ResponseEntity.body(ClasseDeServicedeConta.cadastrarNovaConta(conta));
 	}
 	
