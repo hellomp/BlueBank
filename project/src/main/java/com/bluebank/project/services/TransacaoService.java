@@ -25,7 +25,7 @@ public class TransacaoService {
   }
 
   public Transacao findByCpfCnpj(String cpfcnpj){
-    return this.transacaoRepository.findByCpfCnpj(cpfcnpj);
+    return this.transacaoRepository.findByIdContaByIdClienteByCpfcnpj(cpfcnpj);
   }
   
   public Transacao criarTransacao(Transacao transacao){
@@ -36,8 +36,8 @@ public class TransacaoService {
     return this.emprestimoRepository.save(emprestimo);
   }
 
-  public Transacao criarTrasnferencia(Conta contaDestino){
-    return this.transacaoRepository.criarTransferencia(contaDestino);
+  public Transacao criarTransferencia(Conta contaDestino){
+    return this.transacaoRepository.save(contaDestino);
   }
 
 }

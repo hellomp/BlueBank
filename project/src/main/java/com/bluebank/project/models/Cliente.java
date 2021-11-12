@@ -13,7 +13,6 @@ public class Cliente {
 	
 	public Cliente() {
 		super();
-		
 	}
 
 	public Cliente(int id, String nome, int cpf, int cnpj, String email, int cep, int telefone, String senha,
@@ -100,9 +99,6 @@ public class Cliente {
 
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
-	}
-	
-	
-	
+	}	
 
 }
