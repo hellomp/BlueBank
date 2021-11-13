@@ -2,14 +2,15 @@ package com.bluebank.project.services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.bluebank.project.models.Conta;
 import com.bluebank.project.models.Emprestimo;
 import com.bluebank.project.models.Transacao;
+import com.bluebank.project.repositories.ContaRepository;
 import com.bluebank.project.repositories.EmprestimoRepository;
 import com.bluebank.project.repositories.TransacaoRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 @Service
 public class TransacaoService {
@@ -19,6 +20,9 @@ public class TransacaoService {
 
   @Autowired
   EmprestimoRepository emprestimoRepository;
+  
+  @Autowired
+  ContaRepository contaRepository;
 
   public List<Transacao> findAll(){
     return this.transacaoRepository.findAll();
@@ -36,8 +40,8 @@ public class TransacaoService {
     return this.emprestimoRepository.save(emprestimo);
   }
 
-  public Transacao criarTransferencia(Conta contaDestino){
-    return this.transacaoRepository.save(contaDestino);
+  public Conta criarTransferencia(Conta contaDestino){
+    return this.contaRepository.save(contaDestino);
   }
 
 }
