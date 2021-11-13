@@ -50,6 +50,8 @@ $ git push origin my-new-feature-branch
 ```
 5. Crie um novo pull request para este repositório a partir do repositório do seu fork
 
+(to-do: tópicos para licença e agradecimentos, localizar o índice da documentação)
+
 ## Autores
 
 Este repositório foi construído colaborativamente pelos seguintes membros: [Alano Menezes](https://github.com/alanomenezes), [Marcos Paulo](https://github.com/hellomp), [Hellimateas Chaves](https://github.com/Hellimateas), [Pedro Henrique](https://github.com/PedroHenriquebc) e [Ícaro Pablo](https://github.com/IcaroPablo).
