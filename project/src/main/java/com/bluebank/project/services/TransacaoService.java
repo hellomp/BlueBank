@@ -2,7 +2,6 @@ package com.bluebank.project.services;
 
 import java.util.List;
 
-import com.bluebank.project.models.Conta;
 import com.bluebank.project.models.Emprestimo;
 import com.bluebank.project.models.Transacao;
 import com.bluebank.project.repositories.EmprestimoRepository;
@@ -10,6 +9,13 @@ import com.bluebank.project.repositories.TransacaoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+/**
+ * TODO:
+ * - [x] Deixar apenas o método criar transação
+ * - [x] Criar sobrecarga de método para criar Transação (Emprestimo e sem emprestimo)
+ * 
+*/
 
 @Service
 public class TransacaoService {
@@ -32,12 +38,14 @@ public class TransacaoService {
     return this.transacaoRepository.save(transacao);
   }
 
-  public Emprestimo criarEmprestimo(Emprestimo emprestimo){
-    return this.emprestimoRepository.save(emprestimo);
+  public Transacao criarTransacao(Transacao transacao, Long emprestimoId) throws IllegalArgumentException{
+    Emprestimo emprestimo = emprestimoRepository.findById(emprestimoId).orElseThrow(() -> new IllegalArgumentException("Emprestimo não encontrado"));
+    transacao.setEmprestimo(emprestimo);
+    return this.transacaoRepository.save(transacao);
   }
 
-  public Transacao criarTransferencia(Conta contaDestino){
-    return this.transacaoRepository.save(contaDestino);
+  public Emprestimo criarEmprestimo(Emprestimo emprestimo){
+    return this.emprestimoRepository.save(emprestimo);
   }
 
 }
