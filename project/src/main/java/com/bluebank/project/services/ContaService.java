@@ -25,14 +25,19 @@ public class ContaService {
 		return contaRepository.save(conta);
 	}
 	
+//	@Transactional
+//	public Conta consultarCadastroConta(Long id) throws IllegalArgumentException {
+//		return contaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Conta Inexistente"));
+//	}
+	
 	@Transactional
-	public Conta consultarCadastroConta(Long id) throws IllegalArgumentException {
-		return contaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Conta Inexistente"));
+	public Conta consultarCadastroConta(String cpfcnpj) throws IllegalArgumentException {
+		return contaRepository.findByIdByCpfcnpj(cpfcnpj);
 	}
 	
 	@Transactional
-	public Conta atualizarCadastroConta(Long id, AccountDTO accountDTO) {
-	    Conta contaAux = consultarCadastroConta(id);
+	public Conta atualizarCadastroConta(String cpfcnpj, AccountDTO accountDTO) {
+	    Conta contaAux = consultarCadastroConta(cpfcnpj);
 	    accountMapper.updateAccountFromDto(accountDTO, contaAux);
 		return contaRepository.save(contaAux);
 	}
