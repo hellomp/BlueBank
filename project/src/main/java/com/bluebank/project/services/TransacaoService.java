@@ -38,8 +38,8 @@ public class TransacaoService {
     return this.transacaoRepository.findAll();
   }
 
-  public Transacao findByCpfCnpj(String cpfcnpj){
-    return this.transacaoRepository.findByIdContaByIdClienteByCpfcnpj(cpfcnpj);
+  public List<Transacao> findByCpfCnpj(String cpfcnpj){
+    return this.transacaoRepository.findByContaId_ClienteId_Cpfcnpj(cpfcnpj);
   }
   
   public Transacao criarTransacao(Transacao transacao){
