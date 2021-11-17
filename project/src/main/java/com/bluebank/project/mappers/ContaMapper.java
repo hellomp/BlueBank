@@ -6,8 +6,6 @@ import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
 import com.bluebank.project.dtos.AccountDTO;
-import com.bluebank.project.dtos.ClientDTO;
-import com.bluebank.project.models.Cliente;
 import com.bluebank.project.models.Conta;
 
 @Mapper(componentModel = "spring")
