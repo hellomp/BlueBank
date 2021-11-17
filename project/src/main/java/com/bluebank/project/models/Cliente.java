@@ -1,32 +1,53 @@
 package com.bluebank.project.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.validation.constraints.NotBlank;
+
+@Entity
 public class Cliente {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
+	@NotBlank
+	@JoinColumn(name = "nome")
 	private String nome;
-	private int cpf;
-	private int cnpj;
+	
+	@NotBlank
+	@JoinColumn(name = "cpf")
+	private String cpf;
+	
+	@NotBlank
+	@JoinColumn(name = "cnpj")
+	private String cnpj;
+	
+	@NotBlank
+	@JoinColumn(name = "email")
 	private String email;
-	private int cep;
-	private int telefone;
+	
+	@NotBlank
+	@JoinColumn(name = "cep")
+	private String cep;
+	
+	@NotBlank
+	@JoinColumn(name = "telefone")
+	private String telefone;
+	
+	@NotBlank
+	@JoinColumn(name = "senha")
 	private String senha;
+	
+	@NotBlank
+	@JoinColumn(name = "tipo")
 	private String tipo;
 	
 	public Cliente() {
 		super();
-	}
-
-	public Cliente(int id, String nome, int cpf, int cnpj, String email, int cep, int telefone, String senha,
-			String tipo) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.cpf = cpf;
-		this.cnpj = cnpj;
-		this.email = email;
-		this.cep = cep;
-		this.telefone = telefone;
-		this.senha = senha;
-		this.tipo = tipo;
 	}
 
 	public int getId() {
@@ -45,19 +66,19 @@ public class Cliente {
 		this.nome = nome;
 	}
 
-	public int getCpf() {
+	public String getCpf() {
 		return cpf;
 	}
 
-	public void setCpf(int cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 
-	public int getCnpj() {
+	public String getCnpj() {
 		return cnpj;
 	}
 
-	public void setCnpj(int cnpj) {
+	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
 
@@ -69,19 +90,19 @@ public class Cliente {
 		this.email = email;
 	}
 
-	public int getCep() {
+	public String getCep() {
 		return cep;
 	}
 
-	public void setCep(int cep) {
+	public void setCep(String cep) {
 		this.cep = cep;
 	}
 
-	public int getTelefone() {
+	public String getTelefone() {
 		return telefone;
 	}
 
-	public void setTelefone(int telefone) {
+	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
 
