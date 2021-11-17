@@ -48,7 +48,6 @@ public class Cliente {
 	
 	public Cliente() {
 		super();
-		
 	}
 
 	public int getId() {
@@ -121,11 +120,6 @@ public class Cliente {
 
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
-	}
-
-	
-	
-	
-	
+	}	
 
 }
