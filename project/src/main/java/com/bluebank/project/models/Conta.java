@@ -42,7 +42,7 @@ public class Conta {
 	
 	@NotBlank
 	@Column(name = "saldo_inicial")
-	private double sladoInicial;
+	private double saldoInicial;
 	
 	@NotBlank
 	@Column(name = "sado_anterior")
@@ -104,11 +104,11 @@ public class Conta {
 	}
 
 	public double getSladoInicial() {
-		return sladoInicial;
+		return saldoInicial;
 	}
 
 	public void setSladoInicial(double sladoInicial) {
-		this.sladoInicial = sladoInicial;
+		this.saldoInicial = sladoInicial;
 	}
 
 	public double getSaldoAnterior() {
@@ -148,7 +148,7 @@ public class Conta {
 	public String toString() {
 		return "Conta [id=" + id + ", cliente=" + cliente + ", idAgencia=" + agencia + ", tipoConta=" + tipoConta
 				+ ", dataAbertura=" + dataAbertura + ", dataEncerramento=" + dataEncerramento + ", sladoInicial="
-				+ sladoInicial + ", saldoAnterior=" + saldoAnterior + ", saldoAtual=" + saldoAtual + "]";
+				+ saldoInicial + ", saldoAnterior=" + saldoAnterior + ", saldoAtual=" + saldoAtual + "]";
 	}
 	
 	
