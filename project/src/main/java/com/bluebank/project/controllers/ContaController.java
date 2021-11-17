@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -42,13 +43,22 @@ public class ContaController {
 //		return ResponseEntity.created(uri).build(); 
 //	}
 	
-	@PutMapping("/{id}")
+	@GetMapping("/{cpfcnpj}")
+	@ResponseBody
+	@ResponseStatus(HttpStatus.OK)
+	public Conta consultarConta(@PathVariable("cpfcnpj") String cpfcnpj){
+		return contaService.consultarCadastroConta(cpfcnpj);
+	}
+	
+	@PutMapping("/{cpfcnpj}")
+	@ResponseBody
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	public Conta update(@PathVariable Long id, @RequestBody AccountDTO accountDTO){
-		return contaService.atualizarCadastroConta(id, accountDTO);
+	public Conta update(@PathVariable String cpfcnpj, @RequestBody AccountDTO accountDTO){
+		return contaService.atualizarCadastroConta(cpfcnpj, accountDTO);
 	}
 	
 	@DeleteMapping("/{id}")
+	@ResponseBody
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable Long id){
 		contaService.excluirConta(id);

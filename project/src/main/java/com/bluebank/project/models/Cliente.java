@@ -19,12 +19,8 @@ public class Cliente {
 	private String nome;
 	
 	@NotBlank
-	@JoinColumn(name = "cpf")
-	private String cpf;
-	
-	@NotBlank
-	@JoinColumn(name = "cnpj")
-	private String cnpj;
+	@JoinColumn(name = "cpfcnpj")
+	private String cpfcnpj;
 	
 	@NotBlank
 	@JoinColumn(name = "email")
@@ -66,20 +62,12 @@ public class Cliente {
 		this.nome = nome;
 	}
 
-	public String getCpf() {
-		return cpf;
+	public String getCpfcnpj() {
+		return cpfcnpj;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public String getCnpj() {
-		return cnpj;
-	}
-
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
+	public void setCpfcnpj(String cpfcnpj) {
+		this.cpfcnpj = cpfcnpj;
 	}
 
 	public String getEmail() {
@@ -123,8 +111,5 @@ public class Cliente {
 	}
 
 	
-	
-
-		
 
 }
