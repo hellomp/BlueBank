@@ -1,25 +1,19 @@
 package com.bluebank.project.mappers;
 
+import org.mapstruct.BeanMapping;
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
+
 import com.bluebank.project.dtos.ClientDTO;
 import com.bluebank.project.models.Cliente;
 
-public class ClientMapper {
+@Mapper(componentModel = "spring")
+public interface ClientMapper {
 
-	public ClientDTO toDto(Cliente cliente) {
-//        String name = user.getName();
-//        List<String> roles = user
-//          .getRoles()
-//          .stream()
-//          .map(Role::getName)
-//          .collect(toList());
-
-//        return new UserDTO(name, roles);
-		return new ClientDTO();
-    }
-
-    public Cliente toClient(ClientDTO clientDTO) {
-//        return new User(userDTO.getName(), userDTO.getPassword(), new ArrayList<>());
-    	return new Cliente();
-    }
+	@BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+	void updateClientFromDto(ClientDTO clientDTO, @MappingTarget Cliente cliente);
+	
+	void updateDtoFromClient(Cliente cliente, @MappingTarget ClientDTO clientDTO);
 
 }

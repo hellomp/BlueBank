@@ -6,7 +6,7 @@ import com.bluebank.project.models.Conta;
 
 public interface ContaRepository extends JpaRepository<Conta, Long> {
 	
-	public Conta findByIdByCpfcnpj (String cpfcnpj);
+	public Conta findByClienteId_Cpfcnpj (String cpfcnpj);
 	
-	public void deleteByIdByCpfcnpj (String cpfcnpj);
+//	public void deleteByIdCliente_Cpfcnpj (String cpfcnpj);
 }

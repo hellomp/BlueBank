@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bluebank.project.dtos.ClientDTO;
-import com.bluebank.project.mappers.ClienteUpdater;
 import com.bluebank.project.models.Cliente;
 import com.bluebank.project.services.ClienteService;
 
@@ -27,8 +26,8 @@ public class ClienteController {
 	@Autowired
 	ClienteService clienteService;
 	
-	@Autowired
-	ClienteUpdater clientMapper;
+//	@Autowired
+//	ClienteUpdater clientMapper;
 //	public ClienteController() {
 //		
 //	}	
@@ -48,9 +47,8 @@ public class ClienteController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public ClientDTO cadastrarCliente(@Validated @RequestBody Cliente cliente, BindingResult br) {//throws DataIntegrityViolationException, Exception {
 //		if(br.hasErrors()) throw new ConstraintException(br.getAllErrors().get(0).getDefaultMessage());
-		ClientDTO clientDTO = new ClientDTO();
-		clientMapper.updateDtoFromClient(clienteService.cadastrarNovoCliente(cliente), clientDTO);
-		return clientDTO;
+//		ClientDTO clientDTO = new ClientDTO();
+		return clienteService.cadastrarNovoCliente(cliente);
 	}
 	
 	//consultar cliente
@@ -60,13 +58,12 @@ public class ClienteController {
 //		return ResponseEntity.body(clienteService.consultarCadastroCliente(cpfcnpj)).build();
 //	}
 	
-	@GetMapping("/{cpfcnpj")
+	@GetMapping("/{cpfcnpj}")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
 	public ClientDTO consultarCadastro(@PathVariable("cpfcnpj") String cpfcnpj) {
-		ClientDTO clientDTO = new ClientDTO();
-		clientMapper.updateDtoFromClient(clienteService.consultarCadastroCliente(cpfcnpj), clientDTO);
-		return clientDTO;
+//		ClientDTO clientDTO = new ClientDTO();
+		return clienteService.consultarCadastroCliente(cpfcnpj);
 	}
 	
 	//atualizar cliente
@@ -85,8 +82,8 @@ public class ClienteController {
 //		if(br.hasErrors()) throw new ConstraintException(br.getAllErrors().get(0).getDefaultMessage());
 //		Cliente client = clientMapper.toClient(clientDTO);
 //		ClientDTO clientDTO = new ClientDTO();
-		clientMapper.updateDtoFromClient(clienteService.atualizarCadastroCliente(cpfcnpj, clientDTO), clientDTO);
-		return clientDTO;
+//		clientMapper.updateDtoFromClient(, clientDTO);
+		return clienteService.atualizarCadastroCliente(cpfcnpj, clientDTO);
 	}
 	
 	//excluir coliente

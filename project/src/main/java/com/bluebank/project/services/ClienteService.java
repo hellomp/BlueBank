@@ -5,7 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bluebank.project.dtos.ClientDTO;
-import com.bluebank.project.mappers.ClienteUpdater;
+import com.bluebank.project.mappers.ClientMapper;
+import com.bluebank.project.mappers.ClientMapperImpl;
 import com.bluebank.project.models.Cliente;
 import com.bluebank.project.repositories.ClienteRepository;
 
@@ -16,26 +17,32 @@ public class ClienteService {
 	ClienteRepository clienteRepository;
 	
 	@Autowired
-	ClienteUpdater clienteUpdaterMapper;
+	ClientMapperImpl clientMapper;
 	
 	@Transactional
-	public Cliente cadastrarNovoCliente(Cliente cliente) {
-		return clienteRepository.save(cliente);
+	public ClientDTO cadastrarNovoCliente(Cliente cliente) {
+		ClientDTO clientDTO = new ClientDTO();
+		clientMapper.updateDtoFromClient(cliente, clientDTO);
+		clienteRepository.save(cliente);
+		return clientDTO;
 	}
 	
 	@Transactional
-	public Cliente consultarCadastroCliente(String cpfcnpj){
-		return clienteRepository.findByCpfcnpj(cpfcnpj);
+	public ClientDTO consultarCadastroCliente(String cpfcnpj){
+		ClientDTO clientDTO = new ClientDTO();
+		clientMapper.updateDtoFromClient(clienteRepository.findByCpfcnpj(cpfcnpj), clientDTO);
+		return clientDTO;
 	}
 	
 	@Transactional
-	public Cliente atualizarCadastroCliente(String cpfcnpj, ClientDTO clientDTO) {//(String cpfcnpj, Cliente cliente){ // 
+	public ClientDTO atualizarCadastroCliente(String cpfcnpj, ClientDTO clientDTO) {//(String cpfcnpj, Cliente cliente){ // 
 //		Cliente clienteAux = consultarCadastroCliente(cpfcnpj);
 //		clienteAux
 
 	    Cliente clienteAux = clienteRepository.findByCpfcnpj(cpfcnpj);
-	    clienteUpdaterMapper.updateClientFromDto(clientDTO, clienteAux);
-		return clienteRepository.save(clienteAux);
+	    clientMapper.updateClientFromDto(clientDTO, clienteAux);
+	    clientMapper.updateDtoFromClient(clienteAux, clientDTO);
+		return clientDTO;
 	}
 
 	@Transactional

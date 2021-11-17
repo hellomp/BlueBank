@@ -22,7 +22,7 @@ public class Transacao {
   private int id;
   
   @ManyToOne
-  @JoinColumn(name = "id_conta")
+//  @JoinColumn(name = "id_conta")
   private Conta conta;
 
   @NotNull

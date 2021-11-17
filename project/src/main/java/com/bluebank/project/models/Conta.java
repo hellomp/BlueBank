@@ -22,7 +22,7 @@ public class Conta {
 	private int id;
 	
 	@ManyToOne
-	@JoinColumn(name = "id_cliente")
+//	@JoinColumn(name = "idCliente")
 	private Cliente cliente;
 	
 	@NotBlank
@@ -33,23 +33,25 @@ public class Conta {
 	@Column(name = "tipo_conta")
 	private ContaEnum tipoConta;
 	
-	@NotBlank
-	@Column(name = "dt_abertura")
-	private Date dataAbertura;
+//	@NotBlank
+//	@Column(name = "dt_abertura")
+//	private Date dataAbertura;
+//	
+//	@Column(name = "dt_encerramento")
+//	private Date dataEncerramento;
 	
-	@Column(name = "dt_encerramento")
-	private Date dataEncerramento;
+	private double saldo;
 	
-	@NotBlank
-	@Column(name = "saldo_inicial")
-	private double saldoInicial;
-	
-	@NotBlank
-	@Column(name = "sado_anterior")
-	private double saldoAnterior;
-	
-	@Column(name = "saldo_atual")
-	private double saldoAtual;
+//	@NotBlank
+//	@Column(name = "saldo_inicial")
+//	private double saldoInicial;
+//	
+//	@NotBlank
+//	@Column(name = "sado_anterior")
+//	private double saldoAnterior;
+//	
+//	@Column(name = "saldo_atual")
+//	private double saldoAtual;
 	
 	public Conta() {
 		
@@ -87,44 +89,54 @@ public class Conta {
 		this.tipoConta = tipoConta;
 	}
 
-	public Date getDataAbertura() {
-		return dataAbertura;
+//	public Date getDataAbertura() {
+//		return dataAbertura;
+//	}
+//
+//	public void setDataAbertura(Date dataAbertura) {
+//		this.dataAbertura = dataAbertura;
+//	}
+//
+//	public Date getDataEncerramento() {
+//		return dataEncerramento;
+//	}
+//
+//	public void setDataEncerramento(Date dataEncerramento) {
+//		this.dataEncerramento = dataEncerramento;
+//	}
+	
+	
+
+//	public double getSladoInicial() {
+//		return saldoInicial;
+//	}
+//
+//	public void setSladoInicial(double sladoInicial) {
+//		this.saldoInicial = sladoInicial;
+//	}
+//
+//	public double getSaldoAnterior() {
+//		return saldoAnterior;
+//	}
+//
+//	public void setSaldoAnterior(double saldoAnterior) {
+//		this.saldoAnterior = saldoAnterior;
+//	}
+//
+//	public double getSaldoAtual() {
+//		return saldoAtual;
+//	}
+//
+//	public void setSaldoAtual(double saldoAtual) {
+//		this.saldoAtual = saldoAtual;
+//	}
+
+	public double getSaldo() {
+		return saldo;
 	}
 
-	public void setDataAbertura(Date dataAbertura) {
-		this.dataAbertura = dataAbertura;
-	}
-
-	public Date getDataEncerramento() {
-		return dataEncerramento;
-	}
-
-	public void setDataEncerramento(Date dataEncerramento) {
-		this.dataEncerramento = dataEncerramento;
-	}
-
-	public double getSladoInicial() {
-		return saldoInicial;
-	}
-
-	public void setSladoInicial(double sladoInicial) {
-		this.saldoInicial = sladoInicial;
-	}
-
-	public double getSaldoAnterior() {
-		return saldoAnterior;
-	}
-
-	public void setSaldoAnterior(double saldoAnterior) {
-		this.saldoAnterior = saldoAnterior;
-	}
-
-	public double getSaldoAtual() {
-		return saldoAtual;
-	}
-
-	public void setSaldoAtual(double saldoAtual) {
-		this.saldoAtual = saldoAtual;
+	public void setSaldo(double saldo) {
+		this.saldo = saldo;
 	}
 
 	@Override
@@ -144,12 +156,12 @@ public class Conta {
 		return id == other.id;
 	}
 
-	@Override
-	public String toString() {
-		return "Conta [id=" + id + ", cliente=" + cliente + ", idAgencia=" + agencia + ", tipoConta=" + tipoConta
-				+ ", dataAbertura=" + dataAbertura + ", dataEncerramento=" + dataEncerramento + ", sladoInicial="
-				+ saldoInicial + ", saldoAnterior=" + saldoAnterior + ", saldoAtual=" + saldoAtual + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Conta [id=" + id + ", cliente=" + cliente + ", idAgencia=" + agencia + ", tipoConta=" + tipoConta
+//				+ ", dataAbertura=" + dataAbertura + ", dataEncerramento=" + dataEncerramento + ", sladoInicial="
+//				+ saldoInicial + ", saldoAnterior=" + saldoAnterior + ", saldoAtual=" + saldoAtual + "]";
+//	}
 	
 	
 }
