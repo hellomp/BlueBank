@@ -1,5 +1,7 @@
 package com.bluebank.project.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
@@ -27,11 +29,11 @@ public class ContaController {
 	ContaService contaService;
 	
 	//criar conta
-	@PostMapping()
+	@PostMapping("/{cpfcnpj}")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.CREATED)
-	public Conta cadastrarConta(@Validated @RequestBody Conta conta, BindingResult br){
-		return contaService.cadastrarNovaConta(conta);
+	public AccountDTO cadastrarConta(@PathVariable("cpfcnpj") String cpfcnpj, @Validated @RequestBody Conta conta){
+		return contaService.cadastrarNovaConta(cpfcnpj, conta);
 	}
 	
 //	@PostMapping()
@@ -43,25 +45,39 @@ public class ContaController {
 //		return ResponseEntity.created(uri).build(); 
 //	}
 	
-	@GetMapping("/{cpfcnpj}")
+	@GetMapping("/id/{id}")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
-	public Conta consultarConta(@PathVariable("cpfcnpj") String cpfcnpj){
-		return contaService.consultarCadastroConta(cpfcnpj);
+	public AccountDTO consultarConta(@PathVariable("id") Long id){
+		return contaService.consultarCadastroContaId(id);
 	}
 	
-	@PutMapping("/{cpfcnpj}")
+	@GetMapping("/cpfcnpj/{cpfcnpj}")
+	@ResponseBody
+	@ResponseStatus(HttpStatus.OK)
+	public List<AccountDTO> consultarConta(@PathVariable("cpfcnpj") String cpfcnpj){
+		return contaService.consultarCadastrosContaCpfcnpj(cpfcnpj);
+	}
+	
+	@PutMapping("/update/{id}/{cpfcnpj}")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	public Conta update(@PathVariable String cpfcnpj, @RequestBody AccountDTO accountDTO){
-		return contaService.atualizarCadastroConta(cpfcnpj, accountDTO);
+	public AccountDTO update(@PathVariable("id") Long id, @PathVariable("cpfcnpj") String cpfcnpj){
+		return contaService.AlterarTitularContaId(id, cpfcnpj);
 	}
 	
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/delete/id/{id}")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void delete(@PathVariable Long id){
-		contaService.excluirConta(id);
+	public void delete(@PathVariable("id") Long id){
+		contaService.desativarContaId(id);
+	}
+	
+	@DeleteMapping("/delete/cpfcnpj/{cpfcnpj}")
+	@ResponseBody
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void delete(@PathVariable("cpfcnpj") String cpfcnpj){
+		contaService.desativarContasCpfcnpj(cpfcnpj);
 	}
 
 }

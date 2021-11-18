@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 
+import com.bluebank.project.enums.AccountStatusEnum;
 import com.bluebank.project.enums.ContaEnum;
 
 @Entity
@@ -19,49 +20,36 @@ public class Conta {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private long id;
 	
 	@ManyToOne
 //	@JoinColumn(name = "idCliente")
 	private Cliente cliente;
 	
-	@NotBlank
-	@Column(name = "id_agencia")
+//	@NotBlank
+//	@Column(name = "id_agencia")
 	private int agencia;
 	
-	@NotBlank
-	@Column(name = "tipo_conta")
+//	@NotBlank
+//	@Column(name = "tipo_conta")
 	private ContaEnum tipoConta;
 	
-//	@NotBlank
 //	@Column(name = "dt_abertura")
-//	private Date dataAbertura;
-//	
-//	@Column(name = "dt_encerramento")
-//	private Date dataEncerramento;
+	private Date dateForReference;
 	
 	private double saldo;
 	
-//	@NotBlank
-//	@Column(name = "saldo_inicial")
-//	private double saldoInicial;
-//	
-//	@NotBlank
-//	@Column(name = "sado_anterior")
-//	private double saldoAnterior;
-//	
-//	@Column(name = "saldo_atual")
-//	private double saldoAtual;
+	private AccountStatusEnum status;
 	
 	public Conta() {
 		
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -73,12 +61,12 @@ public class Conta {
 		this.cliente = cliente;
 	}
 
-	public int getIdAgencia() {
+	public int getAgencia() {
 		return agencia;
 	}
 
-	public void setIdAgencia(int idAgencia) {
-		this.agencia = idAgencia;
+	public void setAgencia(int agencia) {
+		this.agencia = agencia;
 	}
 
 	public ContaEnum getTipoConta() {
@@ -89,47 +77,13 @@ public class Conta {
 		this.tipoConta = tipoConta;
 	}
 
-//	public Date getDataAbertura() {
-//		return dataAbertura;
-//	}
-//
-//	public void setDataAbertura(Date dataAbertura) {
-//		this.dataAbertura = dataAbertura;
-//	}
-//
-//	public Date getDataEncerramento() {
-//		return dataEncerramento;
-//	}
-//
-//	public void setDataEncerramento(Date dataEncerramento) {
-//		this.dataEncerramento = dataEncerramento;
-//	}
-	
-	
+	public Date getDateForReference() {
+		return dateForReference;
+	}
 
-//	public double getSladoInicial() {
-//		return saldoInicial;
-//	}
-//
-//	public void setSladoInicial(double sladoInicial) {
-//		this.saldoInicial = sladoInicial;
-//	}
-//
-//	public double getSaldoAnterior() {
-//		return saldoAnterior;
-//	}
-//
-//	public void setSaldoAnterior(double saldoAnterior) {
-//		this.saldoAnterior = saldoAnterior;
-//	}
-//
-//	public double getSaldoAtual() {
-//		return saldoAtual;
-//	}
-//
-//	public void setSaldoAtual(double saldoAtual) {
-//		this.saldoAtual = saldoAtual;
-//	}
+	public void setDateForReference(Date dataForReference) {
+		this.dateForReference = dataForReference;
+	}
 
 	public double getSaldo() {
 		return saldo;
@@ -137,6 +91,14 @@ public class Conta {
 
 	public void setSaldo(double saldo) {
 		this.saldo = saldo;
+	}
+
+	public AccountStatusEnum getStatus() {
+		return status;
+	}
+
+	public void setStatus(AccountStatusEnum status) {
+		this.status = status;
 	}
 
 	@Override
@@ -156,12 +118,10 @@ public class Conta {
 		return id == other.id;
 	}
 
-//	@Override
-//	public String toString() {
-//		return "Conta [id=" + id + ", cliente=" + cliente + ", idAgencia=" + agencia + ", tipoConta=" + tipoConta
-//				+ ", dataAbertura=" + dataAbertura + ", dataEncerramento=" + dataEncerramento + ", sladoInicial="
-//				+ saldoInicial + ", saldoAnterior=" + saldoAnterior + ", saldoAtual=" + saldoAtual + "]";
-//	}
-	
+	@Override
+	public String toString() {
+		return "Conta [id=" + id + ", cliente=" + cliente + ", agencia=" + agencia + ", tipoConta=" + tipoConta
+				+ ", dataForReference=" + dateForReference + ", saldo=" + saldo + ", status=" + status + "]";
+	}
 	
 }

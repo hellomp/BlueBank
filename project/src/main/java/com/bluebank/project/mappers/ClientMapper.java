@@ -8,10 +8,10 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 import com.bluebank.project.dtos.ClientDTO;
 import com.bluebank.project.models.Cliente;
 
-@Mapper(componentModel = "spring")
+//@Mapper(componentModel = "spring")
 public interface ClientMapper {
 
-	@BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+//	@BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 	void updateClientFromDto(ClientDTO clientDTO, @MappingTarget Cliente cliente);
 	
 	void updateDtoFromClient(Cliente cliente, @MappingTarget ClientDTO clientDTO);

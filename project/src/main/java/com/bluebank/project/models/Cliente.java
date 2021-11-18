@@ -1,11 +1,14 @@
 package com.bluebank.project.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.validation.constraints.NotBlank;
+
+import com.bluebank.project.enums.ClientStatusEnum;
 
 @Entity
 public class Cliente {
@@ -19,6 +22,7 @@ public class Cliente {
 	private String nome;
 	
 	@NotBlank
+	@Column(unique = true)
 	@JoinColumn(name = "cpfcnpj")
 	private String cpfcnpj;
 	
@@ -41,6 +45,8 @@ public class Cliente {
 	@NotBlank
 	@JoinColumn(name = "tipo")
 	private String tipo;
+	
+	private ClientStatusEnum status;
 	
 	public Cliente() {
 		super();
@@ -110,6 +116,16 @@ public class Cliente {
 		this.tipo = tipo;
 	}
 
+
 	
+
+	public ClientStatusEnum getStatus() {
+		return status;
+	}
+
+	public void setStatus(ClientStatusEnum status) {
+		this.status = status;
+	}	
+
 
 }
