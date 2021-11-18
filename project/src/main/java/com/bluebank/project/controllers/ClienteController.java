@@ -1,5 +1,7 @@
 package com.bluebank.project.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
@@ -26,77 +28,39 @@ public class ClienteController {
 	@Autowired
 	ClienteService clienteService;
 	
-//	@Autowired
-//	ClienteUpdater clientMapper;
-//	public ClienteController() {
-//		
-//	}	
-	
-	//criar cliente
-	// obs retornar DTO sem senha
-	// tirar o @ResponseBody modifica algo ?
-//	@PostMapping()
-//	@ResponseStatus(HttpStatus.CREATED)
-//	public ResponseEntity<Cliente> cadastrarCliente(@Validated @RequestBody Cliente cliente, BindingResult br) {//throws DataIntegrityViolationException, Exception {
-////		if(br.hasErrors()) throw new ConstraintException(br.getAllErrors().get(0).getDefaultMessage());
-//		return ResponseEntity.body(clienteService.cadastrarNovoCliente(cliente));
-//	}
-	
 	@PostMapping()
 	@ResponseBody
 	@ResponseStatus(HttpStatus.CREATED)
 	public ClientDTO cadastrarCliente(@Validated @RequestBody Cliente cliente, BindingResult br) {//throws DataIntegrityViolationException, Exception {
 //		if(br.hasErrors()) throw new ConstraintException(br.getAllErrors().get(0).getDefaultMessage());
-//		ClientDTO clientDTO = new ClientDTO();
 		return clienteService.cadastrarNovoCliente(cliente);
 	}
-	
-	//consultar cliente
-//	@GetMapping("/{cpfcnpj")
-//	@ResponseStatus(HttpStatus.OK)
-//	public ResponseEntity<Cliente> consultarCadastro(@PathVariable("cpfcnpj") String cpfcnpj) {
-//		return ResponseEntity.body(clienteService.consultarCadastroCliente(cpfcnpj)).build();
-//	}
 	
 	@GetMapping("/{cpfcnpj}")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
 	public ClientDTO consultarCadastro(@PathVariable("cpfcnpj") String cpfcnpj) {
-//		ClientDTO clientDTO = new ClientDTO();
 		return clienteService.consultarCadastroCliente(cpfcnpj);
 	}
 	
-	//atualizar cliente
-//	@PutMapping("/{id}")
-//	@ResponseStatus(HttpStatus.ACCEPTED)
-//	public ResponseEntity<Cliente> atualizarCadastro(@PathVariable Long id, @RequestBody Cliente cliente) {//, BindingResult br) throws DataIntegrityViolationException, Exception {
-////		if(br.hasErrors()) throw new ConstraintException(br.getAllErrors().get(0).getDefaultMessage());
-//		Cliente clienteAux = clienteService.atualizarCadastroCliente(id, cliente);
-//		return ResponseEntity.body(clienteAux).build;
-//	}
+	@GetMapping("/nome/{nome}")
+	@ResponseBody
+	@ResponseStatus(HttpStatus.OK)
+	public List<ClientDTO> consultarCadastroPorNome(@PathVariable("nome") String nome) {
+		return clienteService.buscarClientePorNome(nome);
+	}
 	
 	@PutMapping("/{cpfcnpj}")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	public ClientDTO atualizarCadastro(@PathVariable("cpfcnpj") String cpfcnpj, @RequestBody ClientDTO clientDTO) {//, BindingResult br) throws DataIntegrityViolationException, Exception {
 //		if(br.hasErrors()) throw new ConstraintException(br.getAllErrors().get(0).getDefaultMessage());
-//		Cliente client = clientMapper.toClient(clientDTO);
-//		ClientDTO clientDTO = new ClientDTO();
-//		clientMapper.updateDtoFromClient(, clientDTO);
 		return clienteService.atualizarCadastroCliente(cpfcnpj, clientDTO);
 	}
-	
-	//excluir coliente
-//	@DeleteMapping("/{id}")
-//	@ResponseStatus(HttpStatus.NO_CONTENT)
-//	public ResponseEntity<Void> excluirConta(@PathVariable("cpfcnpj") String cpfcnpj) {
-//		clienteService.excluirContaCliente(cpfcnpj);
-//		return ResponseEntity.body().build();
-//	}
 	
 	@DeleteMapping("/{cpfcnpj}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void excluirConta(@PathVariable("cpfcnpj") String cpfcnpj) {
-		clienteService.excluirContaCliente(cpfcnpj);
+		clienteService.desativarContaCliente(cpfcnpj);
 	}
 }
