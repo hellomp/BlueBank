@@ -10,7 +10,7 @@ import com.bluebank.project.models.Cliente;
 public class ClientMapperImpl {
 
 //	@BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-	public void updateClientFromDto(ClientDTO clientDTO, @MappingTarget Cliente cliente) {
+	public void updateClientFromDto(ClientDTO clientDTO, Cliente cliente) {
 		if (!clientDTO.getCpfcnpj().isBlank()) cliente.setCpfcnpj(clientDTO.getCpfcnpj());
 		if (!clientDTO.getNome().isBlank()) cliente.setNome(clientDTO.getNome());
 		if (!clientDTO.getEmail().isBlank()) cliente.setEmail(clientDTO.getEmail());
