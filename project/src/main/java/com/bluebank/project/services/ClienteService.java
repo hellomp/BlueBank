@@ -1,10 +1,14 @@
 package com.bluebank.project.services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bluebank.project.dtos.ClientDTO;
+import com.bluebank.project.enums.ClientStatusEnum;
 import com.bluebank.project.mappers.ClientMapper;
 import com.bluebank.project.mappers.ClientMapperImpl;
 import com.bluebank.project.models.Cliente;
@@ -18,6 +22,9 @@ public class ClienteService {
 	
 	@Autowired
 	ClientMapperImpl clientMapper;
+	
+	@Autowired
+	ContaService contaService;
 	
 	@Transactional
 	public ClientDTO cadastrarNovoCliente(Cliente cliente) {
@@ -35,10 +42,17 @@ public class ClienteService {
 	}
 	
 	@Transactional
-	public ClientDTO atualizarCadastroCliente(String cpfcnpj, ClientDTO clientDTO) {//(String cpfcnpj, Cliente cliente){ // 
-//		Cliente clienteAux = consultarCadastroCliente(cpfcnpj);
-//		clienteAux
-
+	public List<ClientDTO> buscarClientePorNome(String nome){
+		List<Cliente> listClientAux = clienteRepository.findByNomeContaining(nome);
+		List<ClientDTO> listClientDTOAux = new ArrayList<>();
+		for(Cliente clientAux : listClientAux) {
+			listClientDTOAux.add(clientMapper.updateDtoFromClient(clientAux, new ClientDTO()));
+		}
+		return listClientDTOAux;
+	}
+	
+	@Transactional
+	public ClientDTO atualizarCadastroCliente(String cpfcnpj, ClientDTO clientDTO) {
 	    Cliente clienteAux = clienteRepository.findByCpfcnpj(cpfcnpj);
 	    clientMapper.updateClientFromDto(clientDTO, clienteAux);
 	    clientMapper.updateDtoFromClient(clienteAux, clientDTO);
@@ -46,8 +60,10 @@ public class ClienteService {
 	}
 
 	@Transactional
-	public void excluirContaCliente(String cpfcnpj){
-		clienteRepository.deleteByCpfcnpj(cpfcnpj);
+	public void desativarContaCliente(String cpfcnpj){
+		Cliente clientAux = clienteRepository.findByCpfcnpj(cpfcnpj);
+		clientAux.setStatus(ClientStatusEnum.Inativo);
+		contaService.desativarContasCpfcnpj(cpfcnpj);
 	}
 
 }

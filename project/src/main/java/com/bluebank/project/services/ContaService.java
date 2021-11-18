@@ -34,8 +34,7 @@ public class ContaService {
 		conta.setStatus(AccountStatusEnum.Ativa);
 		
 		AccountDTO accountDTOAux = new AccountDTO();
-		accountMapper.updateDtoFromAccount(conta, accountDTOAux); // bug do id
-		contaRepository.save(conta);
+		accountMapper.updateDtoFromAccount(contaRepository.save(conta), accountDTOAux);
 		return accountDTOAux;
 	}
 	
@@ -61,17 +60,9 @@ public class ContaService {
 		contaAux.setCliente(clienteAux);
 		return accountMapper.updateDtoFromAccount(contaAux, new AccountDTO());
 	}
-	
-//	@Transactional
-//	public Conta atualizarCadastroConta(String cpfcnpj, AccountDTO accountDTO) {
-//	    Conta contaAux = consultarCadastroConta(cpfcnpj);
-//	    accountMapper.updateAccountFromDto(accountDTO, contaAux);
-//		return contaRepository.save(contaAux);
-//	}
 
 	@Transactional
 	public void desativarContaId(Long id) {
-		// mudar status
 		Conta contaAux = contaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Conta Inexistente"));
 		contaAux.setStatus(AccountStatusEnum.Inativa);
 		contaAux.setDateForReference(java.util.Calendar.getInstance().getTime());
@@ -80,7 +71,6 @@ public class ContaService {
 	
 	@Transactional
 	public void desativarContasCpfcnpj(String cpfcnpj) {
-		// mudar status
 		List<Conta> listContaAux = contaRepository.findByClienteId_Cpfcnpj(cpfcnpj);
 		for (Conta contaAux : listContaAux) {
 			contaAux.setStatus(AccountStatusEnum.Inativa);

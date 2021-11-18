@@ -1,5 +1,7 @@
 package com.bluebank.project.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
@@ -26,13 +28,11 @@ public class ClienteController {
 	@Autowired
 	ClienteService clienteService;
 	
-	
 	@PostMapping()
 	@ResponseBody
 	@ResponseStatus(HttpStatus.CREATED)
 	public ClientDTO cadastrarCliente(@Validated @RequestBody Cliente cliente, BindingResult br) {//throws DataIntegrityViolationException, Exception {
 //		if(br.hasErrors()) throw new ConstraintException(br.getAllErrors().get(0).getDefaultMessage());
-//		ClientDTO clientDTO = new ClientDTO();
 		return clienteService.cadastrarNovoCliente(cliente);
 	}
 	
@@ -40,8 +40,14 @@ public class ClienteController {
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
 	public ClientDTO consultarCadastro(@PathVariable("cpfcnpj") String cpfcnpj) {
-//		ClientDTO clientDTO = new ClientDTO();
 		return clienteService.consultarCadastroCliente(cpfcnpj);
+	}
+	
+	@GetMapping("/nome/{nome}")
+	@ResponseBody
+	@ResponseStatus(HttpStatus.OK)
+	public List<ClientDTO> consultarCadastroPorNome(@PathVariable("nome") String nome) {
+		return clienteService.buscarClientePorNome(nome);
 	}
 	
 	@PutMapping("/{cpfcnpj}")
@@ -55,6 +61,6 @@ public class ClienteController {
 	@DeleteMapping("/{cpfcnpj}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void excluirConta(@PathVariable("cpfcnpj") String cpfcnpj) {
-		clienteService.excluirContaCliente(cpfcnpj);
+		clienteService.desativarContaCliente(cpfcnpj);
 	}
 }
