@@ -56,6 +56,7 @@ public class ClienteService {
 	    Cliente clienteAux = clienteRepository.findByCpfcnpj(cpfcnpj);
 	    clientMapper.updateClientFromDto(clientDTO, clienteAux);
 	    clientMapper.updateDtoFromClient(clienteAux, clientDTO);
+	    clienteRepository.save(clienteAux);
 		return clientDTO;
 	}
 
@@ -64,6 +65,7 @@ public class ClienteService {
 		Cliente clientAux = clienteRepository.findByCpfcnpj(cpfcnpj);
 		clientAux.setStatus(ClientStatusEnum.Inativo);
 		contaService.desativarContasCpfcnpj(cpfcnpj);
+		clienteRepository.save(clientAux);
 	}
 
 }
