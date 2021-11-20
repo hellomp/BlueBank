@@ -22,7 +22,7 @@ public class ClientMapperImpl {
 	}
 	
 	
-	public ClientDTO updateDtoFromClient(Cliente client, @MappingTarget ClientDTO clientDTO) {
+	public ClientDTO updateDtoFromClient(Cliente client, ClientDTO clientDTO) {
 		clientDTO.setCpfcnpj(client.getCpfcnpj());
 		clientDTO.setNome(client.getNome());
 		clientDTO.setEmail(client.getEmail());
