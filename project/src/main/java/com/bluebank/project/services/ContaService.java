@@ -58,7 +58,8 @@ public class ContaService {
 		Conta contaAux = contaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Conta Inexistente"));
 		Cliente clienteAux = clientRepository.findByCpfcnpj(cpfcnpj);
 		contaAux.setCliente(clienteAux);
-		return accountMapper.updateDtoFromAccount(contaAux, new AccountDTO());
+//		contaRepository.save(contaAux);
+		return accountMapper.updateDtoFromAccount(contaRepository.save(contaAux), new AccountDTO());
 	}
 
 	@Transactional
