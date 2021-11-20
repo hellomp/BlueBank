@@ -12,8 +12,9 @@
 	<groupId>com.bluebank</groupId>
 	<artifactId>project</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<!--home-->
 	<name>project</name>
-	<description>BlueBank project for Spring Boot</description>
+		<description>BlueBank project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
