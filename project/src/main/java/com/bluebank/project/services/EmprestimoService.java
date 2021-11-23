@@ -1,5 +1,6 @@
 package com.bluebank.project.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.bluebank.project.dtos.EmprestimoDTO;
@@ -34,14 +35,19 @@ public class EmprestimoService {
   }
 
   @Transactional
-  public Emprestimo consultarEmprestimoId(Long emprestimoId) throws IllegalArgumentException{
-    return this.emprestimoRepository.findById(emprestimoId).orElseThrow(() -> new IllegalArgumentException("Emprestimo não encontrado"));
+  public EmprestimoDTO consultarEmprestimoId(Long emprestimoId) throws IllegalArgumentException{
+    Emprestimo emprestimo = emprestimoRepository.findById(emprestimoId).orElseThrow(() -> new IllegalArgumentException("Emprestimo não encontrado"));
+    return emprestimoMapper.updateEmprestimoDtoFromEmprestimo(emprestimo, new EmprestimoDTO());
   }
 
   //FIXME: Completar consulta por cpfcnpj
   @Transactional
-  public List<Emprestimo> consultarEmprestimoCpfcnpj(String cpfcnpj){
-    return this.emprestimoRepository.findByClienteId_Cpfcnpj(cpfcnpj);
+  public List<EmprestimoDTO> consultarEmprestimoCpfcnpj(String cpfcnpj){
+    List<EmprestimoDTO> listEmprestimoDTO = new ArrayList<EmprestimoDTO>();
+    for(Emprestimo emprestimo : emprestimoRepository.findByClienteId_Cpfcnpj(cpfcnpj)){
+      listEmprestimoDTO.add(emprestimoMapper.updateEmprestimoDtoFromEmprestimo(emprestimo, new EmprestimoDTO()));
+    }
+    return listEmprestimoDTO;
   }
   
 }

@@ -37,7 +37,7 @@ public class EmprestimoController {
   @GetMapping("/id/{emprestimoId}")
   @ResponseBody
   @ResponseStatus(HttpStatus.OK)
-  public Emprestimo consultarEmprestimo(@PathVariable("emprestimoId") Long emprestimoId){
+  public EmprestimoDTO consultarEmprestimo(@PathVariable("emprestimoId") Long emprestimoId){
     return emprestimoService.consultarEmprestimoId(emprestimoId);
   }
 
@@ -45,7 +45,7 @@ public class EmprestimoController {
   @GetMapping("/cpfcnpj/{cpfcnpj}")
   @ResponseBody
   @ResponseStatus(HttpStatus.OK)
-  public List<Emprestimo> consultarEmprestimo(@PathVariable("cpfcnpj") String cpfcnpj){
+  public List<EmprestimoDTO> consultarEmprestimo(@PathVariable("cpfcnpj") String cpfcnpj){
     return emprestimoService.consultarEmprestimoCpfcnpj(cpfcnpj);
   }
 }
