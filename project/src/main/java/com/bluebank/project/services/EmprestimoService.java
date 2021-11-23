@@ -42,7 +42,12 @@ public class EmprestimoService {
     return emprestimoDTOAux;
   }
 
-  @Transactional
+  private void criarTransacao(Transacao novaTransacao, long id) {
+	// TODO Auto-generated method stub
+	
+}
+
+@Transactional
   public Emprestimo consultarEmprestimoId(Long emprestimoId){
     return this.emprestimoRepository.findById(emprestimoId).orElseThrow(() -> new IllegalArgumentException("Emprestimo não encontrado"));
   }
