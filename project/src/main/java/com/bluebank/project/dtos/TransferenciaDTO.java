@@ -15,6 +15,7 @@ public class TransferenciaDTO {
   private Conta contaDestino;
   private Date dataAgendTransacao;
   private Date dataExecTransacao;
+  private Double valor;
   
   public TransferenciaDTO() {
   }
@@ -82,5 +83,14 @@ public class TransferenciaDTO {
   public void setDataExecTransacao(Date dataExecTransacao) {
     this.dataExecTransacao = dataExecTransacao;
   }
+
+public Double getValor() {
+	return valor;
+}
+
+public void setValor(Double valor) {
+	this.valor = valor;
+}
+  
   
 }
