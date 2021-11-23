@@ -1,13 +1,10 @@
 package com.bluebank.project.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.bluebank.project.dtos.EmprestimoDTO;
-import com.bluebank.project.enums.TipoTransacao;
 import com.bluebank.project.mappers.EmprestimoMapper;
 import com.bluebank.project.models.Emprestimo;
-import com.bluebank.project.models.Transacao;
 import com.bluebank.project.repositories.ClienteRepository;
 import com.bluebank.project.repositories.EmprestimoRepository;
 
@@ -37,14 +34,14 @@ public class EmprestimoService {
   }
 
   @Transactional
-  public Emprestimo consultarEmprestimoId(Long emprestimoId){
+  public Emprestimo consultarEmprestimoId(Long emprestimoId) throws IllegalArgumentException{
     return this.emprestimoRepository.findById(emprestimoId).orElseThrow(() -> new IllegalArgumentException("Emprestimo não encontrado"));
   }
 
   //FIXME: Completar consulta por cpfcnpj
   @Transactional
   public List<Emprestimo> consultarEmprestimoCpfcnpj(String cpfcnpj){
-    return new ArrayList<Emprestimo>();
+    return this.emprestimoRepository.findByClienteId_Cpfcnpj(cpfcnpj);
   }
   
 }

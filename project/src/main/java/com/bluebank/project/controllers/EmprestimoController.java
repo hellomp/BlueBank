@@ -26,15 +26,15 @@ public class EmprestimoController {
   EmprestimoService emprestimoService;
 
   //criar emprestimo
-  @PostMapping("/emprestimo/{cpfcnpj}")
+  @PostMapping("/{cpfcnpj}")
   @ResponseBody
   @ResponseStatus(HttpStatus.CREATED)
-  public EmprestimoDTO cadastrarEmprestimo(@PathVariable("cpfpcnpj") String cpfcnpj, @Validated @RequestBody Emprestimo emprestimo){
+  public EmprestimoDTO cadastrarEmprestimo(@PathVariable("cpfcnpj") String cpfcnpj, @Validated @RequestBody Emprestimo emprestimo){
     return emprestimoService.criarEmprestimo(cpfcnpj, emprestimo);
   }
 
   //consultar emprestimo pelo id
-  @GetMapping("/emprestimo/id/{emprestimoId}")
+  @GetMapping("/id/{emprestimoId}")
   @ResponseBody
   @ResponseStatus(HttpStatus.OK)
   public Emprestimo consultarEmprestimo(@PathVariable("emprestimoId") Long emprestimoId){
@@ -42,7 +42,7 @@ public class EmprestimoController {
   }
 
   //consultar emprestimo pelo cpfcnpj
-  @GetMapping("/emprestimo/cpfcnpj/{cpfcnpj}")
+  @GetMapping("/cpfcnpj/{cpfcnpj}")
   @ResponseBody
   @ResponseStatus(HttpStatus.OK)
   public List<Emprestimo> consultarEmprestimo(@PathVariable("cpfcnpj") String cpfcnpj){
