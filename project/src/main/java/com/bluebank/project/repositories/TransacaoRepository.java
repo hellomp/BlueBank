@@ -13,5 +13,7 @@ public interface TransacaoRepository extends JpaRepository<Transacao, Long> {
 //	public Transacao findByContaIdByIdClienteByCpfcnpj(String cpfcnpj);
 	
 	public List<Transacao> findByContaId_ClienteId_Cpfcnpj(String cpfcnpj);
+	
+	public List<Transacao> findByContaId(Long id);
 
 }

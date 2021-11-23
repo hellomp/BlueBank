@@ -7,99 +7,108 @@ import com.bluebank.project.models.Conta;
 import com.bluebank.project.models.Emprestimo;
 
 public class TransacaoDTO {
-  
-  private Conta conta;
-  private TipoTransacao tipoTransacao;
-  private Date dataTransacao;
-  private double saldoAnterior;
-  private double saldoAtual;
-  private Conta contaDestino;
-  private Date dataAgendTransacao;
-  private Date dataExecTransacao;
-  private Emprestimo emprestimo;
-  private double depositoEmprestimo;
 
-  public TransacaoDTO() {
-  }
+	private Conta conta;
+	private TipoTransacao tipoTransacao;
+	private Date dataTransacao;
+	private double saldoAnterior;
+	private double saldoAtual;
+	private Conta contaDestino;
+	private Date dataAgendTransacao;
+	private Date dataExecTransacao;
+	private Emprestimo emprestimo;
+	private double depositoEmprestimo;
+	private double valor;
 
-  public Conta getConta() {
-    return conta;
-  }
+	public TransacaoDTO() {
+	}
 
-  public void setConta(Conta conta) {
-    this.conta = conta;
-  }
+	public Conta getConta() {
+		return conta;
+	}
 
-  public TipoTransacao getTipoTransacao() {
-    return tipoTransacao;
-  }
+	public void setConta(Conta conta) {
+		this.conta = conta;
+	}
 
-  public void setTipoTransacao(TipoTransacao tipoTransacao) {
-    this.tipoTransacao = tipoTransacao;
-  }
+	public TipoTransacao getTipoTransacao() {
+		return tipoTransacao;
+	}
 
-  public Date getDataTransacao() {
-    return dataTransacao;
-  }
+	public void setTipoTransacao(TipoTransacao tipoTransacao) {
+		this.tipoTransacao = tipoTransacao;
+	}
 
-  public void setDataTransacao(Date dataTransacao) {
-    this.dataTransacao = dataTransacao;
-  }
+	public Date getDataTransacao() {
+		return dataTransacao;
+	}
 
-  public double getSaldoAnterior() {
-    return saldoAnterior;
-  }
+	public void setDataTransacao(Date dataTransacao) {
+		this.dataTransacao = dataTransacao;
+	}
 
-  public void setSaldoAnterior(double saldoAnterior) {
-    this.saldoAnterior = saldoAnterior;
-  }
+	public double getSaldoAnterior() {
+		return saldoAnterior;
+	}
 
-  public double getSaldoAtual() {
-    return saldoAtual;
-  }
+	public void setSaldoAnterior(double saldoAnterior) {
+		this.saldoAnterior = saldoAnterior;
+	}
 
-  public void setSaldoAtual(double saldoAtual) {
-    this.saldoAtual = saldoAtual;
-  }
+	public double getSaldoAtual() {
+		return saldoAtual;
+	}
 
-  public Conta getContaDestino() {
-    return contaDestino;
-  }
+	public void setSaldoAtual(double saldoAtual) {
+		this.saldoAtual = saldoAtual;
+	}
 
-  public void setContaDestino(Conta contaDestino) {
-    this.contaDestino = contaDestino;
-  }
+	public Conta getContaDestino() {
+		return contaDestino;
+	}
 
-  public Date getDataAgendTransacao() {
-    return dataAgendTransacao;
-  }
+	public void setContaDestino(Conta contaDestino) {
+		this.contaDestino = contaDestino;
+	}
 
-  public void setDataAgendTransacao(Date dataAgendTransacao) {
-    this.dataAgendTransacao = dataAgendTransacao;
-  }
+	public Date getDataAgendTransacao() {
+		return dataAgendTransacao;
+	}
 
-  public Date getDataExecTransacao() {
-    return dataExecTransacao;
-  }
+	public void setDataAgendTransacao(Date dataAgendTransacao) {
+		this.dataAgendTransacao = dataAgendTransacao;
+	}
 
-  public void setDataExecTransacao(Date dataExecTransacao) {
-    this.dataExecTransacao = dataExecTransacao;
-  }
+	public Date getDataExecTransacao() {
+		return dataExecTransacao;
+	}
 
-  public Emprestimo getEmprestimo() {
-    return emprestimo;
-  }
+	public void setDataExecTransacao(Date dataExecTransacao) {
+		this.dataExecTransacao = dataExecTransacao;
+	}
 
-  public void setEmprestimo(Emprestimo emprestimo) {
-    this.emprestimo = emprestimo;
-  }
+	public Emprestimo getEmprestimo() {
+		return emprestimo;
+	}
 
-  public double getDepositoEmprestimo() {
-    return depositoEmprestimo;
-  }
+	public void setEmprestimo(Emprestimo emprestimo) {
+		this.emprestimo = emprestimo;
+	}
 
-  public void setDepositoEmprestimo(double depositoEmprestimo) {
-    this.depositoEmprestimo = depositoEmprestimo;
-  }
-  
+	public double getDepositoEmprestimo() {
+		return depositoEmprestimo;
+	}
+
+	public void setDepositoEmprestimo(double depositoEmprestimo) {
+		this.depositoEmprestimo = depositoEmprestimo;
+	}
+
+	public double getValor() {
+		return valor;
+	}
+
+	public void setValor(double valor) {
+		this.valor = valor;
+	}
+
 }
