@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -15,6 +16,10 @@ public class Emprestimo {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
+
+  @NotNull
+  @ManyToOne
+  private Cliente cliente;
 
   @NotNull
   @Column(name = "num_contrato")
@@ -50,6 +55,14 @@ public class Emprestimo {
 
   public void setId(long id) {
     this.id = id;
+  }
+
+  public Cliente getCliente() {
+    return cliente;
+  }
+
+  public void setCliente(Cliente cliente) {
+    this.cliente = cliente;
   }
 
   public String getNumeroContrato() {

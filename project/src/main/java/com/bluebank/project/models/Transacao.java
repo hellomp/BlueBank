@@ -50,19 +50,6 @@ public class Transacao {
   
   @Column(name = "dt_exec_tra")
   private Date dataExecTransacao;
-  
-  @OneToOne
-  // @JoinColumn(name = "id_emp")
-  private Emprestimo emprestimo;
-  
-  @ManyToOne
-  private Cliente cliente;
-
-  @Column(name = "dep_emp")
-  private Double depositoEmprestimo;
-  
-  @Column(name = "valor")
-  private Double valor;
 
   public Transacao() {
     super();
@@ -108,14 +95,6 @@ public class Transacao {
 
   public void setConta(Conta conta) {
     this.conta = conta;
-  }
-
-  public Cliente getCliente() {
-    return cliente;
-  }
-
-  public void setCliente(Cliente cliente) {
-    this.cliente = cliente;
   }
 
   public TipoTransacao getTipoTransacao() {
@@ -174,32 +153,6 @@ public class Transacao {
     this.dataExecTransacao = dataExecTransacao;
   }
 
-  public Emprestimo getEmprestimo() {
-    return emprestimo;
-  }
-
-  public void setEmprestimo(Emprestimo emprestimo) {
-    this.emprestimo = emprestimo;
-  }
-
-  public Double getDepositoEmprestimo() {
-    return depositoEmprestimo;
-  }
-
-  public void setDepositoEmprestimo(Double depositoEmprestimo) {
-    this.depositoEmprestimo = depositoEmprestimo;
-  }
-  
-  
-
-  public Double getValor() {
-	return valor;
-}
-
-public void setValor(Double valor) {
-	this.valor = valor;
-}
-
 @Override
   public int hashCode() {
     final int prime = 31;
@@ -226,8 +179,8 @@ public void setValor(Double valor) {
   public String toString() {
     return "Transacao [SaldoAtual=" + SaldoAtual + ", conta=" + conta + ", contaDestino=" + contaDestino
         + ", dataAgendTransacao=" + dataAgendTransacao + ", dataExecTransacao=" + dataExecTransacao + ", dataTransacao="
-        + dataTransacao + ", depositoEmprestimo=" + depositoEmprestimo + ", emprestimo=" + emprestimo + ", id=" + id
-        + ", saldoAnterior=" + saldoAnterior + ", tipoTransacao=" + tipoTransacao + ", valor=" + valor + "]";
+        + dataTransacao + ", id=" + id
+        + ", saldoAnterior=" + saldoAnterior + ", tipoTransacao=" + tipoTransacao + "]";
   }
   
 }
