@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class Emprestimo {
 
@@ -17,32 +19,27 @@ public class Emprestimo {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
-  @NotNull
   @ManyToOne
   private Cliente cliente;
 
   @NotNull
-  @Column(name = "num_contrato")
   private String numeroContrato;
 
   @NotNull
-  @Column(name = "dt_inicio")
+  @JsonFormat(pattern = "dd/MM/yyyy")
   private Date dataInicio;
 
   @NotNull
-  @Column(name = "dt_fim")
+  @JsonFormat(pattern = "dd/MM/yyyy")
   private Date dataFim;
 
   @NotNull
-  @Column(name = "vl_emprestimo")
   private double valorEmprestimo;
 
   @NotNull
-  @Column(name = "per_juros")
   private double percentualJuros;
 
   @NotNull
-  @Column(name = "qt_parcelas")
   private int quantParcelas;
 
   public Emprestimo() {
