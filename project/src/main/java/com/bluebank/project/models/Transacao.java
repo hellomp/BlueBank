@@ -28,11 +28,11 @@ public class Transacao {
   @NotNull
   @Column(name = "tipo_trans")
   private TipoTransacao tipoTransacao;
-
+  
   @NotNull
   @Column(name = "dt_trans")
   private Date dataTransacao;
-
+  
   @NotNull
   @Column(name = "saldo_anterior")
   private double saldoAnterior;
@@ -44,16 +44,19 @@ public class Transacao {
   @OneToOne
   @JoinColumn(name = "id_conta_dest")
   private Conta contaDestino;
-
+  
   @Column(name = "dt_agend_tra")
   private Date dataAgendTransacao;
-
+  
   @Column(name = "dt_exec_tra")
   private Date dataExecTransacao;
-
+  
   @OneToOne
-  @JoinColumn(name = "id_emp")
+  // @JoinColumn(name = "id_emp")
   private Emprestimo emprestimo;
+  
+  @ManyToOne
+  private Cliente cliente;
 
   @Column(name = "dep_emp")
   private Double depositoEmprestimo;
@@ -105,6 +108,14 @@ public class Transacao {
 
   public void setConta(Conta conta) {
     this.conta = conta;
+  }
+
+  public Cliente getCliente() {
+    return cliente;
+  }
+
+  public void setCliente(Cliente cliente) {
+    this.cliente = cliente;
   }
 
   public TipoTransacao getTipoTransacao() {
