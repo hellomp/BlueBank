@@ -11,8 +11,8 @@ public class EmprestimoMapper {
 	public EmprestimoDTO updateEmprestimoDtoFromEmprestimo(Emprestimo emprestimo, EmprestimoDTO emprestimoDTO) {
 		emprestimoDTO.setClienteCpfcnpj(emprestimo.getCliente().getCpfcnpj());
     emprestimoDTO.setNumeroContrato(emprestimo.getNumeroContrato());
-		emprestimoDTO.setDataInicio(emprestimo.getDataInicio());
-		emprestimoDTO.setDataFim(emprestimo.getDataFim());
+    emprestimoDTO.setDataInicio(emprestimo.getDataInicio().toString());
+		emprestimoDTO.setDataFim(emprestimo.getDataFim().toString());
 		emprestimoDTO.setValorEmprestimo(emprestimo.getValorEmprestimo());
 		emprestimoDTO.setPercentualJuros(emprestimo.getPercentualJuros());
 		emprestimoDTO.setQuantParcelas(emprestimo.getQuantParcelas());
