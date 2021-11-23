@@ -25,17 +25,14 @@ public class Transacao {
 //  @JoinColumn(name = "id_conta")
   private Conta conta;
 
-  @ManyToOne
-  private Cliente cliente;
-
   @NotNull
   @Column(name = "tipo_trans")
   private TipoTransacao tipoTransacao;
-
+  
   @NotNull
   @Column(name = "dt_trans")
   private Date dataTransacao;
-
+  
   @NotNull
   @Column(name = "saldo_anterior")
   private double saldoAnterior;
@@ -47,16 +44,19 @@ public class Transacao {
   @OneToOne
   @JoinColumn(name = "id_conta_dest")
   private Conta contaDestino;
-
+  
   @Column(name = "dt_agend_tra")
   private Date dataAgendTransacao;
-
+  
   @Column(name = "dt_exec_tra")
   private Date dataExecTransacao;
-
+  
   @OneToOne
   // @JoinColumn(name = "id_emp")
   private Emprestimo emprestimo;
+  
+  @ManyToOne
+  private Cliente cliente;
 
   @Column(name = "dep_emp")
   private Double depositoEmprestimo;
