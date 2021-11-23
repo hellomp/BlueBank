@@ -28,11 +28,11 @@ public class Transacao {
   @NotNull
   @Column(name = "tipo_trans")
   private TipoTransacao tipoTransacao;
-
+  
   @NotNull
   @Column(name = "dt_trans")
   private Date dataTransacao;
-
+  
   @NotNull
   @Column(name = "saldo_anterior")
   private double saldoAnterior;
@@ -44,20 +44,13 @@ public class Transacao {
   @OneToOne
   @JoinColumn(name = "id_conta_dest")
   private Conta contaDestino;
-
+  
   @Column(name = "dt_agend_tra")
   private Date dataAgendTransacao;
-
+  
   @Column(name = "dt_exec_tra")
   private Date dataExecTransacao;
 
-  @OneToOne
-  @JoinColumn(name = "id_emp")
-  private Emprestimo emprestimo;
-
-  @Column(name = "dep_emp")
-  private Double depositoEmprestimo;
-  
   @Column(name = "valor")
   private Double valor;
 
@@ -163,31 +156,13 @@ public class Transacao {
     this.dataExecTransacao = dataExecTransacao;
   }
 
-  public Emprestimo getEmprestimo() {
-    return emprestimo;
-  }
-
-  public void setEmprestimo(Emprestimo emprestimo) {
-    this.emprestimo = emprestimo;
-  }
-
-  public Double getDepositoEmprestimo() {
-    return depositoEmprestimo;
-  }
-
-  public void setDepositoEmprestimo(Double depositoEmprestimo) {
-    this.depositoEmprestimo = depositoEmprestimo;
-  }
-  
-  
-
   public Double getValor() {
-	return valor;
-}
+    return valor;
+  }
 
-public void setValor(Double valor) {
-	this.valor = valor;
-}
+  public void setValor(Double valor) {
+    this.valor = valor;
+  }
 
 @Override
   public int hashCode() {
@@ -215,8 +190,8 @@ public void setValor(Double valor) {
   public String toString() {
     return "Transacao [SaldoAtual=" + SaldoAtual + ", conta=" + conta + ", contaDestino=" + contaDestino
         + ", dataAgendTransacao=" + dataAgendTransacao + ", dataExecTransacao=" + dataExecTransacao + ", dataTransacao="
-        + dataTransacao + ", depositoEmprestimo=" + depositoEmprestimo + ", emprestimo=" + emprestimo + ", id=" + id
-        + ", saldoAnterior=" + saldoAnterior + ", tipoTransacao=" + tipoTransacao + ", valor=" + valor + "]";
+        + dataTransacao + ", id=" + id
+        + ", saldoAnterior=" + saldoAnterior + ", tipoTransacao=" + tipoTransacao + "]";
   }
   
 }

@@ -70,7 +70,7 @@ public class TransacaoMapper {
 		return depositoDTO;
 	}
 
-	
+
 //	public Emprestimo updateEmprestimoFromEmprestimoDto(EmprestimoDTO emprestimoDTO, Emprestimo emprestimo) {	
 //	}
 	public EmprestimoDTO updateEmprestimoDtoFromEmprestimo(Emprestimo emprestimo, EmprestimoDTO emprestimoDTO) {
@@ -82,8 +82,6 @@ public class TransacaoMapper {
 		emprestimoDTO.setQuantParcelas(emprestimo.getQuantParcelas());
 		return emprestimoDTO;
 	}
-	
-	
 	
 //	public Transacao updateTransacaoFromSaqueDto(SaqueDTO saqueDTO,Transacao transacao){
 //}
@@ -113,7 +111,3 @@ public class TransacaoMapper {
 	}
 
 }
-
-
-
-
