@@ -11,5 +11,5 @@ import org.springframework.stereotype.Repository;
 public interface EmprestimoRepository extends JpaRepository<Emprestimo, Long>{
 
   //FIXME: Completar query
-  public List<Emprestimo> findByClientId_Cpfcnpj(String cpfcnpj);
+  public List<Emprestimo> findByClienteId_Cpfcnpj(String cpfcnpj);
 }
