@@ -29,17 +29,11 @@ public class EmprestimoService {
 
   @Transactional
   public EmprestimoDTO criarEmprestimo(String cpfcnpj, Emprestimo emprestimo){
-    EmprestimoDTO emprestimoDTOAux = new EmprestimoDTO();
-    Emprestimo novoEmprestimo = emprestimoRepository.save(emprestimo);
-    emprestimoMapper.updateEmprestimoDtoFromEmprestimo(novoEmprestimo, emprestimoDTOAux);
-    
-    Transacao novaTransacao = new Transacao();
-    novaTransacao.setCliente(clienteRepository.findByCpfcnpj(cpfcnpj));
-    novaTransacao.setTipoTransacao(TipoTransacao.EMP);
-    novaTransacao.setDataTransacao(java.util.Calendar.getInstance().getTime());
-    
-    this.criarTransacao(novaTransacao, novoEmprestimo.getId());
-    return emprestimoDTOAux;
+    emprestimo.setCliente(clienteRepository.findByCpfcnpj(cpfcnpj));
+
+    EmprestimoDTO emprestimoDTO = new EmprestimoDTO();
+    emprestimoMapper.updateEmprestimoDtoFromEmprestimo(emprestimoRepository.save(emprestimo), emprestimoDTO);
+    return emprestimoDTO;
   }
 
   @Transactional
