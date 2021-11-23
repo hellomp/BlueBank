@@ -25,6 +25,9 @@ public class Transacao {
 //  @JoinColumn(name = "id_conta")
   private Conta conta;
 
+  @ManyToOne
+  private Cliente cliente;
+
   @NotNull
   @Column(name = "tipo_trans")
   private TipoTransacao tipoTransacao;
@@ -52,7 +55,7 @@ public class Transacao {
   private Date dataExecTransacao;
 
   @OneToOne
-  @JoinColumn(name = "id_emp")
+  // @JoinColumn(name = "id_emp")
   private Emprestimo emprestimo;
 
   @Column(name = "dep_emp")
@@ -102,6 +105,14 @@ public class Transacao {
 
   public void setConta(Conta conta) {
     this.conta = conta;
+  }
+
+  public Cliente getCliente() {
+    return cliente;
+  }
+
+  public void setCliente(Cliente cliente) {
+    this.cliente = cliente;
   }
 
   public TipoTransacao getTipoTransacao() {

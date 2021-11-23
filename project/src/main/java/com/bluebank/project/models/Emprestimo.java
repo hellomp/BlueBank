@@ -14,7 +14,7 @@ public class Emprestimo {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
+  private long id;
 
   @NotNull
   @Column(name = "num_contrato")
@@ -44,11 +44,11 @@ public class Emprestimo {
     super();
   }
 
-  public int getId() {
+  public long getId() {
     return id;
   }
 
-  public void setId(int id) {
+  public void setId(long id) {
     this.id = id;
   }
 
@@ -104,7 +104,7 @@ public class Emprestimo {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + id;
+    result = prime * result + (int) (id ^ (id >>> 32));
     return result;
   }
 
