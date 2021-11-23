@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class EmprestimoMapper {
 
 	public EmprestimoDTO updateEmprestimoDtoFromEmprestimo(Emprestimo emprestimo, EmprestimoDTO emprestimoDTO) {
-		emprestimoDTO.setCliente(emprestimo.getCliente());
+		emprestimoDTO.setClienteCpfcnpj(emprestimo.getCliente().getCpfcnpj());
     emprestimoDTO.setNumeroContrato(emprestimo.getNumeroContrato());
 		emprestimoDTO.setDataInicio(emprestimo.getDataInicio());
 		emprestimoDTO.setDataFim(emprestimo.getDataFim());
