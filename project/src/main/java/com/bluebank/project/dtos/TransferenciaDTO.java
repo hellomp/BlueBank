@@ -9,12 +9,12 @@ public class TransferenciaDTO {
 
   private Conta conta;
   private TipoTransacao tipoTransacao;
-  private Date dataTransacao;
+  private String dataTransacao;
   private double saldoAnterior;
   private double saldoAtual;
   private Conta contaDestino;
-  private Date dataAgendTransacao;
-  private Date dataExecTransacao;
+  private String dataAgendTransacao;
+  private String dataExecTransacao;
   private Double valor;
   
   public TransferenciaDTO() {
@@ -36,11 +36,11 @@ public class TransferenciaDTO {
     this.tipoTransacao = tipoTransacao;
   }
 
-  public Date getDataTransacao() {
+  public String getDataTransacao() {
     return dataTransacao;
   }
 
-  public void setDataTransacao(Date dataTransacao) {
+  public void setDataTransacao(String dataTransacao) {
     this.dataTransacao = dataTransacao;
   }
 
@@ -68,19 +68,19 @@ public class TransferenciaDTO {
     this.contaDestino = contaDestino;
   }
 
-  public Date getDataAgendTransacao() {
+  public String getDataAgendTransacao() {
     return dataAgendTransacao;
   }
 
-  public void setDataAgendTransacao(Date dataAgendTransacao) {
+  public void setDataAgendTransacao(String dataAgendTransacao) {
     this.dataAgendTransacao = dataAgendTransacao;
   }
 
-  public Date getDataExecTransacao() {
+  public String getDataExecTransacao() {
     return dataExecTransacao;
   }
 
-  public void setDataExecTransacao(Date dataExecTransacao) {
+  public void setDataExecTransacao(String dataExecTransacao) {
     this.dataExecTransacao = dataExecTransacao;
   }
 

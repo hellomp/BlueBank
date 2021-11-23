@@ -1,6 +1,5 @@
 package com.bluebank.project.dtos;
 
-import java.util.Date;
 
 import com.bluebank.project.enums.TipoTransacao;
 import com.bluebank.project.models.Conta;
@@ -9,7 +8,7 @@ public class DepositoDTO {
   
 //  private Conta conta;
   private TipoTransacao tipoTransacao;
-  private Date dataTransacao;
+  private String dataTransacao;
   private double saldoAnterior;
   private double valorDeposito;
   private double saldoAtual;
@@ -34,11 +33,11 @@ public class DepositoDTO {
     this.tipoTransacao = tipoTransacao;
   }
 
-  public Date getDataTransacao() {
+  public String getDataTransacao() {
     return dataTransacao;
   }
 
-  public void setDataTransacao(Date dataTransacao) {
+  public void setDataTransacao(String dataTransacao) {
     this.dataTransacao = dataTransacao;
   }
 
