@@ -1,11 +1,10 @@
 package com.bluebank.project.dtos;
 
 
-import com.bluebank.project.models.Cliente;
 
 public class EmprestimoDTO {
 
-  private Cliente cliente;
+  private String clienteCpfcnpj;
   private String numeroContrato;
   private String dataInicio;
   private String dataFim;
@@ -16,12 +15,12 @@ public class EmprestimoDTO {
   public EmprestimoDTO() {
   }
 
-  public Cliente getCliente() {
-    return cliente;
+  public String getClienteCpfcnpj() {
+    return clienteCpfcnpj;
   }
 
-  public void setCliente(Cliente cliente) {
-    this.cliente = cliente;
+  public void setClienteCpfcnpj(String clienteCpfcnpj) {
+    this.clienteCpfcnpj = clienteCpfcnpj;
   }
 
   public String getNumeroContrato() {
