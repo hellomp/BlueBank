@@ -2,7 +2,9 @@ package com.bluebank.project.controllers;
 
 import java.util.List;
 
+import com.bluebank.project.dtos.DepositoDTO;
 import com.bluebank.project.dtos.EmprestimoDTO;
+import com.bluebank.project.dtos.SaqueDTO;
 import com.bluebank.project.models.Emprestimo;
 import com.bluebank.project.services.TransacaoService;
 
@@ -24,6 +26,34 @@ public class TransacaoController {
   
   @Autowired
   TransacaoService transacaoService;
+
+  @PostMapping("/saque/{id}")
+	@ResponseBody
+	@ResponseStatus(HttpStatus.CREATED)
+	public SaqueDTO saque(@PathVariable("id") Long id, @RequestBody Transacao transacao) {
+		return transacaoService.criarSaque(id, transacao);
+	}
+	
+	@PostMapping("/deposito/{id}")
+	@ResponseBody
+	@ResponseStatus(HttpStatus.CREATED)
+	public DepositoDTO deposito(@PathVariable("id") Long id, @RequestBody Transacao transacao) {
+		return transacaoService.criarDeposito(id, transacao);
+	}
+	
+	@GetMapping("/saldo/{id}")
+	@ResponseBody
+	@ResponseStatus(HttpStatus.OK)
+	public double saldo(@PathVariable("id") Long id){
+		return transacaoService.findSaldo(id);
+	}
+	
+	@GetMapping("/extrato/{id}")
+	@ResponseBody
+	@ResponseStatus(HttpStatus.OK)
+	public List<Object> extrato(@PathVariable("id") Long id){
+		return transacaoService.findByContaId(id);
+	}
 
   //criar emprestimo
   @PostMapping("/emprestimo/{cpfcnpj}")

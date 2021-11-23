@@ -7,22 +7,24 @@ import com.bluebank.project.models.Conta;
 
 public class DepositoDTO {
   
-  private Conta conta;
+//  private Conta conta;
   private TipoTransacao tipoTransacao;
   private Date dataTransacao;
   private double saldoAnterior;
+  private double valorDeposito;
   private double saldoAtual;
+  
   
   public DepositoDTO() {
   }
 
-  public Conta getConta() {
-    return conta;
-  }
-
-  public void setConta(Conta conta) {
-    this.conta = conta;
-  }
+//  public Conta getConta() {
+//    return conta;
+//  }
+//
+//  public void setConta(Conta conta) {
+//    this.conta = conta;
+//  }
 
   public TipoTransacao getTipoTransacao() {
     return tipoTransacao;
@@ -55,5 +57,14 @@ public class DepositoDTO {
   public void setSaldoAtual(double saldoAtual) {
     this.saldoAtual = saldoAtual;
   }
+
+public double getValorDeposito() {
+	return valorDeposito;
+}
+
+public void setValorDeposito(double valor) {
+	this.valorDeposito = valor;
+}
+  
 
 }
