@@ -4,7 +4,6 @@ import java.util.Date;
 
 import com.bluebank.project.enums.TipoTransacao;
 import com.bluebank.project.models.Conta;
-import com.bluebank.project.models.Emprestimo;
 
 public class TransacaoDTO {
 
@@ -16,8 +15,6 @@ public class TransacaoDTO {
 	private Conta contaDestino;
 	private Date dataAgendTransacao;
 	private Date dataExecTransacao;
-	private Emprestimo emprestimo;
-	private double depositoEmprestimo;
 	private double valor;
 
 	public TransacaoDTO() {
@@ -85,22 +82,6 @@ public class TransacaoDTO {
 
 	public void setDataExecTransacao(Date dataExecTransacao) {
 		this.dataExecTransacao = dataExecTransacao;
-	}
-
-	public Emprestimo getEmprestimo() {
-		return emprestimo;
-	}
-
-	public void setEmprestimo(Emprestimo emprestimo) {
-		this.emprestimo = emprestimo;
-	}
-
-	public double getDepositoEmprestimo() {
-		return depositoEmprestimo;
-	}
-
-	public void setDepositoEmprestimo(double depositoEmprestimo) {
-		this.depositoEmprestimo = depositoEmprestimo;
 	}
 
 	public double getValor() {

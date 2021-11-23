@@ -3,9 +3,8 @@ package com.bluebank.project.controllers;
 import java.util.List;
 
 import com.bluebank.project.dtos.DepositoDTO;
-import com.bluebank.project.dtos.EmprestimoDTO;
 import com.bluebank.project.dtos.SaqueDTO;
-import com.bluebank.project.models.Emprestimo;
+import com.bluebank.project.models.Transacao;
 import com.bluebank.project.services.TransacaoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,27 +54,4 @@ public class TransacaoController {
 		return transacaoService.findByContaId(id);
 	}
 
-  //criar emprestimo
-  @PostMapping("/emprestimo/{cpfcnpj}")
-  @ResponseBody
-  @ResponseStatus(HttpStatus.CREATED)
-  public EmprestimoDTO cadastrarEmprestimo(@PathVariable("cpfpcnpj") String cpfcnpj, @Validated @RequestBody Emprestimo emprestimo){
-    return transacaoService.criarEmprestimo(cpfcnpj, emprestimo);
-  }
-
-  //consultar emprestimo pelo id
-  @GetMapping("/emprestimo/id/{emprestimoId}")
-  @ResponseBody
-  @ResponseStatus(HttpStatus.OK)
-  public Emprestimo consultarEmprestimo(@PathVariable("emprestimoId") Long emprestimoId){
-    return transacaoService.consultarEmprestimoId(emprestimoId);
-  }
-
-  //consultar emprestimo pelo cpfcnpj
-  @GetMapping("/emprestimo/cpfcnpj/{cpfcnpj}")
-  @ResponseBody
-  @ResponseStatus(HttpStatus.OK)
-  public List<Emprestimo> consultarEmprestimo(@PathVariable("cpfcnpj") String cpfcnpj){
-    return transacaoService.consultarEmprestimoCpfcnpj(cpfcnpj);
-  }
 }

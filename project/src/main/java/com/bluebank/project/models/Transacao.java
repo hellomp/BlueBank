@@ -51,6 +51,9 @@ public class Transacao {
   @Column(name = "dt_exec_tra")
   private Date dataExecTransacao;
 
+  @Column(name = "valor")
+  private Double valor;
+
   public Transacao() {
     super();
   }
@@ -151,6 +154,14 @@ public class Transacao {
 
   public void setDataExecTransacao(Date dataExecTransacao) {
     this.dataExecTransacao = dataExecTransacao;
+  }
+
+  public Double getValor() {
+    return valor;
+  }
+
+  public void setValor(Double valor) {
+    this.valor = valor;
   }
 
 @Override

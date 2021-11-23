@@ -8,12 +8,9 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.bluebank.project.dtos.DepositoDTO;
-import com.bluebank.project.dtos.EmprestimoDTO;
 import com.bluebank.project.dtos.SaqueDTO;
-import com.bluebank.project.dtos.TransacaoDTO;
 import com.bluebank.project.dtos.TransferenciaDTO;
 import com.bluebank.project.enums.TipoTransacao;
-import com.bluebank.project.models.Emprestimo;
 import com.bluebank.project.models.Transacao;
 
 @Service
@@ -66,21 +63,6 @@ public class TransacaoMapper {
 		return depositoDTO;
 	}
 
-	
-//	public Emprestimo updateEmprestimoFromEmprestimoDto(EmprestimoDTO emprestimoDTO, Emprestimo emprestimo) {	
-//	}
-	public EmprestimoDTO updateEmprestimoDtoFromEmprestimo(Emprestimo emprestimo, EmprestimoDTO emprestimoDTO) {
-		emprestimoDTO.setNumeroContrato(emprestimo.getNumeroContrato());
-		emprestimoDTO.setDataInicio(emprestimo.getDataInicio());
-		emprestimoDTO.setDataFim(emprestimo.getDataFim());
-		emprestimoDTO.setValorEmprestimo(emprestimo.getValorEmprestimo());
-		emprestimoDTO.setPercentualJuros(emprestimo.getPercentualJuros());
-		emprestimoDTO.setQuantParcelas(emprestimo.getQuantParcelas());
-		return emprestimoDTO;
-	}
-	
-	
-	
 //	public Transacao updateTransacaoFromSaqueDto(SaqueDTO saqueDTO,Transacao transacao){
 //}
 	public SaqueDTO updateSaqueDtoFromTransacao(Transacao transacao, SaqueDTO saqueDTO) {
