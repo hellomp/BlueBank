@@ -35,7 +35,7 @@ public class ClienteController {
 	ClienteService clienteService;
 	
 	@PostMapping()
-	@ApiOperation(value="Cadastra um novo cliente com od dados pessoais")
+	@ApiOperation(value="Cadastra um novo cliente com os dados pessoais")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.CREATED)
 	public ClientDTO cadastrarCliente(@Validated @RequestBody Cliente cliente, BindingResult br) {//throws DataIntegrityViolationException, Exception {
@@ -60,7 +60,7 @@ public class ClienteController {
 	}
 	
 	@PutMapping("/{cpfcnpj}")
-	@ApiOperation(value="Atualiza o cadastro do clieNte atraves do CPF ou CNPJ")
+	@ApiOperation(value="Atualiza o cadastro do cliente atraves do CPF ou CNPJ")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	public ClientDTO atualizarCadastro(@PathVariable("cpfcnpj") String cpfcnpj, @RequestBody ClientDTO clientDTO) {//, BindingResult br) throws DataIntegrityViolationException, Exception {
