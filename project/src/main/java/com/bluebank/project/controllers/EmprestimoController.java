@@ -48,4 +48,12 @@ public class EmprestimoController {
   public List<EmprestimoDTO> consultarEmprestimo(@PathVariable("cpfcnpj") String cpfcnpj){
     return emprestimoService.consultarEmprestimoCpfcnpj(cpfcnpj);
   }
+
+  //pagar emprestimo
+  @PostMapping("/pagamento/{emprestimoId}/{contaId}")
+  @ResponseBody
+  @ResponseStatus(HttpStatus.CREATED)
+  public double pagarEmprestimo(@PathVariable("emprestimoId") Long emprestimoId, @PathVariable("contaId") Long contaId){
+    return emprestimoService.pagarEmprestimo(emprestimoId, contaId);
+  }
 }

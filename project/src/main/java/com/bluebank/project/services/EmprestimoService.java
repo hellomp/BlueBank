@@ -49,5 +49,13 @@ public class EmprestimoService {
     }
     return listEmprestimoDTO;
   }
+
+  @Transactional
+  public double pagarEmprestimo(Long emprestimoId, Long contaId) throws IllegalArgumentException{
+    Emprestimo emprestimo = emprestimoRepository.findById(emprestimoId).orElseThrow(() -> new IllegalArgumentException("Emprestimo não encontrado"));
+
+    double valorPagamento = (emprestimo.getValorEmprestimo() / emprestimo.getQuantParcelas()) + (emprestimo.getValorEmprestimo() * emprestimo.getPercentualJuros());
+    return valorPagamento;
+  }
   
 }
