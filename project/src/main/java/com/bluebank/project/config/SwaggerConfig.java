@@ -16,7 +16,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 	    public Docket api() {
 	        return new Docket(DocumentationType.SWAGGER_2)
 	          .select()
-	          .apis(RequestHandlerSelectors.any())
+	          .apis(RequestHandlerSelectors.basePackage("com.bluebank.project.controllers"))
 	          .paths(PathSelectors.any())
 	          .build();
 	    }
