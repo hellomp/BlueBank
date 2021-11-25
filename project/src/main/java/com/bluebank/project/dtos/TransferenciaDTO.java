@@ -7,24 +7,24 @@ import com.bluebank.project.models.Conta;
 
 public class TransferenciaDTO {
 
-  private Conta conta;
+  private Long conta;
   private TipoTransacao tipoTransacao;
   private String dataTransacao;
   private double saldoAnterior;
   private double saldoAtual;
-  private Conta contaDestino;
-  private String dataAgendTransacao;
-  private String dataExecTransacao;
+  private Long contaDestino;
+//  private String dataAgendTransacao;
+//  private String dataExecTransacao;
   private Double valor;
   
   public TransferenciaDTO() {
   }
 
-  public Conta getConta() {
+  public Long getConta() {
     return conta;
   }
 
-  public void setConta(Conta conta) {
+  public void setConta(Long conta) {
     this.conta = conta;
   }
 
@@ -60,29 +60,29 @@ public class TransferenciaDTO {
     this.saldoAtual = saldoAtual;
   }
 
-  public Conta getContaDestino() {
+  public Long getContaDestino() {
     return contaDestino;
   }
 
-  public void setContaDestino(Conta contaDestino) {
+  public void setContaDestino(Long contaDestino) {
     this.contaDestino = contaDestino;
   }
 
-  public String getDataAgendTransacao() {
-    return dataAgendTransacao;
-  }
-
-  public void setDataAgendTransacao(String dataAgendTransacao) {
-    this.dataAgendTransacao = dataAgendTransacao;
-  }
-
-  public String getDataExecTransacao() {
-    return dataExecTransacao;
-  }
-
-  public void setDataExecTransacao(String dataExecTransacao) {
-    this.dataExecTransacao = dataExecTransacao;
-  }
+//  public String getDataAgendTransacao() {
+//    return dataAgendTransacao;
+//  }
+//
+//  public void setDataAgendTransacao(String dataAgendTransacao) {
+//    this.dataAgendTransacao = dataAgendTransacao;
+//  }
+//
+//  public String getDataExecTransacao() {
+//    return dataExecTransacao;
+//  }
+//
+//  public void setDataExecTransacao(String dataExecTransacao) {
+//    this.dataExecTransacao = dataExecTransacao;
+//  }
 
 public Double getValor() {
 	return valor;

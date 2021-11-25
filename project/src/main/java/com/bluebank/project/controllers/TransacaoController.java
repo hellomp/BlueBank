@@ -48,7 +48,7 @@ public class TransacaoController {
 	}
 	
 	@GetMapping("/extrato/{id}")
-	@ResponseBody
+//	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
 	public List<Object> extrato(@PathVariable("id") Long id){
 		return transacaoService.findByContaId(id);

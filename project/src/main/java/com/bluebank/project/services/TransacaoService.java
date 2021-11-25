@@ -87,7 +87,7 @@ public class TransacaoService {
 		transacao.setValor(transacao.getValor());
 		DepositoDTO depositoDTO = new DepositoDTO();
 		double valorDeposito = transacao.getValor();
-		if (valorDeposito < 0.0) {
+		if (valorDeposito <= 0.0) {
 			throw new IllegalArgumentException("Valor de depósito inválido");
 		} else {
 			Conta conta = transacao.getConta();
@@ -105,18 +105,18 @@ public class TransacaoService {
 		transacao.setDataTransacao(java.util.Calendar.getInstance().getTime());
 		transacao.setSaldoAnterior(transacao.getConta().getSaldo());
 		transacao.setSaldoAtual(transacao.getConta().getSaldo());
-		transacao.setValor(transacao.getValor());
+//		transacao.setValor(transacao.getValor());
 		transacao.setContaDestino(contaRepository.findById(contaDestinoId).orElseThrow(() -> new IllegalArgumentException("Conta inexistente")));
 
 		TransferenciaDTO transferenciaDTO = new TransferenciaDTO();
 		double valorTransferencia = transacao.getValor();
-		if (valorTransferencia < 0.0) {
+		if (valorTransferencia <= 0.0) {
 			throw new IllegalArgumentException("Valor de transferência inválido");
 		} else if (valorTransferencia >= transacao.getSaldoAtual()) {
 			throw new IllegalArgumentException("Valor de saque maior que o saldo disponível");
 		} else {
 			Conta conta = transacao.getConta();
-			Conta contaDestino = transacao.getConta();
+			Conta contaDestino = transacao.getContaDestino();
 			conta.setSaldo(conta.getSaldo() - valorTransferencia);
 			contaDestino.setSaldo(contaDestino.getSaldo() + valorTransferencia);
 			transacao.setSaldoAtual(conta.getSaldo());
