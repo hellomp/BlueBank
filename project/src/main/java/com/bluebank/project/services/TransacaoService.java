@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.bluebank.project.dtos.DepositoDTO;
 import com.bluebank.project.dtos.SaqueDTO;
+import com.bluebank.project.dtos.TransferenciaDTO;
 import com.bluebank.project.enums.TipoTransacao;
 import com.bluebank.project.mappers.TransacaoMapper;
 import com.bluebank.project.models.Conta;
@@ -96,6 +97,33 @@ public class TransacaoService {
 		transacaoMapper.updateDepositoDtoFromTransacao(transacao, depositoDTO);
 		transacaoRepository.save(transacao);
 		return depositoDTO;
+	}
+
+	public TransferenciaDTO criarTransferencia(Long contaId, Long contaDestinoId,Transacao transacao){
+		transacao.setConta(contaRepository.findById(contaId).orElseThrow(() -> new IllegalArgumentException("Conta Inexistente")));
+		transacao.setTipoTransacao(TipoTransacao.TRA);
+		transacao.setDataTransacao(java.util.Calendar.getInstance().getTime());
+		transacao.setSaldoAnterior(transacao.getConta().getSaldo());
+		transacao.setSaldoAtual(transacao.getConta().getSaldo());
+		transacao.setValor(transacao.getValor());
+		transacao.setContaDestino(contaRepository.findById(contaDestinoId).orElseThrow(() -> new IllegalArgumentException("Conta inexistente")));
+
+		TransferenciaDTO transferenciaDTO = new TransferenciaDTO();
+		double valorTransferencia = transacao.getValor();
+		if (valorTransferencia < 0.0) {
+			throw new IllegalArgumentException("Valor de transferência inválido");
+		} else if (valorTransferencia >= transacao.getSaldoAtual()) {
+			throw new IllegalArgumentException("Valor de saque maior que o saldo disponível");
+		} else {
+			Conta conta = transacao.getConta();
+			Conta contaDestino = transacao.getConta();
+			conta.setSaldo(conta.getSaldo() - valorTransferencia);
+			contaDestino.setSaldo(contaDestino.getSaldo() + valorTransferencia);
+			transacao.setSaldoAtual(conta.getSaldo());
+		}
+		transacaoMapper.updateTransferenciaDtoFromTransacao(transacao, transferenciaDTO);
+		transacaoRepository.save(transacao);
+		return transferenciaDTO;
 	}
 }
 
