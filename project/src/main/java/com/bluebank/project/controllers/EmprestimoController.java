@@ -3,6 +3,7 @@ package com.bluebank.project.controllers;
 import java.util.List;
 
 import com.bluebank.project.dtos.EmprestimoDTO;
+import com.bluebank.project.dtos.TransferenciaDTO;
 import com.bluebank.project.models.Emprestimo;
 import com.bluebank.project.services.EmprestimoService;
 
@@ -47,5 +48,13 @@ public class EmprestimoController {
   @ResponseStatus(HttpStatus.OK)
   public List<EmprestimoDTO> consultarEmprestimo(@PathVariable("cpfcnpj") String cpfcnpj){
     return emprestimoService.consultarEmprestimoCpfcnpj(cpfcnpj);
+  }
+
+  //pagar emprestimo
+  @PostMapping("/pagamento/{emprestimoId}/{contaId}")
+  @ResponseBody
+  @ResponseStatus(HttpStatus.CREATED)
+  public TransferenciaDTO pagarEmprestimo(@PathVariable("emprestimoId") Long emprestimoId, @PathVariable("contaId") Long contaId){
+    return emprestimoService.pagarEmprestimo(emprestimoId, contaId);
   }
 }

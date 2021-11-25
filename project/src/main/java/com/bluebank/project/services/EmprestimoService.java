@@ -4,9 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bluebank.project.dtos.EmprestimoDTO;
+import com.bluebank.project.dtos.TransferenciaDTO;
+import com.bluebank.project.enums.TipoTransacao;
 import com.bluebank.project.mappers.EmprestimoMapper;
+import com.bluebank.project.mappers.TransacaoMapper;
+import com.bluebank.project.models.Conta;
 import com.bluebank.project.models.Emprestimo;
+import com.bluebank.project.models.Transacao;
 import com.bluebank.project.repositories.ClienteRepository;
+import com.bluebank.project.repositories.ContaRepository;
 import com.bluebank.project.repositories.EmprestimoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +29,16 @@ public class EmprestimoService {
   ClienteRepository clienteRepository;
 
   @Autowired
+  ContaRepository contaRepository;
+
+  @Autowired
   EmprestimoMapper emprestimoMapper;
+
+  @Autowired
+  TransacaoMapper transacaoMapper;
+
+  @Autowired
+  TransacaoService transacaoService;
 
   @Transactional
   public EmprestimoDTO criarEmprestimo(String cpfcnpj, Emprestimo emprestimo){
@@ -40,7 +55,6 @@ public class EmprestimoService {
     return emprestimoMapper.updateEmprestimoDtoFromEmprestimo(emprestimo, new EmprestimoDTO());
   }
 
-  //FIXME: Completar consulta por cpfcnpj
   @Transactional
   public List<EmprestimoDTO> consultarEmprestimoCpfcnpj(String cpfcnpj){
     List<EmprestimoDTO> listEmprestimoDTO = new ArrayList<EmprestimoDTO>();
@@ -48,6 +62,17 @@ public class EmprestimoService {
       listEmprestimoDTO.add(emprestimoMapper.updateEmprestimoDtoFromEmprestimo(emprestimo, new EmprestimoDTO()));
     }
     return listEmprestimoDTO;
+  }
+
+  @Transactional
+  public TransferenciaDTO pagarEmprestimo(Long emprestimoId, Long contaId) throws IllegalArgumentException{
+    Emprestimo emprestimo = emprestimoRepository.findById(emprestimoId).orElseThrow(() -> new IllegalArgumentException("Emprestimo não encontrado"));
+    double valorPagamento = (emprestimo.getValorEmprestimo() / emprestimo.getQuantParcelas()) + (emprestimo.getValorEmprestimo() * emprestimo.getPercentualJuros());
+    
+    Transacao transacao = new Transacao();
+    transacao.setValor(valorPagamento);
+
+    return transacaoService.criarTransferencia(contaId, 1L, transacao);
   }
   
 }
