@@ -116,6 +116,9 @@ public class Cliente {
 		this.tipo = tipo;
 	}
 
+
+	
+
 	public ClientStatusEnum getStatus() {
 		return status;
 	}
@@ -123,5 +126,6 @@ public class Cliente {
 	public void setStatus(ClientStatusEnum status) {
 		this.status = status;
 	}	
+
 
 }

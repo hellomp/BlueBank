@@ -193,5 +193,10 @@ public class Transacao {
         + dataTransacao + ", id=" + id
         + ", saldoAnterior=" + saldoAnterior + ", tipoTransacao=" + tipoTransacao + "]";
   }
+
+public void setCliente(Cliente findByCpfcnpj) {
+	// TODO Auto-generated method stub
+	
+}
   
 }
