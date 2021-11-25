@@ -7,49 +7,59 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class Emprestimo {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
+  private long id;
+
+  @ManyToOne
+  private Cliente cliente;
 
   @NotNull
-  @Column(name = "num_contrato")
   private String numeroContrato;
 
   @NotNull
-  @Column(name = "dt_inicio")
+  @JsonFormat(pattern = "dd/MM/yyyy")
   private Date dataInicio;
 
   @NotNull
-  @Column(name = "dt_fim")
+  @JsonFormat(pattern = "dd/MM/yyyy")
   private Date dataFim;
 
   @NotNull
-  @Column(name = "vl_emprestimo")
   private double valorEmprestimo;
 
   @NotNull
-  @Column(name = "per_juros")
   private double percentualJuros;
 
   @NotNull
-  @Column(name = "qt_parcelas")
   private int quantParcelas;
 
   public Emprestimo() {
     super();
   }
 
-  public int getId() {
+  public long getId() {
     return id;
   }
 
-  public void setId(int id) {
+  public void setId(long id) {
     this.id = id;
+  }
+
+  public Cliente getCliente() {
+    return cliente;
+  }
+
+  public void setCliente(Cliente cliente) {
+    this.cliente = cliente;
   }
 
   public String getNumeroContrato() {
@@ -104,7 +114,7 @@ public class Emprestimo {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + id;
+    result = prime * result + (int) (id ^ (id >>> 32));
     return result;
   }
 

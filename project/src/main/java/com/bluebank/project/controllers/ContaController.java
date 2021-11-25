@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,8 +21,13 @@ import com.bluebank.project.dtos.AccountDTO;
 import com.bluebank.project.models.Conta;
 import com.bluebank.project.services.ContaService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("/conta")
+@Api(value="API BlueBank")
+@CrossOrigin(origins="*")
 public class ContaController {
 	
 	@Autowired
@@ -30,6 +35,7 @@ public class ContaController {
 	
 	//criar conta
 	@PostMapping("/{cpfcnpj}")
+	@ApiOperation(value="Cadastra um conta com o CPF ou CNPJ")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.CREATED)
 	public AccountDTO cadastrarConta(@PathVariable("cpfcnpj") String cpfcnpj, @Validated @RequestBody Conta conta){
@@ -46,6 +52,7 @@ public class ContaController {
 //	}
 	
 	@GetMapping("/id/{id}")
+	@ApiOperation(value="Consulta os dados da conta atraves do id")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
 	public AccountDTO consultarConta(@PathVariable("id") Long id){
@@ -53,6 +60,7 @@ public class ContaController {
 	}
 	
 	@GetMapping("/cpfcnpj/{cpfcnpj}")
+	@ApiOperation(value="Consulta os dados da conta atraves do CPF ou CNPJ")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
 	public List<AccountDTO> consultarConta(@PathVariable("cpfcnpj") String cpfcnpj){
@@ -60,6 +68,7 @@ public class ContaController {
 	}
 	
 	@PutMapping("/update/{id}/{cpfcnpj}")
+@ApiOperation(value="Atualiza os dados pelo id ou CPF ou CNPJ")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	public AccountDTO update(@PathVariable("id") Long id, @PathVariable("cpfcnpj") String cpfcnpj){
@@ -67,6 +76,7 @@ public class ContaController {
 	}
 	
 	@DeleteMapping("/delete/id/{id}")
+	@ApiOperation(value="Desativa a conta do cliente pelo id")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable("id") Long id){
@@ -74,6 +84,7 @@ public class ContaController {
 	}
 	
 	@DeleteMapping("/delete/cpfcnpj/{cpfcnpj}")
+	@ApiOperation(value="Desativa a conta do cliente pelo CPF ou CNPJ")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable("cpfcnpj") String cpfcnpj){
