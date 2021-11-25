@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bluebank.project.dtos.EmprestimoDTO;
-import com.bluebank.project.enums.TipoTransacao;
 import com.bluebank.project.mappers.EmprestimoMapper;
 import com.bluebank.project.models.Emprestimo;
-import com.bluebank.project.models.Transacao;
 import com.bluebank.project.repositories.ClienteRepository;
 import com.bluebank.project.repositories.EmprestimoRepository;
 
@@ -29,33 +27,27 @@ public class EmprestimoService {
 
   @Transactional
   public EmprestimoDTO criarEmprestimo(String cpfcnpj, Emprestimo emprestimo){
-    EmprestimoDTO emprestimoDTOAux = new EmprestimoDTO();
-    Emprestimo novoEmprestimo = emprestimoRepository.save(emprestimo);
-    emprestimoMapper.updateEmprestimoDtoFromEmprestimo(novoEmprestimo, emprestimoDTOAux);
-    
-    Transacao novaTransacao = new Transacao();
-    novaTransacao.setCliente(clienteRepository.findByCpfcnpj(cpfcnpj));
-    novaTransacao.setTipoTransacao(TipoTransacao.EMP);
-    novaTransacao.setDataTransacao(java.util.Calendar.getInstance().getTime());
-    
-    this.criarTransacao(novaTransacao, novoEmprestimo.getId());
-    return emprestimoDTOAux;
+    emprestimo.setCliente(clienteRepository.findByCpfcnpj(cpfcnpj));
+
+    EmprestimoDTO emprestimoDTO = new EmprestimoDTO();
+    emprestimoMapper.updateEmprestimoDtoFromEmprestimo(emprestimoRepository.save(emprestimo), emprestimoDTO);
+    return emprestimoDTO;
   }
 
-  private void criarTransacao(Transacao novaTransacao, long id) {
-	// TODO Auto-generated method stub
-	
-}
-
-@Transactional
-  public Emprestimo consultarEmprestimoId(Long emprestimoId){
-    return this.emprestimoRepository.findById(emprestimoId).orElseThrow(() -> new IllegalArgumentException("Emprestimo não encontrado"));
+  @Transactional
+  public EmprestimoDTO consultarEmprestimoId(Long emprestimoId) throws IllegalArgumentException{
+    Emprestimo emprestimo = emprestimoRepository.findById(emprestimoId).orElseThrow(() -> new IllegalArgumentException("Emprestimo não encontrado"));
+    return emprestimoMapper.updateEmprestimoDtoFromEmprestimo(emprestimo, new EmprestimoDTO());
   }
 
   //FIXME: Completar consulta por cpfcnpj
   @Transactional
-  public List<Emprestimo> consultarEmprestimoCpfcnpj(String cpfcnpj){
-    return new ArrayList<Emprestimo>();
+  public List<EmprestimoDTO> consultarEmprestimoCpfcnpj(String cpfcnpj){
+    List<EmprestimoDTO> listEmprestimoDTO = new ArrayList<EmprestimoDTO>();
+    for(Emprestimo emprestimo : emprestimoRepository.findByClienteId_Cpfcnpj(cpfcnpj)){
+      listEmprestimoDTO.add(emprestimoMapper.updateEmprestimoDtoFromEmprestimo(emprestimo, new EmprestimoDTO()));
+    }
+    return listEmprestimoDTO;
   }
   
 }

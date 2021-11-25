@@ -1,15 +1,13 @@
 package com.bluebank.project.dtos;
 
-import java.util.Date;
 
-import com.bluebank.project.models.Cliente;
 
 public class EmprestimoDTO {
 
-  private Cliente cliente;
+  private String clienteCpfcnpj;
   private String numeroContrato;
-  private Date dataInicio;
-  private Date dataFim;
+  private String dataInicio;
+  private String dataFim;
   private double valorEmprestimo;
   private double percentualJuros;
   private int quantParcelas;
@@ -17,12 +15,12 @@ public class EmprestimoDTO {
   public EmprestimoDTO() {
   }
 
-  public Cliente getCliente() {
-    return cliente;
+  public String getClienteCpfcnpj() {
+    return clienteCpfcnpj;
   }
 
-  public void setCliente(Cliente cliente) {
-    this.cliente = cliente;
+  public void setClienteCpfcnpj(String clienteCpfcnpj) {
+    this.clienteCpfcnpj = clienteCpfcnpj;
   }
 
   public String getNumeroContrato() {
@@ -33,19 +31,19 @@ public class EmprestimoDTO {
     this.numeroContrato = numeroContrato;
   }
 
-  public Date getDataInicio() {
+  public String getDataInicio() {
     return dataInicio;
   }
 
-  public void setDataInicio(Date dataInicio) {
+  public void setDataInicio(String dataInicio) {
     this.dataInicio = dataInicio;
   }
 
-  public Date getDataFim() {
+  public String getDataFim() {
     return dataFim;
   }
 
-  public void setDataFim(Date dataFim) {
+  public void setDataFim(String dataFim) {
     this.dataFim = dataFim;
   }
 
