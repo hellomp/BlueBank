@@ -14,12 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bluebank.project.dtos.ClientDTO;
-import com.bluebank.project.models.Cliente;
+import com.bluebank.project.models.Client;
 import com.bluebank.project.services.ClienteService;
 
 import io.swagger.annotations.Api;
@@ -29,41 +28,37 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping("/cliente")
 @Api(value="API BlueBank")
 @CrossOrigin(origins="*")
-public class ClienteController {
+public class ClientController {
 
 	@Autowired
 	ClienteService clienteService;
 	
 	@PostMapping()
 	@ApiOperation(value="Cadastra um novo cliente com os dados pessoais")
-	@ResponseBody
 	@ResponseStatus(HttpStatus.CREATED)
-	public ClientDTO cadastrarCliente(@Validated @RequestBody Cliente cliente, BindingResult br) {//throws DataIntegrityViolationException, Exception {
+	public ClientDTO registerClient(@Validated @RequestBody Client cliente, BindingResult br) {//throws DataIntegrityViolationException, Exception {
 //		if(br.hasErrors()) throw new ConstraintException(br.getAllErrors().get(0).getDefaultMessage());
-		return clienteService.cadastrarNovoCliente(cliente);
+		return clienteService.registerNewClient(cliente);
 	}
 	
 	@GetMapping("/{cpfcnpj}")
 	@ApiOperation(value="Consulta os dados de um cliente atraves do CPF ou CNPJ")
-	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
-	public ClientDTO consultarCadastro(@PathVariable("cpfcnpj") String cpfcnpj) {
+	public ClientDTO consultClientRegistryByCpfcnpj(@PathVariable("cpfcnpj") String cpfcnpj) {
 		return clienteService.consultarCadastroCliente(cpfcnpj);
 	}
 	
 	@GetMapping("/nome/{nome}")
 	@ApiOperation(value="Consulta os dados de um cliente atraves do nome")
-	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
-	public List<ClientDTO> consultarCadastroPorNome(@PathVariable("nome") String nome) {
+	public List<ClientDTO> consultClientRegistryByName(@PathVariable("nome") String nome) {
 		return clienteService.buscarClientePorNome(nome);
 	}
 	
 	@PutMapping("/{cpfcnpj}")
 	@ApiOperation(value="Atualiza o cadastro do cliente atraves do CPF ou CNPJ")
-	@ResponseBody
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	public ClientDTO atualizarCadastro(@PathVariable("cpfcnpj") String cpfcnpj, @RequestBody ClientDTO clientDTO) {//, BindingResult br) throws DataIntegrityViolationException, Exception {
+	public ClientDTO updateClientRegistry(@PathVariable("cpfcnpj") String cpfcnpj, @RequestBody ClientDTO clientDTO) {//, BindingResult br) throws DataIntegrityViolationException, Exception {
 //		if(br.hasErrors()) throw new ConstraintException(br.getAllErrors().get(0).getDefaultMessage());
 		return clienteService.atualizarCadastroCliente(cpfcnpj, clientDTO);
 	}
@@ -71,7 +66,7 @@ public class ClienteController {
 	@DeleteMapping("/{cpfcnpj}")
 	@ApiOperation(value="Desativa o cadastro do cliente")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void excluirConta(@PathVariable("cpfcnpj") String cpfcnpj) {
+	public void deactivateClientRegistry(@PathVariable("cpfcnpj") String cpfcnpj) {
 		clienteService.desativarContaCliente(cpfcnpj);
 	}
 }

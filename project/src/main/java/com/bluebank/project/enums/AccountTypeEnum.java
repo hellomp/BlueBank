@@ -1,5 +1,5 @@
 package com.bluebank.project.enums;
 
-public enum ContaEnum {
+public enum AccountTypeEnum {
 	 CC, CP, CS, CD, CU;
 }

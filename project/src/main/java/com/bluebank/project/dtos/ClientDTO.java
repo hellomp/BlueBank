@@ -3,14 +3,13 @@ package com.bluebank.project.dtos;
 public class ClientDTO {
 
 	private String cpfcnpj;
-	private String nome;
+	private String name;
 	private String email;
 	private String cep;
-	private String telefone;
-	private String tipo;
+	private String phoneNumber;
+	private String type;
 	
 	public ClientDTO() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getCpfcnpj() {
@@ -21,12 +20,12 @@ public class ClientDTO {
 		this.cpfcnpj = cpfcnpj;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getEmail() {
@@ -45,22 +44,19 @@ public class ClientDTO {
 		this.cep = cep;
 	}
 
-	public String getTelefone() {
-		return telefone;
+	public String getPhoneNumber() {
+		return phoneNumber;
 	}
 
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
-	public String getTipo() {
-		return tipo;
+	public String getType() {
+		return type;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setType(String type) {
+		this.type = type;
 	}
-
-
-	
 }
