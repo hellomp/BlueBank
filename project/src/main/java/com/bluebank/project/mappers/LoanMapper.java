@@ -10,7 +10,7 @@ public class LoanMapper {
 
 	public LoanDTO updateEmprestimoDtoFromEmprestimo(Loan loan, LoanDTO loanDTO) {
 		loanDTO.setClientCpfcnpj(loan.getClient().getCpfcnpj());
-	    loanDTO.setNumeroContrato(loan.getNumeroContrato());
+	    loanDTO.setContractNumber(loan.getId());
 	    loanDTO.setStartDate(loan.getStartDate().toString());
 		loanDTO.setEndDate(loan.getEndDate().toString());
 		loanDTO.setBorrowedAmount(loan.getBorrowedAmount());

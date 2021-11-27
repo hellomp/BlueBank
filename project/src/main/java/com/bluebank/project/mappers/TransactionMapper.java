@@ -32,7 +32,7 @@ public class TransactionMapper {
 			case TRA:
 				TransferenceDTO transferenciaDTO = new TransferenceDTO();
 				updateTransferenceDtoFromTransaction(transacao, transferenciaDTO);
-				transacoesDTO.add(transacoesDTO);
+				transacoesDTO.add(transferenciaDTO);
 				break;
 			}		
 		}
@@ -41,7 +41,7 @@ public class TransactionMapper {
 	
 	public DepositDTO updateDepositDtoFromTransaction(Transaction transaction, DepositDTO depositDTO) {
 		depositDTO.setTransactionDate(transaction.getTransactionDate().toString());
-		depositDTO.setTransactionType(transaction.getTransactionType()); // TODO: pegar string do nome completo
+		depositDTO.setTransactionType("DEPÓSITO"); // TODO: pegar string do nome completo
 		depositDTO.setPreviousBalance(transaction.getPreviousBalance());
 		depositDTO.setCurrentBalance(transaction.getCurrentBalance());
 		depositDTO.setDepositValue(transaction.getValue());
@@ -49,7 +49,7 @@ public class TransactionMapper {
 	}
 
 	public LoanDTO updateLoanDtoFromLoan(Loan loan, LoanDTO loanDTO) {
-		loanDTO.setNumeroContrato(loan.getNumeroContrato());
+		loanDTO.setContractNumber(loan.getId());
 		loanDTO.setStartDate(loan.getStartDate().toString());
 		loanDTO.setEndDate(loan.getEndDate().toString());
 		loanDTO.setBorrowedAmount(loan.getBorrowedAmount());
@@ -59,7 +59,7 @@ public class TransactionMapper {
 	}
 	
 	public WithdrawDTO updateWithdrawDtoFromTransaction(Transaction transaction, WithdrawDTO withdrawDTO) {
-		withdrawDTO.setTransactionType(transaction.getTransactionType()); // TODO: pegar string do nome completo
+		withdrawDTO.setTransactionType("SAQUE");
 		withdrawDTO.setTransactionDate(transaction.getTransactionDate().toString());
 		withdrawDTO.setPreviousBalance(transaction.getPreviousBalance());
 		withdrawDTO.setCurrentBalance(transaction.getCurrentBalance());
@@ -68,14 +68,14 @@ public class TransactionMapper {
 	}
 
 	public TransferenceDTO updateTransferenceDtoFromTransaction(Transaction transaction, TransferenceDTO transferenceDTO) {
-		transferenceDTO.setAccount(transaction.getAccount()); // TODO: mudar para ID
-		transferenceDTO.setTransactionType(transaction.getTransactionType()); // TODO: pegar string do nome completo
+		transferenceDTO.setAccount(transaction.getAccount().getId());
+		transferenceDTO.setTransactionType("TRANSFERÊNCIA");
 		transferenceDTO.setTransactionDate(transaction.getTransactionDate().toString());
 		transferenceDTO.setPreviousBalance(transaction.getPreviousBalance());
 		transferenceDTO.setCurrentBalance(transaction.getCurrentBalance());
-		transferenceDTO.setDestinationAccount(transaction.getDestinationAccount());
-		transferenceDTO.setScheduledDate(transaction.getDataAgendTransacao().toString());
-		transferenceDTO.setDataExecTransacao(transaction.getDataExecTransacao().toString());
+		transferenceDTO.setDestinationAccount(transaction.getDestinationAccount().getId());
+//		transferenceDTO.setScheduledDate(transaction.getDataAgendTransacao().toString());
+//		transferenceDTO.setDataExecTransacao(transaction.getDataExecTransacao().toString());
 		transferenceDTO.setValue(transaction.getValue());
 		return transferenceDTO;
 	}

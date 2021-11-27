@@ -3,7 +3,7 @@ package com.bluebank.project.dtos;
 public class LoanDTO {
 	
 	private String clientCpfcnpj;
-	private String numeroContrato; // TODO: usar Id
+	private Long contractNumber;
 	private String startDate;
 	private String endDate;
 	private double borrowedAmount;
@@ -21,12 +21,12 @@ public class LoanDTO {
 		this.clientCpfcnpj = clientCpfcnpj;
 	}
 	
-	public String getNumeroContrato() {
-		return numeroContrato;
+	public Long getContractNumber() {
+		return contractNumber;
 	}
 	
-	public void setNumeroContrato(String numeroContrato) {
-		this.numeroContrato = numeroContrato;
+	public void setContractNumber(Long numeroContrato) {
+		this.contractNumber = numeroContrato;
 	}
 	
 	public String getStartDate() {
