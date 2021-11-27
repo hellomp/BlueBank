@@ -5,50 +5,42 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.validation.constraints.NotBlank;
 
 import com.bluebank.project.enums.ClientStatusEnum;
 
 @Entity
-public class Cliente {
+public class Client {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	@NotBlank
-	@JoinColumn(name = "nome")
-	private String nome;
+	private String name;
 	
 	@NotBlank
 	@Column(unique = true)
-	@JoinColumn(name = "cpfcnpj")
 	private String cpfcnpj;
 	
 	@NotBlank
-	@JoinColumn(name = "email")
 	private String email;
 	
 	@NotBlank
-	@JoinColumn(name = "cep")
 	private String cep;
 	
 	@NotBlank
-	@JoinColumn(name = "telefone")
-	private String telefone;
+	private String phoneNumber;
 	
 	@NotBlank
-	@JoinColumn(name = "senha")
-	private String senha;
+	private String password;
 	
 	@NotBlank
-	@JoinColumn(name = "tipo")
-	private String tipo;
+	private String type;
 	
 	private ClientStatusEnum status;
 	
-	public Cliente() {
+	public Client() {
 		super();
 	}
 
@@ -60,12 +52,12 @@ public class Cliente {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getCpfcnpj() {
@@ -92,32 +84,29 @@ public class Cliente {
 		this.cep = cep;
 	}
 
-	public String getTelefone() {
-		return telefone;
+	public String getPhoneNumber() {
+		return phoneNumber;
 	}
 
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
-	public String getSenha() {
-		return senha;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public String getTipo() {
-		return tipo;
+	public String getType() {
+		return type;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setType(String type) {
+		this.type = type;
 	}
-
-
-	
 
 	public ClientStatusEnum getStatus() {
 		return status;
@@ -125,7 +114,6 @@ public class Cliente {
 
 	public void setStatus(ClientStatusEnum status) {
 		this.status = status;
-	}	
-
+	}
 
 }

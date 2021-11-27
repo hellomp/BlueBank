@@ -10,24 +10,23 @@ import org.springframework.transaction.annotation.Transactional;
 import com.bluebank.project.dtos.ClientDTO;
 import com.bluebank.project.enums.ClientStatusEnum;
 import com.bluebank.project.mappers.ClientMapper;
-import com.bluebank.project.mappers.ClientMapperImpl;
-import com.bluebank.project.models.Cliente;
-import com.bluebank.project.repositories.ClienteRepository;
+import com.bluebank.project.models.Client;
+import com.bluebank.project.repositories.ClientRepository;
 
 @Service
 public class ClienteService {
 
 	@Autowired
-	ClienteRepository clienteRepository;
+	ClientRepository clienteRepository;
 	
 	@Autowired
-	ClientMapperImpl clientMapper;
+	ClientMapper clientMapper;
 	
 	@Autowired
 	ContaService contaService;
 	
 	@Transactional
-	public ClientDTO cadastrarNovoCliente(Cliente cliente) {
+	public ClientDTO registerNewClient(Client cliente) {
 		ClientDTO clientDTO = new ClientDTO();
 		clientMapper.updateDtoFromClient(cliente, clientDTO);
 		clienteRepository.save(cliente);
@@ -43,9 +42,9 @@ public class ClienteService {
 	
 	@Transactional
 	public List<ClientDTO> buscarClientePorNome(String nome){
-		List<Cliente> listClientAux = clienteRepository.findByNomeContaining(nome);
+		List<Client> listClientAux = clienteRepository.findByNameContaining(nome);
 		List<ClientDTO> listClientDTOAux = new ArrayList<>();
-		for(Cliente clientAux : listClientAux) {
+		for(Client clientAux : listClientAux) {
 			listClientDTOAux.add(clientMapper.updateDtoFromClient(clientAux, new ClientDTO()));
 		}
 		return listClientDTOAux;
@@ -53,7 +52,7 @@ public class ClienteService {
 	
 	@Transactional
 	public ClientDTO atualizarCadastroCliente(String cpfcnpj, ClientDTO clientDTO) {
-	    Cliente clienteAux = clienteRepository.findByCpfcnpj(cpfcnpj);
+	    Client clienteAux = clienteRepository.findByCpfcnpj(cpfcnpj);
 	    clientMapper.updateClientFromDto(clientDTO, clienteAux);
 	    clientMapper.updateDtoFromClient(clienteAux, clientDTO);
 	    clienteRepository.save(clienteAux);
@@ -62,7 +61,7 @@ public class ClienteService {
 
 	@Transactional
 	public void desativarContaCliente(String cpfcnpj){
-		Cliente clientAux = clienteRepository.findByCpfcnpj(cpfcnpj);
+		Client clientAux = clienteRepository.findByCpfcnpj(cpfcnpj);
 		clientAux.setStatus(ClientStatusEnum.Inativo);
 		contaService.desativarContasCpfcnpj(cpfcnpj);
 		clienteRepository.save(clientAux);

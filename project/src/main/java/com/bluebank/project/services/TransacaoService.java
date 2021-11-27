@@ -6,122 +6,122 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.bluebank.project.dtos.DepositoDTO;
-import com.bluebank.project.dtos.SaqueDTO;
-import com.bluebank.project.dtos.TransferenciaDTO;
-import com.bluebank.project.enums.TipoTransacao;
-import com.bluebank.project.mappers.TransacaoMapper;
-import com.bluebank.project.models.Conta;
-import com.bluebank.project.models.Transacao;
-import com.bluebank.project.repositories.ClienteRepository;
-import com.bluebank.project.repositories.ContaRepository;
-import com.bluebank.project.repositories.TransacaoRepository;
+import com.bluebank.project.dtos.DepositDTO;
+import com.bluebank.project.dtos.WithdrawDTO;
+import com.bluebank.project.dtos.TransferenceDTO;
+import com.bluebank.project.enums.TransactionTypeEnum;
+import com.bluebank.project.mappers.TransactionMapper;
+import com.bluebank.project.models.Account;
+import com.bluebank.project.models.Transaction;
+import com.bluebank.project.repositories.ClientRepository;
+import com.bluebank.project.repositories.AccountRepository;
+import com.bluebank.project.repositories.TransactionRepository;
 
 @Service
 public class TransacaoService {
 
   @Autowired
-  TransacaoRepository transacaoRepository;
+  TransactionRepository transacaoRepository;
   
   @Autowired
-  ContaRepository contaRepository;
+  AccountRepository contaRepository;
 
   @Autowired
-  ClienteRepository clienteRepository;
+  ClientRepository clienteRepository;
 
   @Autowired
-  TransacaoMapper transacaoMapper;
+  TransactionMapper transacaoMapper;
 
   @Transactional
-  public List<Transacao> findAll(){
+  public List<Transaction> findAll(){
     return this.transacaoRepository.findAll();
   }
 
   @Transactional
-  public List<Transacao> findByCpfCnpj(String cpfcnpj){
-    return this.transacaoRepository.findByContaId_ClienteId_Cpfcnpj(cpfcnpj);
+  public List<Transaction> findByCpfCnpj(String cpfcnpj){
+    return this.transacaoRepository.findByAccountId_ClientId_Cpfcnpj(cpfcnpj);
   }
   
   @Transactional
-  public Transacao criarTransacao(Transacao transacao){
+  public Transaction criarTransacao(Transaction transacao){
     return this.transacaoRepository.save(transacao);
   }
 
   public List<Object> findByContaId(Long id){
-		List <Transacao> transacoes = transacaoRepository.findByContaId(id);
+		List <Transaction> transacoes = transacaoRepository.findByAccountId(id);
 		return transacaoMapper.updateDtoFromTransacoes(transacoes);
 	}
 	
 	public double findSaldo(Long id) {
-		Conta conta = contaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Conta Inexistente"));
-		return conta.getSaldo();
+		Account conta = contaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Conta Inexistente"));
+		return conta.getBalance();
 	}
 
-	public SaqueDTO criarSaque(Long id, Transacao transacao) {
-		transacao.setConta(contaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Conta Inexistente")));
-		transacao.setTipoTransacao(TipoTransacao.SAQ);
-		transacao.setDataTransacao(java.util.Calendar.getInstance().getTime());
-		transacao.setSaldoAnterior(transacao.getConta().getSaldo());
-		transacao.setSaldoAtual(transacao.getConta().getSaldo());
-		transacao.setValor(transacao.getValor());
-		SaqueDTO saqueDTO = new SaqueDTO();
-		double valorSaque = transacao.getValor();
-		if (valorSaque >= transacao.getSaldoAtual()) {
+	public WithdrawDTO criarSaque(Long id, Transaction transacao) {
+		transacao.setAccount(contaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Conta Inexistente")));
+		transacao.setTransactionType(TransactionTypeEnum.SAQ);
+		transacao.setTransactionDate(java.util.Calendar.getInstance().getTime());
+		transacao.setPreviousBalance(transacao.getAccount().getBalance());
+		transacao.setCurrentBalance(transacao.getAccount().getBalance());
+		transacao.setValue(transacao.getValue());
+		WithdrawDTO saqueDTO = new WithdrawDTO();
+		double valorSaque = transacao.getValue();
+		if (valorSaque >= transacao.getCurrentBalance()) {
 			throw new IllegalArgumentException("Valor de saque maior que o saldo disponível");
 		} else {
-			Conta conta = transacao.getConta();
-			conta.setSaldo(conta.getSaldo() - valorSaque);
-			transacao.setSaldoAtual(conta.getSaldo());
+			Account conta = transacao.getAccount();
+			conta.setBalance(conta.getBalance() - valorSaque);
+			transacao.setCurrentBalance(conta.getBalance());
 		}
-		transacaoMapper.updateSaqueDtoFromTransacao(transacao, saqueDTO);
+		transacaoMapper.updateWithdrawDtoFromTransaction(transacao, saqueDTO);
 		transacaoRepository.save(transacao);
 		return saqueDTO;
 	}
 
-	public DepositoDTO criarDeposito(Long id, Transacao transacao) {
-		transacao.setConta(contaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Conta Inexistente")));
-		transacao.setTipoTransacao(TipoTransacao.DEP);
-		transacao.setDataTransacao(java.util.Calendar.getInstance().getTime());
-		transacao.setSaldoAnterior(transacao.getConta().getSaldo());
-		transacao.setSaldoAtual(transacao.getConta().getSaldo());
-		transacao.setValor(transacao.getValor());
-		DepositoDTO depositoDTO = new DepositoDTO();
-		double valorDeposito = transacao.getValor();
-		if (valorDeposito <= 0.0) {
+	public DepositDTO criarDeposito(Long id, Transaction transacao) {
+		transacao.setAccount(contaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Conta Inexistente")));
+		transacao.setTransactionType(TransactionTypeEnum.DEP);
+		transacao.setTransactionDate(java.util.Calendar.getInstance().getTime());
+		transacao.setPreviousBalance(transacao.getAccount().getBalance());
+		transacao.setCurrentBalance(transacao.getAccount().getBalance());
+		transacao.setValue(transacao.getValue());
+		DepositDTO depositoDTO = new DepositDTO();
+		double valorDeposito = transacao.getValue();
+		if (valorDeposito < 0.0) {
 			throw new IllegalArgumentException("Valor de depósito inválido");
 		} else {
-			Conta conta = transacao.getConta();
-			conta.setSaldo(conta.getSaldo() + valorDeposito);
-			transacao.setSaldoAtual(conta.getSaldo());
+			Account conta = transacao.getAccount();
+			conta.setBalance(conta.getBalance() + valorDeposito);
+			transacao.setCurrentBalance(conta.getBalance());
 		}
-		transacaoMapper.updateDepositoDtoFromTransacao(transacao, depositoDTO);
+		transacaoMapper.updateDepositDtoFromTransaction(transacao, depositoDTO);
 		transacaoRepository.save(transacao);
 		return depositoDTO;
 	}
 
-	public TransferenciaDTO criarTransferencia(Long contaId, Long contaDestinoId,Transacao transacao){
-		transacao.setConta(contaRepository.findById(contaId).orElseThrow(() -> new IllegalArgumentException("Conta Inexistente")));
-		transacao.setTipoTransacao(TipoTransacao.TRA);
-		transacao.setDataTransacao(java.util.Calendar.getInstance().getTime());
-		transacao.setSaldoAnterior(transacao.getConta().getSaldo());
-		transacao.setSaldoAtual(transacao.getConta().getSaldo());
-//		transacao.setValor(transacao.getValor());
-		transacao.setContaDestino(contaRepository.findById(contaDestinoId).orElseThrow(() -> new IllegalArgumentException("Conta inexistente")));
+	public TransferenceDTO criarTransferencia(Long contaId, Long contaDestinoId,Transaction transacao){
+		transacao.setAccount(contaRepository.findById(contaId).orElseThrow(() -> new IllegalArgumentException("Conta Inexistente")));
+		transacao.setTransactionType(TransactionTypeEnum.TRA);
+		transacao.setTransactionDate(java.util.Calendar.getInstance().getTime());
+		transacao.setPreviousBalance(transacao.getAccount().getBalance());
+		transacao.setCurrentBalance(transacao.getAccount().getBalance());
+		transacao.setValue(transacao.getValue());
+		transacao.setDestinationAccount(contaRepository.findById(contaDestinoId).orElseThrow(() -> new IllegalArgumentException("Conta inexistente")));
 
-		TransferenciaDTO transferenciaDTO = new TransferenciaDTO();
-		double valorTransferencia = transacao.getValor();
-		if (valorTransferencia <= 0.0) {
+		TransferenceDTO transferenciaDTO = new TransferenceDTO();
+		double valorTransferencia = transacao.getValue();
+		if (valorTransferencia < 0.0) {
 			throw new IllegalArgumentException("Valor de transferência inválido");
-		} else if (valorTransferencia >= transacao.getSaldoAtual()) {
+		} else if (valorTransferencia >= transacao.getCurrentBalance()) {
 			throw new IllegalArgumentException("Valor de saque maior que o saldo disponível");
 		} else {
-			Conta conta = transacao.getConta();
-			Conta contaDestino = transacao.getContaDestino();
-			conta.setSaldo(conta.getSaldo() - valorTransferencia);
-			contaDestino.setSaldo(contaDestino.getSaldo() + valorTransferencia);
-			transacao.setSaldoAtual(conta.getSaldo());
+			Account conta = transacao.getAccount();
+			Account contaDestino = transacao.getAccount();
+			conta.setBalance(conta.getBalance() - valorTransferencia);
+			contaDestino.setBalance(contaDestino.getBalance() + valorTransferencia);
+			transacao.setCurrentBalance(conta.getBalance());
 		}
-		transacaoMapper.updateTransferenciaDtoFromTransacao(transacao, transferenciaDTO);
+		transacaoMapper.updateTransferenceDtoFromTransaction(transacao, transferenciaDTO);
 		transacaoRepository.save(transacao);
 		return transferenciaDTO;
 	}

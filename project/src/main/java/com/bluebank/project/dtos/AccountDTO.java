@@ -1,69 +1,18 @@
 package com.bluebank.project.dtos;
 
-import java.util.Date;
-import com.bluebank.project.enums.ContaEnum;
-import com.bluebank.project.models.Cliente;
+import com.bluebank.project.enums.AccountTypeEnum;
 
 public class AccountDTO {
 
-//	private ClientDTO clientDTO;
 	private Long id;
-	private String nomeDoCliente;
-	private int agencia;
-	private ContaEnum tipoConta;
+	private String clientName;
+	private int agency;
+	private AccountTypeEnum accountType;
 	private String status;
-	private double saldoAtual;
+	private double currentBalance;
 	
 	public AccountDTO() {
 		super();
-	}
-	
-//	public ClientDTO getClientDTO() {
-//		return clientDTO;
-//	}
-//	
-//	public void setClientDTO(ClientDTO clientDTO) {
-//		this.clientDTO = clientDTO;
-//	}
-	
-	public int getAgencia() {
-		return agencia;
-	}
-	
-	public void setAgencia(int agencia) {
-		this.agencia = agencia;
-	}
-	
-	public ContaEnum getTipoConta() {
-		return tipoConta;
-	}
-	
-	public void setTipoConta(ContaEnum tipoConta) {
-		this.tipoConta = tipoConta;
-	}
-	
-	public double getSaldoAtual() {
-		return saldoAtual;
-	}
-	
-	public void setSaldoAtual(double saldoAtual) {
-		this.saldoAtual = saldoAtual;
-	}
-	
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public String getNomeDoCliente() {
-		return nomeDoCliente;
-	}
-
-	public void setNomeDoCliente(String nomeDoCliente) {
-		this.nomeDoCliente = nomeDoCliente;
 	}
 
 	public Long getId() {
@@ -72,6 +21,46 @@ public class AccountDTO {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getClientName() {
+		return clientName;
+	}
+
+	public void setClientName(String clientName) {
+		this.clientName = clientName;
+	}
+
+	public int getAgency() {
+		return agency;
+	}
+
+	public void setAgency(int agency) {
+		this.agency = agency;
+	}
+
+	public AccountTypeEnum getAccountType() {
+		return accountType;
+	}
+
+	public void setAccountType(AccountTypeEnum accountType) {
+		this.accountType = accountType;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public double getCurrentBalance() {
+		return currentBalance;
+	}
+
+	public void setCurrentBalance(double actualBalance) {
+		this.currentBalance = actualBalance;
 	}
 	
 }
