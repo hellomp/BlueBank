@@ -110,13 +110,13 @@ public class TransacaoService {
 
 		TransferenceDTO transferenciaDTO = new TransferenceDTO();
 		double valorTransferencia = transacao.getValue();
-		if (valorTransferencia < 0.0) {
+		if (valorTransferencia <= 0.0) {
 			throw new IllegalArgumentException("Valor de transferência inválido");
 		} else if (valorTransferencia >= transacao.getCurrentBalance()) {
 			throw new IllegalArgumentException("Valor de saque maior que o saldo disponível");
 		} else {
 			Account conta = transacao.getAccount();
-			Account contaDestino = transacao.getAccount();
+			Account contaDestino = transacao.getDestinationAccount();
 			conta.setBalance(conta.getBalance() - valorTransferencia);
 			contaDestino.setBalance(contaDestino.getBalance() + valorTransferencia);
 			transacao.setCurrentBalance(conta.getBalance());
