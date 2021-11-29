@@ -1,36 +1,34 @@
 package com.bluebank.project.dtos;
 
-import com.bluebank.project.enums.TransactionTypeEnum;
-import com.bluebank.project.models.Account;
 
 public class TransferenceDTO {
 
-	private Account account;
-	private TransactionTypeEnum transactionType;
+	private Long account;
+	private String transactionType;
 	private String transactionDate;
 	private double previousBalance;
 	private double currentBalance;
-	private Account destinationAccount;
-	private String scheduledDate; // TODO: verificar se é possível usar isso no lambda
-	private String dataExecTransacao;
+	private Long destinationAccount;
+//	private String scheduledDate; // TODO: verificar se é possível usar isso no lambda
+//	private String dataExecTransacao;
 	private Double value;
 	  
 	public TransferenceDTO() {
 	}
 
-	public Account getAccount() {
+	public Long getAccount() {
 		return account;
 	}
 	
-	public void setAccount(Account account) {
+	public void setAccount(Long account) {
 		this.account = account;
 	}
 	
-	public TransactionTypeEnum getTransactionType() {
+	public String getTransactionType() {
 		return transactionType;
 	}
 	
-	public void setTransactionType(TransactionTypeEnum transactionType) {
+	public void setTransactionType(String transactionType) {
 		this.transactionType = transactionType;
 	}
 	
@@ -58,29 +56,29 @@ public class TransferenceDTO {
 		this.currentBalance = currentBalance;
 	}
 	
-	public Account getDestinationAccount() {
+	public Long getDestinationAccount() {
 		return destinationAccount;
 	}
 	
-	public void setDestinationAccount(Account destinationAccount) {
+	public void setDestinationAccount(Long destinationAccount) {
 		this.destinationAccount = destinationAccount;
 	}
 	
-	public String getScheduledDate() {
-		return scheduledDate;
-	}
-	
-	public void setScheduledDate(String scheduledDate) {
-		this.scheduledDate = scheduledDate;
-	}
-	
-	public String getDataExecTransacao() {
-		return dataExecTransacao;
-	}
-	
-	public void setDataExecTransacao(String dataExecTransacao) {
-		this.dataExecTransacao = dataExecTransacao;
-	}
+//	public String getScheduledDate() {
+//		return scheduledDate;
+//	}
+//	
+//	public void setScheduledDate(String scheduledDate) {
+//		this.scheduledDate = scheduledDate;
+//	}
+//	
+//	public String getDataExecTransacao() {
+//		return dataExecTransacao;
+//	}
+//	
+//	public void setDataExecTransacao(String dataExecTransacao) {
+//		this.dataExecTransacao = dataExecTransacao;
+//	}
 	
 	public Double getValue() {
 		return value;

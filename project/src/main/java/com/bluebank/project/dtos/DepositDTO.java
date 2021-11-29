@@ -1,11 +1,10 @@
 package com.bluebank.project.dtos;
 
 
-import com.bluebank.project.enums.TransactionTypeEnum;
 
 public class DepositDTO {
   
-	private TransactionTypeEnum transactionType;
+	private String transactionType;
 	private String transactionDate;
 	private double previousBalance;
 	private double depositValue;
@@ -14,11 +13,11 @@ public class DepositDTO {
 	public DepositDTO() {
 	}
 
-	public TransactionTypeEnum getTransactionType() {
+	public String getTransactionType() {
 		return transactionType;
 	}
 
-	public void setTransactionType(TransactionTypeEnum transactionType) {
+	public void setTransactionType(String transactionType) {
 		this.transactionType = transactionType;
 	}
 

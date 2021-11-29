@@ -22,8 +22,8 @@ public class Loan {
   @ManyToOne
   private Client client;
 
-  @NotNull
-  private String numeroContrato; //TODO: mudar isso pra ID
+//  @NotNull
+//  private String numeroContrato; //TODO: mudar isso pra ID
 
   @NotNull
   @JsonFormat(pattern = "dd/MM/yyyy")
@@ -62,13 +62,13 @@ public class Loan {
 		this.client = client;
 	}
 	
-	public String getNumeroContrato() {
-		return numeroContrato;
-	}
-	
-	public void setNumeroContrato(String numeroContrato) {
-		this.numeroContrato = numeroContrato;
-	}
+//	public String getNumeroContrato() {
+//		return numeroContrato;
+//	}
+//	
+//	public void setNumeroContrato(String numeroContrato) {
+//		this.numeroContrato = numeroContrato;
+//	}
 	
 	public Date getStartDate() {
 		return startDate;
@@ -129,7 +129,7 @@ public class Loan {
 
 	@Override
 	public String toString() {
-		return "Loan [id=" + id + ", client=" + client + ", numeroContrato=" + numeroContrato + ", startDate="
+		return "Loan [id=" + id + ", client=" + client + ", numeroContrato=" + ", startDate="
 				+ startDate + ", endDate=" + endDate + ", borrowedAmount=" + borrowedAmount + ", fees=" + fees
 				+ ", installments=" + installments + "]";
 	}
