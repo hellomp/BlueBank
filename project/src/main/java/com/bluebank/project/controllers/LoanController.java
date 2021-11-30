@@ -16,40 +16,40 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bluebank.project.dtos.LoanDTO;
 import com.bluebank.project.dtos.TransferenceDTO;
 import com.bluebank.project.models.Loan;
-import com.bluebank.project.services.EmprestimoService;
+import com.bluebank.project.services.LoanService;
 
 @RestController
 @RequestMapping("/emprestimo")
 public class LoanController {
   
   @Autowired
-  EmprestimoService emprestimoService;
+  LoanService emprestimoService;
 
   //criar emprestimo
   @PostMapping("/{cpfcnpj}")
   @ResponseStatus(HttpStatus.CREATED)
 	public LoanDTO registerLoan(@PathVariable("cpfcnpj") String cpfcnpj, @Validated @RequestBody Loan emprestimo){
-    return emprestimoService.criarEmprestimo(cpfcnpj, emprestimo);
+    return emprestimoService.createLoan(cpfcnpj, emprestimo);
   }
 
   //consultar emprestimo pelo id
   @GetMapping("/id/{emprestimoId}")
   @ResponseStatus(HttpStatus.OK)
   public LoanDTO consultLoanRegistryById(@PathVariable("emprestimoId") Long emprestimoId){
-    return emprestimoService.consultarEmprestimoId(emprestimoId);
+    return emprestimoService.showLoanById(emprestimoId);
   }
 
   //consultar emprestimo pelo cpfcnpj
   @GetMapping("/cpfcnpj/{cpfcnpj}")
   @ResponseStatus(HttpStatus.OK)
   public List<LoanDTO> consultLoanRegistryByCpfcnpj(@PathVariable("cpfcnpj") String cpfcnpj){
-    return emprestimoService.consultarEmprestimoCpfcnpj(cpfcnpj);
+    return emprestimoService.showLoanByClientCpfcnpj(cpfcnpj);
   }
 
   //pagar emprestimo
   @PostMapping("/pagamento/{emprestimoId}/{contaId}")
   @ResponseStatus(HttpStatus.CREATED)
   public TransferenceDTO payLoan(@PathVariable("emprestimoId") Long emprestimoId, @PathVariable("contaId") Long contaId){
-    return emprestimoService.pagarEmprestimo(emprestimoId, contaId);
+    return emprestimoService.payLoan(emprestimoId, contaId);
   }
 }

@@ -1,7 +1,7 @@
 package com.bluebank.project.dtos;
 
 
-public class TransferenceDTO {
+public class TransferenceDTO implements TransactionDTO {
 
 	private Long account;
 	private String transactionType;

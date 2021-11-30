@@ -2,7 +2,7 @@ package com.bluebank.project.dtos;
 
 
 
-public class DepositDTO {
+public class DepositDTO implements TransactionDTO{
   
 	private String transactionType;
 	private String transactionDate;

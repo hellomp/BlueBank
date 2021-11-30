@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.bluebank.project.dtos.DepositDTO;
 import com.bluebank.project.dtos.LoanDTO;
+import com.bluebank.project.dtos.TransactionDTO;
 import com.bluebank.project.dtos.WithdrawDTO;
 import com.bluebank.project.dtos.TransferenceDTO;
 import com.bluebank.project.models.Loan;
@@ -15,28 +16,28 @@ import com.bluebank.project.models.Transaction;
 @Service
 public class TransactionMapper {
 
-	public List <Object> updateDtoFromTransacoes(List <Transaction> transactions) {
-		List <Object> transacoesDTO = new ArrayList<>();
-		for (Transaction transacao : transactions) {
-			switch (transacao.getTransactionType()) {
+	public List <TransactionDTO> updateDtoFromTransacoes(List <Transaction> transactions) {
+		List <TransactionDTO> transactionDTO = new ArrayList<>();
+		for (Transaction transaction : transactions) {
+			switch (transaction.getTransactionType()) {
 			case DEP:
-				DepositDTO depositoDTO = new DepositDTO();
-				updateDepositDtoFromTransaction(transacao, depositoDTO);
-				transacoesDTO.add(depositoDTO);
+				DepositDTO depositDTO = new DepositDTO();
+				updateDepositDtoFromTransaction(transaction, depositDTO);
+				transactionDTO.add(depositDTO);
 				break;
 			case SAQ:
-				WithdrawDTO saqueDTO = new WithdrawDTO();
-				updateWithdrawDtoFromTransaction(transacao, saqueDTO);
-				transacoesDTO.add(saqueDTO);
+				WithdrawDTO withdrawDTO = new WithdrawDTO();
+				updateWithdrawDtoFromTransaction(transaction, withdrawDTO);
+				transactionDTO.add(withdrawDTO);
 				break;
 			case TRA:
-				TransferenceDTO transferenciaDTO = new TransferenceDTO();
-				updateTransferenceDtoFromTransaction(transacao, transferenciaDTO);
-				transacoesDTO.add(transferenciaDTO);
+				TransferenceDTO transferenceDTO = new TransferenceDTO();
+				updateTransferenceDtoFromTransaction(transaction, transferenceDTO);
+				transactionDTO.add(transferenceDTO);
 				break;
 			}		
 		}
-		return transacoesDTO;
+		return transactionDTO;
 	}	
 	
 	public DepositDTO updateDepositDtoFromTransaction(Transaction transaction, DepositDTO depositDTO) {
