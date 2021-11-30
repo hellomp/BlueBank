@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bluebank.project.dtos.AccountDTO;
 import com.bluebank.project.models.Account;
-import com.bluebank.project.services.ContaService;
+import com.bluebank.project.services.AccountService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -30,48 +30,48 @@ import io.swagger.annotations.ApiOperation;
 public class AccountController {
 	
 	@Autowired
-	ContaService contaService;
+	AccountService contaService;
 	
 	@PostMapping("/{cpfcnpj}")
 	@ApiOperation(value="Cadastra um conta com o CPF ou CNPJ")
 	@ResponseStatus(HttpStatus.CREATED)
 	public AccountDTO registerAccount(@PathVariable("cpfcnpj") String cpfcnpj, @Validated @RequestBody Account conta){
-		return contaService.cadastrarNovaConta(cpfcnpj, conta);
+		return contaService.registerNewAccount(cpfcnpj, conta);
 	}
 
 	@GetMapping("/id/{id}")
 	@ApiOperation(value="Consulta os dados da conta atraves do id")
 	@ResponseStatus(HttpStatus.OK)
 	public AccountDTO consultAccountRegistryById(@PathVariable("id") Long id){
-		return contaService.consultarCadastroContaId(id);
+		return contaService.showAccountById(id);
 	}
 	
 	@GetMapping("/cpfcnpj/{cpfcnpj}")
 	@ApiOperation(value="Consulta os dados da conta atraves do CPF ou CNPJ")
 	@ResponseStatus(HttpStatus.OK)
 	public List<AccountDTO> consultAccountRegistryByCpfcnpj(@PathVariable("cpfcnpj") String cpfcnpj){
-		return contaService.consultarCadastrosContaCpfcnpj(cpfcnpj);
+		return contaService.showAccountsByClientCpfcnpj(cpfcnpj);
 	}
 	
 	@PutMapping("/update/{id}/{cpfcnpj}")
 	@ApiOperation(value="Atualiza os dados pelo id ou CPF ou CNPJ")
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	public AccountDTO changeAccountHolder(@PathVariable("id") Long id, @PathVariable("cpfcnpj") String cpfcnpj){
-		return contaService.AlterarTitularContaId(id, cpfcnpj);
+		return contaService.changeAccountHolder(id, cpfcnpj);
 	}
 	
 	@DeleteMapping("/delete/id/{id}")
 	@ApiOperation(value="Desativa a conta do cliente pelo id")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deactivateAccountRegistryById(@PathVariable("id") Long id){
-		contaService.desativarContaId(id);
+		contaService.deactivateAccountById(id);
 	}
 	
 	@DeleteMapping("/delete/cpfcnpj/{cpfcnpj}")
 	@ApiOperation(value="Desativa a conta do cliente pelo CPF ou CNPJ")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deactivateAccountRegistryByCpfcnpj(@PathVariable("cpfcnpj") String cpfcnpj){
-		contaService.desativarContasCpfcnpj(cpfcnpj);
+		contaService.deactivateAccountsByClientCpfcnpj(cpfcnpj);
 	}
 
 }

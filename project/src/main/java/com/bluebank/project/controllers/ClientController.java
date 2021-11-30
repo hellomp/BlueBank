@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bluebank.project.dtos.ClientDTO;
 import com.bluebank.project.models.Client;
-import com.bluebank.project.services.ClienteService;
+import com.bluebank.project.services.ClientService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -31,7 +31,7 @@ import io.swagger.annotations.ApiOperation;
 public class ClientController {
 
 	@Autowired
-	ClienteService clienteService;
+	ClientService clienteService;
 	
 	@PostMapping()
 	@ApiOperation(value="Cadastra um novo cliente com os dados pessoais")
@@ -44,15 +44,15 @@ public class ClientController {
 	@GetMapping("/{cpfcnpj}")
 	@ApiOperation(value="Consulta os dados de um cliente atraves do CPF ou CNPJ")
 	@ResponseStatus(HttpStatus.OK)
-	public ClientDTO consultClientRegistryByCpfcnpj(@PathVariable("cpfcnpj") String cpfcnpj) {
-		return clienteService.consultarCadastroCliente(cpfcnpj);
+	public ClientDTO showClientByCpfcnpj(@PathVariable("cpfcnpj") String cpfcnpj) {
+		return clienteService.showClientByCpfcnpj(cpfcnpj);
 	}
 	
 	@GetMapping("/nome/{nome}")
 	@ApiOperation(value="Consulta os dados de um cliente atraves do nome")
 	@ResponseStatus(HttpStatus.OK)
-	public List<ClientDTO> consultClientRegistryByName(@PathVariable("nome") String nome) {
-		return clienteService.buscarClientePorNome(nome);
+	public List<ClientDTO> showClientByName(@PathVariable("nome") String nome) {
+		return clienteService.showClientByName(nome);
 	}
 	
 	@PutMapping("/{cpfcnpj}")
@@ -60,13 +60,13 @@ public class ClientController {
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	public ClientDTO updateClientRegistry(@PathVariable("cpfcnpj") String cpfcnpj, @RequestBody ClientDTO clientDTO) {//, BindingResult br) throws DataIntegrityViolationException, Exception {
 //		if(br.hasErrors()) throw new ConstraintException(br.getAllErrors().get(0).getDefaultMessage());
-		return clienteService.atualizarCadastroCliente(cpfcnpj, clientDTO);
+		return clienteService.updateClientRegistry(cpfcnpj, clientDTO);
 	}
 	
 	@DeleteMapping("/{cpfcnpj}")
 	@ApiOperation(value="Desativa o cadastro do cliente")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deactivateClientRegistry(@PathVariable("cpfcnpj") String cpfcnpj) {
-		clienteService.desativarContaCliente(cpfcnpj);
+		clienteService.deactivateClientRegistry(cpfcnpj);
 	}
 }

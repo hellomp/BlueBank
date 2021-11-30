@@ -1,7 +1,7 @@
 package com.bluebank.project.dtos;
 
 
-public class WithdrawDTO {
+public class WithdrawDTO implements TransactionDTO {
   
 	private String transactionType;
 	private String transactionDate;

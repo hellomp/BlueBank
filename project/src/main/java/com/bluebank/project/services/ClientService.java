@@ -14,35 +14,35 @@ import com.bluebank.project.models.Client;
 import com.bluebank.project.repositories.ClientRepository;
 
 @Service
-public class ClienteService {
+public class ClientService {
 
 	@Autowired
-	ClientRepository clienteRepository;
+	ClientRepository clientRepository;
 	
 	@Autowired
 	ClientMapper clientMapper;
 	
 	@Autowired
-	ContaService contaService;
+	AccountService accountService;
 	
 	@Transactional
-	public ClientDTO registerNewClient(Client cliente) {
+	public ClientDTO registerNewClient(Client client) {
 		ClientDTO clientDTO = new ClientDTO();
-		clientMapper.updateDtoFromClient(cliente, clientDTO);
-		clienteRepository.save(cliente);
+		clientMapper.updateDtoFromClient(client, clientDTO);
+		clientRepository.save(client);
 		return clientDTO;
 	}
 	
 	@Transactional
-	public ClientDTO consultarCadastroCliente(String cpfcnpj){
+	public ClientDTO showClientByCpfcnpj(String cpfcnpj){
 		ClientDTO clientDTO = new ClientDTO();
-		clientMapper.updateDtoFromClient(clienteRepository.findByCpfcnpj(cpfcnpj), clientDTO);
+		clientMapper.updateDtoFromClient(clientRepository.findByCpfcnpj(cpfcnpj), clientDTO);
 		return clientDTO;
 	}
 	
 	@Transactional
-	public List<ClientDTO> buscarClientePorNome(String nome){
-		List<Client> listClientAux = clienteRepository.findByNameContaining(nome);
+	public List<ClientDTO> showClientByName(String name){
+		List<Client> listClientAux = clientRepository.findByNameContaining(name);
 		List<ClientDTO> listClientDTOAux = new ArrayList<>();
 		for(Client clientAux : listClientAux) {
 			listClientDTOAux.add(clientMapper.updateDtoFromClient(clientAux, new ClientDTO()));
@@ -51,20 +51,20 @@ public class ClienteService {
 	}
 	
 	@Transactional
-	public ClientDTO atualizarCadastroCliente(String cpfcnpj, ClientDTO clientDTO) {
-	    Client clienteAux = clienteRepository.findByCpfcnpj(cpfcnpj);
-	    clientMapper.updateClientFromDto(clientDTO, clienteAux);
-	    clientMapper.updateDtoFromClient(clienteAux, clientDTO);
-	    clienteRepository.save(clienteAux);
+	public ClientDTO updateClientRegistry(String cpfcnpj, ClientDTO clientDTO) {
+	    Client clientAux = clientRepository.findByCpfcnpj(cpfcnpj);
+	    clientMapper.updateClientFromDto(clientDTO, clientAux);
+	    clientMapper.updateDtoFromClient(clientAux, clientDTO);
+	    clientRepository.save(clientAux);
 		return clientDTO;
 	}
 
 	@Transactional
-	public void desativarContaCliente(String cpfcnpj){
-		Client clientAux = clienteRepository.findByCpfcnpj(cpfcnpj);
+	public void deactivateClientRegistry(String cpfcnpj){
+		Client clientAux = clientRepository.findByCpfcnpj(cpfcnpj);
 		clientAux.setStatus(ClientStatusEnum.Inativo);
-		contaService.desativarContasCpfcnpj(cpfcnpj);
-		clienteRepository.save(clientAux);
+		accountService.deactivateAccountsByClientCpfcnpj(cpfcnpj);
+		clientRepository.save(clientAux);
 	}
 
 }
