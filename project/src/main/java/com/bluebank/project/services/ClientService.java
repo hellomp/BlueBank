@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.bluebank.project.dtos.ClientDTO;
 import com.bluebank.project.enums.ClientStatusEnum;
+import com.bluebank.project.exception.ResourceNotFoundException;
 import com.bluebank.project.mappers.ClientMapper;
 import com.bluebank.project.models.Client;
 import com.bluebank.project.repositories.ClientRepository;
@@ -34,9 +35,20 @@ public class ClientService {
 	}
 	
 	@Transactional
-	public ClientDTO showClientByCpfcnpj(String cpfcnpj){
+	public ClientDTO showClientByCpfcnpj(String cpfcnpj) throws ResourceNotFoundException, Exception{
+		Client client = new Client();
+		try {
+			client = clientRepository.findByCpfcnpj(cpfcnpj);
+		} 
+		catch (NullPointerException e) {
+			throw new ResourceNotFoundException("Client not found");
+		}
+		catch (Exception e) {
+			throw new Exception("Unknown error but here is some info: " + e.getMessage());
+		}
+
 		ClientDTO clientDTO = new ClientDTO();
-		clientMapper.updateDtoFromClient(clientRepository.findByCpfcnpj(cpfcnpj), clientDTO);
+		clientMapper.updateDtoFromClient(client, clientDTO);
 		return clientDTO;
 	}
 	

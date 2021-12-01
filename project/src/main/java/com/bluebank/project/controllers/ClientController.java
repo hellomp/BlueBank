@@ -3,6 +3,7 @@ package com.bluebank.project.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bluebank.project.dtos.ClientDTO;
+import com.bluebank.project.exception.ResourceNotFoundException;
 import com.bluebank.project.models.Client;
 import com.bluebank.project.services.ClientService;
 
@@ -44,7 +46,7 @@ public class ClientController {
 	@GetMapping("/{cpfcnpj}")
 	@ApiOperation(value="Consulta os dados de um cliente atraves do CPF ou CNPJ")
 	@ResponseStatus(HttpStatus.OK)
-	public ClientDTO showClientByCpfcnpj(@PathVariable("cpfcnpj") String cpfcnpj) {
+	public ClientDTO showClientByCpfcnpj(@PathVariable("cpfcnpj") String cpfcnpj) throws ResourceNotFoundException, Exception{
 		return clienteService.showClientByCpfcnpj(cpfcnpj);
 	}
 	
