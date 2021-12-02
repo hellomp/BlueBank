@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bluebank.project.dtos.LoanDTO;
 import com.bluebank.project.dtos.TransferenceDTO;
+import com.bluebank.project.exception.ResourceNotFoundException;
 import com.bluebank.project.models.Loan;
 import com.bluebank.project.services.LoanService;
 
@@ -28,7 +29,7 @@ public class LoanController {
   //criar emprestimo
   @PostMapping("/{cpfcnpj}")
   @ResponseStatus(HttpStatus.CREATED)
-	public LoanDTO registerLoan(@PathVariable("cpfcnpj") String cpfcnpj, @Validated @RequestBody Loan emprestimo){
+	public LoanDTO registerLoan(@PathVariable("cpfcnpj") String cpfcnpj, @Validated @RequestBody Loan emprestimo) throws ResourceNotFoundException {
     return emprestimoService.createLoan(cpfcnpj, emprestimo);
   }
 

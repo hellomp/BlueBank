@@ -9,10 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.bluebank.project.dtos.AccountDTO;
 import com.bluebank.project.enums.AccountStatusEnum;
+import com.bluebank.project.exception.ResourceNotFoundException;
 import com.bluebank.project.mappers.AccountMapper;
-import com.bluebank.project.models.Client;
 import com.bluebank.project.models.Account;
-import com.bluebank.project.repositories.ClientRepository;
+import com.bluebank.project.models.Client;
 import com.bluebank.project.repositories.AccountRepository;
 
 @Service
@@ -22,14 +22,14 @@ public class AccountService {
 	AccountRepository accountRepository;
 	
 	@Autowired
-	ClientRepository clientRepository;
+	ClientService clientService;
 	
 	@Autowired
 	AccountMapper accountMapper;
 	
 	@Transactional
-	public AccountDTO registerNewAccount(String cpfcnpj, Account account) {
-		account.setClient(clientRepository.findByCpfcnpj(cpfcnpj));
+	public AccountDTO registerNewAccount(String cpfcnpj, Account account) throws ResourceNotFoundException {
+		account.setClient(clientService.simpleSearchByCpfcnpj(cpfcnpj));
 		account.setDateForReference(java.util.Calendar.getInstance().getTime());
 		account.setStatus(AccountStatusEnum.Ativa);
 		
@@ -54,9 +54,9 @@ public class AccountService {
 	}
 	
 	@Transactional
-	public AccountDTO changeAccountHolder(Long id, String cpfcnpj) throws IllegalArgumentException {
+	public AccountDTO changeAccountHolder(Long id, String cpfcnpj) throws ResourceNotFoundException, IllegalArgumentException {
 		Account accountAux = accountRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Conta Inexistente"));
-		Client clientAux = clientRepository.findByCpfcnpj(cpfcnpj);
+		Client clientAux = clientService.simpleSearchByCpfcnpj(cpfcnpj);
 		accountAux.setClient(clientAux);
 		return accountMapper.updateDtoFromAccount(accountRepository.save(accountAux), new AccountDTO());
 	}

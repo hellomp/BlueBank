@@ -34,26 +34,22 @@ public class ClientService {
 		return clientDTO;
 	}
 	
+	public Client simpleSearchByCpfcnpj(String cpfcnpj) throws ResourceNotFoundException {
+		return clientRepository.findByCpfcnpj(cpfcnpj).orElseThrow(() -> new ResourceNotFoundException("tem não otario, errou"));
+	}
+	
 	@Transactional
 	public ClientDTO showClientByCpfcnpj(String cpfcnpj) throws ResourceNotFoundException, Exception{
 		Client client = new Client();
-		try {
-			client = clientRepository.findByCpfcnpj(cpfcnpj);
-		} 
-		catch (NullPointerException e) {
-			throw new ResourceNotFoundException("Client not found");
-		}
-		catch (Exception e) {
-			throw new Exception("Unknown error but here is some info: " + e.getMessage());
-		}
-
 		ClientDTO clientDTO = new ClientDTO();
+		
+		simpleSearchByCpfcnpj(cpfcnpj);
 		clientMapper.updateDtoFromClient(client, clientDTO);
 		return clientDTO;
 	}
 	
 	@Transactional
-	public List<ClientDTO> showClientByName(String name){
+	public List<ClientDTO> showClientByName(String name) throws ResourceNotFoundException {
 		List<Client> listClientAux = clientRepository.findByNameContaining(name);
 		List<ClientDTO> listClientDTOAux = new ArrayList<>();
 		for(Client clientAux : listClientAux) {
@@ -63,8 +59,8 @@ public class ClientService {
 	}
 	
 	@Transactional
-	public ClientDTO updateClientRegistry(String cpfcnpj, ClientDTO clientDTO) {
-	    Client clientAux = clientRepository.findByCpfcnpj(cpfcnpj);
+	public ClientDTO updateClientRegistry(String cpfcnpj, ClientDTO clientDTO) throws ResourceNotFoundException {
+	    Client clientAux = simpleSearchByCpfcnpj(cpfcnpj);
 	    clientMapper.updateClientFromDto(clientDTO, clientAux);
 	    clientMapper.updateDtoFromClient(clientAux, clientDTO);
 	    clientRepository.save(clientAux);
@@ -72,8 +68,8 @@ public class ClientService {
 	}
 
 	@Transactional
-	public void deactivateClientRegistry(String cpfcnpj){
-		Client clientAux = clientRepository.findByCpfcnpj(cpfcnpj);
+	public void deactivateClientRegistry(String cpfcnpj) throws ResourceNotFoundException {
+		Client clientAux = simpleSearchByCpfcnpj(cpfcnpj);
 		clientAux.setStatus(ClientStatusEnum.Inativo);
 		accountService.deactivateAccountsByClientCpfcnpj(cpfcnpj);
 		clientRepository.save(clientAux);

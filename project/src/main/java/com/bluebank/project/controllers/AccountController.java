@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bluebank.project.dtos.AccountDTO;
+import com.bluebank.project.exception.ResourceNotFoundException;
 import com.bluebank.project.models.Account;
 import com.bluebank.project.services.AccountService;
 
@@ -35,7 +36,7 @@ public class AccountController {
 	@PostMapping("/{cpfcnpj}")
 	@ApiOperation(value="Cadastra um conta com o CPF ou CNPJ")
 	@ResponseStatus(HttpStatus.CREATED)
-	public AccountDTO registerAccount(@PathVariable("cpfcnpj") String cpfcnpj, @Validated @RequestBody Account conta){
+	public AccountDTO registerAccount(@PathVariable("cpfcnpj") String cpfcnpj, @Validated @RequestBody Account conta) throws ResourceNotFoundException{
 		return contaService.registerNewAccount(cpfcnpj, conta);
 	}
 
@@ -56,7 +57,7 @@ public class AccountController {
 	@PutMapping("/update/{id}/{cpfcnpj}")
 	@ApiOperation(value="Atualiza os dados pelo id ou CPF ou CNPJ")
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	public AccountDTO changeAccountHolder(@PathVariable("id") Long id, @PathVariable("cpfcnpj") String cpfcnpj){
+	public AccountDTO changeAccountHolder(@PathVariable("id") Long id, @PathVariable("cpfcnpj") String cpfcnpj) throws ResourceNotFoundException {
 		return contaService.changeAccountHolder(id, cpfcnpj);
 	}
 	
