@@ -40,10 +40,9 @@ public class ClientService {
 	
 	@Transactional
 	public ClientDTO showClientByCpfcnpj(String cpfcnpj) throws ResourceNotFoundException, Exception{
-		Client client = new Client();
 		ClientDTO clientDTO = new ClientDTO();
+		Client client = simpleSearchByCpfcnpj(cpfcnpj);
 		
-		simpleSearchByCpfcnpj(cpfcnpj);
 		clientMapper.updateDtoFromClient(client, clientDTO);
 		return clientDTO;
 	}
