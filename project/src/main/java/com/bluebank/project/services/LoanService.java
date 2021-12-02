@@ -9,11 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.bluebank.project.dtos.LoanDTO;
 import com.bluebank.project.dtos.TransferenceDTO;
+import com.bluebank.project.exception.ResourceNotFoundException;
 import com.bluebank.project.mappers.LoanMapper;
 import com.bluebank.project.mappers.TransactionMapper;
 import com.bluebank.project.models.Loan;
 import com.bluebank.project.models.Transaction;
-import com.bluebank.project.repositories.ClientRepository;
 import com.bluebank.project.repositories.AccountRepository;
 import com.bluebank.project.repositories.LoanRepository;
 
@@ -24,7 +24,7 @@ public class LoanService {
   LoanRepository loanRepository;
 
   @Autowired
-  ClientRepository clientRepository;
+  ClientService clientService;
 
   @Autowired
   AccountRepository accountRepository;
@@ -39,8 +39,8 @@ public class LoanService {
   TransactionService transactionService;
 
   @Transactional
-  public LoanDTO createLoan(String cpfcnpj, Loan loan){
-    loan.setClient(clientRepository.findByCpfcnpj(cpfcnpj));
+  public LoanDTO createLoan(String cpfcnpj, Loan loan) throws ResourceNotFoundException {
+    loan.setClient(clientService.simpleSearchByCpfcnpj(cpfcnpj));
 
     LoanDTO loanDTO = new LoanDTO();
     loanMapper.updateEmprestimoDtoFromEmprestimo(loanRepository.save(loan), loanDTO);

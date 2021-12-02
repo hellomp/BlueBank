@@ -53,14 +53,14 @@ public class ClientController {
 	@GetMapping("/nome/{nome}")
 	@ApiOperation(value="Consulta os dados de um cliente atraves do nome")
 	@ResponseStatus(HttpStatus.OK)
-	public List<ClientDTO> showClientByName(@PathVariable("nome") String nome) {
+	public List<ClientDTO> showClientByName(@PathVariable("nome") String nome) throws ResourceNotFoundException {
 		return clienteService.showClientByName(nome);
 	}
 	
 	@PutMapping("/{cpfcnpj}")
 	@ApiOperation(value="Atualiza o cadastro do cliente atraves do CPF ou CNPJ")
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	public ClientDTO updateClientRegistry(@PathVariable("cpfcnpj") String cpfcnpj, @RequestBody ClientDTO clientDTO) {//, BindingResult br) throws DataIntegrityViolationException, Exception {
+	public ClientDTO updateClientRegistry(@PathVariable("cpfcnpj") String cpfcnpj, @RequestBody ClientDTO clientDTO) throws ResourceNotFoundException {//, BindingResult br) throws DataIntegrityViolationException, Exception {
 //		if(br.hasErrors()) throw new ConstraintException(br.getAllErrors().get(0).getDefaultMessage());
 		return clienteService.updateClientRegistry(cpfcnpj, clientDTO);
 	}
@@ -68,7 +68,7 @@ public class ClientController {
 	@DeleteMapping("/{cpfcnpj}")
 	@ApiOperation(value="Desativa o cadastro do cliente")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deactivateClientRegistry(@PathVariable("cpfcnpj") String cpfcnpj) {
+	public void deactivateClientRegistry(@PathVariable("cpfcnpj") String cpfcnpj) throws ResourceNotFoundException {
 		clienteService.deactivateClientRegistry(cpfcnpj);
 	}
 }
