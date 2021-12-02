@@ -35,7 +35,7 @@ public class ClientService {
 	}
 	
 	public Client simpleSearchByCpfcnpj(String cpfcnpj) throws ResourceNotFoundException {
-		return clientRepository.findByCpfcnpj(cpfcnpj).orElseThrow(() -> new ResourceNotFoundException("tem não otario, errou"));
+		return clientRepository.findByCpfcnpj(cpfcnpj).orElseThrow(() -> new ResourceNotFoundException("O cliente não foi encontrado"));
 	}
 	
 	@Transactional

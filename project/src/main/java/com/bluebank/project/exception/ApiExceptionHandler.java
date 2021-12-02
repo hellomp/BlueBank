@@ -14,7 +14,7 @@ public class ApiExceptionHandler {
 
 	@ExceptionHandler(ResourceNotFoundException.class)
 	public ResponseEntity<?> resourceNotFoundException(ResourceNotFoundException e, WebRequest request){
-		ApiException exception = new ApiException(request.getDescription(false), e, HttpStatus.NOT_FOUND, ZonedDateTime.now(ZoneId.of("Z")));
+		ApiException exception = new ApiException(e.getMessage(), HttpStatus.NOT_FOUND, ZonedDateTime.now(ZoneId.of("Z")));
 		return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
 	}
 }
