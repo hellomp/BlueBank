@@ -26,7 +26,7 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/conta")
-@Api(value="API BlueBank")
+@Api(value="API REST Conta")
 @CrossOrigin(origins="*")
 public class AccountController {
 	
