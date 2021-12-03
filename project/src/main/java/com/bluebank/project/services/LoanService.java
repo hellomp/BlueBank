@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.bluebank.project.dtos.LoanDTO;
 import com.bluebank.project.dtos.TransferenceDTO;
 import com.bluebank.project.exception.ResourceNotFoundException;
+import com.bluebank.project.exception.TransactionException;
 import com.bluebank.project.mappers.LoanMapper;
 import com.bluebank.project.mappers.TransactionMapper;
 import com.bluebank.project.models.Loan;
@@ -64,7 +65,7 @@ public class LoanService {
   }
 
   @Transactional
-  public TransferenceDTO payLoan(Long loanId, Long accountId) throws ResourceNotFoundException{
+  public TransferenceDTO payLoan(Long loanId, Long accountId) throws ResourceNotFoundException, TransactionException{
     Loan loan = loanRepository.findById(loanId).orElseThrow(() -> new ResourceNotFoundException("O empréstimo não encontrado"));
     double moneyAmount = (loan.getBorrowedAmount() / loan.getInstallments()) + (loan.getBorrowedAmount() * loan.getFees());
     

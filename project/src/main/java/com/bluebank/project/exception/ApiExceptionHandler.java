@@ -17,4 +17,10 @@ public class ApiExceptionHandler {
 		ApiException exception = new ApiException(e.getMessage(), HttpStatus.NOT_FOUND, ZonedDateTime.now(ZoneId.of("Z")));
 		return new ResponseEntity<>(exception, HttpStatus.NOT_FOUND);
 	}
+
+	@ExceptionHandler(TransactionException.class)
+	public ResponseEntity<?> transactionException(TransactionException e, WebRequest request){
+		ApiException exception = new ApiException(e.getMessage(), HttpStatus.FORBIDDEN, ZonedDateTime.now(ZoneId.of("Z")));
+		return new ResponseEntity<>(exception, HttpStatus.FORBIDDEN);
+	}
 }

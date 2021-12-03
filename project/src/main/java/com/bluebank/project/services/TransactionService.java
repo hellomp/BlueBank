@@ -12,6 +12,7 @@ import com.bluebank.project.dtos.WithdrawDTO;
 import com.bluebank.project.dtos.TransferenceDTO;
 import com.bluebank.project.enums.TransactionTypeEnum;
 import com.bluebank.project.exception.ResourceNotFoundException;
+import com.bluebank.project.exception.TransactionException;
 import com.bluebank.project.mappers.TransactionMapper;
 import com.bluebank.project.models.Account;
 import com.bluebank.project.models.Transaction;
@@ -59,7 +60,7 @@ public class TransactionService {
 		return transactionMapper.updateDtoFromTransacoes(transactions);
 	}  
   
-  	public List<TransactionDTO> showTransactionsByAccountId(Long id) throws ResourceNotFoundException{
+  public List<TransactionDTO> showTransactionsByAccountId(Long id) throws ResourceNotFoundException{
 		accountService.simpleSearchById(id);
 		List <Transaction> transactions = transactionRepository.findByAccountId(id);
 		List <Transaction> receivedTransferences = transactionRepository.findByDestinationAccountId(id);
@@ -72,7 +73,7 @@ public class TransactionService {
 		return account.getBalance();
 	}
 
-	public WithdrawDTO withdrawAmount(Long id, Transaction transaction) throws ResourceNotFoundException{
+	public WithdrawDTO withdrawAmount(Long id, Transaction transaction) throws ResourceNotFoundException, TransactionException{
 		transaction.setAccount(accountService.simpleSearchById(id));
 		transaction.setTransactionType(TransactionTypeEnum.SAQ);
 		transaction.setTransactionDate(java.util.Calendar.getInstance().getTime());
@@ -83,7 +84,7 @@ public class TransactionService {
 		WithdrawDTO withdrawDTO = new WithdrawDTO();
 		double valorSaque = transaction.getValue();
 		if (valorSaque >= transaction.getCurrentBalance()) {
-			throw new IllegalArgumentException("Valor de saque maior que o saldo disponível");
+			throw new TransactionException("Valor de saque maior que o saldo disponível");
 		} else {
 			Account conta = transaction.getAccount();
 			conta.setBalance(conta.getBalance() - valorSaque);
@@ -94,7 +95,7 @@ public class TransactionService {
 		return withdrawDTO;
 	}
 
-	public DepositDTO depositAmount(Long id, Transaction transaction) throws ResourceNotFoundException{
+	public DepositDTO depositAmount(Long id, Transaction transaction) throws ResourceNotFoundException, TransactionException{
 		transaction.setAccount(accountService.simpleSearchById(id));
 		transaction.setTransactionType(TransactionTypeEnum.DEP);
 		transaction.setTransactionDate(java.util.Calendar.getInstance().getTime());
@@ -105,7 +106,7 @@ public class TransactionService {
 		DepositDTO depositDTO = new DepositDTO();
 		double moneyAmount = transaction.getValue();
 		if (moneyAmount < 0.0) {
-			throw new IllegalArgumentException("Valor de depósito inválido");
+			throw new TransactionException("Valor de depósito inválido");
 		} else {
 			Account account = transaction.getAccount();
 			account.setBalance(account.getBalance() + moneyAmount);
@@ -116,7 +117,7 @@ public class TransactionService {
 		return depositDTO;
 	}
 
-	public TransferenceDTO transferAmount(Long accountId, Long destinationAccountId, Transaction transaction) throws ResourceNotFoundException{
+	public TransferenceDTO transferAmount(Long accountId, Long destinationAccountId, Transaction transaction) throws ResourceNotFoundException, TransactionException{
 		transaction.setAccount(accountService.simpleSearchById(accountId));
 		transaction.setTransactionType(TransactionTypeEnum.TRA);
 		transaction.setTransactionDate(java.util.Calendar.getInstance().getTime());
@@ -128,9 +129,9 @@ public class TransactionService {
 		TransferenceDTO transferenceDTO = new TransferenceDTO();
 		double moneyAmount = transaction.getValue();
 		if (moneyAmount <= 0.0) {
-			throw new IllegalArgumentException("Valor de transferência inválido");
+			throw new TransactionException("Valor de transferência inválido");
 		} else if (moneyAmount >= transaction.getCurrentBalance()) {
-			throw new IllegalArgumentException("Valor de saque maior que o saldo disponível");
+			throw new TransactionException("Valor de saque maior que o saldo disponível");
 		} else {
 			Account account = transaction.getAccount();
 			Account destinationAccount = transaction.getDestinationAccount();

@@ -17,6 +17,7 @@ import com.bluebank.project.dtos.DepositDTO;
 import com.bluebank.project.dtos.TransactionDTO;
 import com.bluebank.project.dtos.WithdrawDTO;
 import com.bluebank.project.exception.ResourceNotFoundException;
+import com.bluebank.project.exception.TransactionException;
 import com.bluebank.project.models.Transaction;
 import com.bluebank.project.services.TransactionService;
 
@@ -35,27 +36,27 @@ public class TransactionController {
   @PostMapping("/saque/{id}")
   @ApiOperation(value="Este método faz um saque atraves de uma transação")
 	@ResponseStatus(HttpStatus.CREATED)
-	public WithdrawDTO withdraw(@PathVariable("id") Long id, @RequestBody Transaction transacao) throws ResourceNotFoundException{
+	public WithdrawDTO withdraw(@PathVariable("id") Long id, @RequestBody Transaction transacao) throws ResourceNotFoundException, TransactionException{
 		return transacaoService.withdrawAmount(id, transacao);
 	}
 	
 	@PostMapping("/deposito/{id}")
 	@ApiOperation(value="Este método faz um depósito atraves de uma transação")
 	@ResponseStatus(HttpStatus.CREATED)
-	public DepositDTO deposit(@PathVariable("id") Long id, @RequestBody Transaction transacao) throws ResourceNotFoundException{
+	public DepositDTO deposit(@PathVariable("id") Long id, @RequestBody Transaction transacao) throws ResourceNotFoundException, TransactionException{
 		return transacaoService.depositAmount(id, transacao);
 	}
 	
 	@GetMapping("/saldo/{id}")
 	@ApiOperation(value="Este método consulta o saldo do cliente")
 	@ResponseStatus(HttpStatus.OK)
-	public double balance(@PathVariable("id") Long id) throws ResourceNotFoundException{
+	public double balance(@PathVariable("id") Long id) throws ResourceNotFoundException, TransactionException{
 		return transacaoService.showAccountBalanceById(id);
 	}
 	
 	@GetMapping("/extrato/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public List<TransactionDTO> extract(@PathVariable("id") Long id) throws ResourceNotFoundException{
+	public List<TransactionDTO> extract(@PathVariable("id") Long id) throws ResourceNotFoundException, TransactionException{
 		return transacaoService.showTransactionsByAccountId(id);
 	}
 
