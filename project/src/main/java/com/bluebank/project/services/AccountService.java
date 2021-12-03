@@ -14,6 +14,7 @@ import com.bluebank.project.mappers.AccountMapper;
 import com.bluebank.project.models.Account;
 import com.bluebank.project.models.Client;
 import com.bluebank.project.repositories.AccountRepository;
+import com.bluebank.project.repositories.ClientRepository;
 
 @Service
 public class AccountService {
@@ -39,13 +40,14 @@ public class AccountService {
 	}
 	
 	@Transactional
-	public AccountDTO showAccountById(Long id) throws IllegalArgumentException {
-		Account accountAux = accountRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Conta Inexistente"));
+	public AccountDTO showAccountById(Long id) throws ResourceNotFoundException {
+		Account accountAux = accountRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("A conta não foi encontrada"));
 		return accountMapper.updateDtoFromAccount(accountAux, new AccountDTO());
 	}
 	
 	@Transactional
-	public List<AccountDTO> showAccountsByClientCpfcnpj(String cpfcnpj) throws IllegalArgumentException {
+	public List<AccountDTO> showAccountsByClientCpfcnpj(String cpfcnpj) throws ResourceNotFoundException {
+		clientService.simpleSearchByCpfcnpj(cpfcnpj);
 		List<AccountDTO> listAccountDTOAux = new ArrayList<AccountDTO>();
 		for (Account account : accountRepository.findByClientId_Cpfcnpj(cpfcnpj)) {
 			listAccountDTOAux.add(accountMapper.updateDtoFromAccount(account, new AccountDTO()));
@@ -54,23 +56,24 @@ public class AccountService {
 	}
 	
 	@Transactional
-	public AccountDTO changeAccountHolder(Long id, String cpfcnpj) throws ResourceNotFoundException, IllegalArgumentException {
-		Account accountAux = accountRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Conta Inexistente"));
+	public AccountDTO changeAccountHolder(Long id, String cpfcnpj) throws ResourceNotFoundException {
+		Account accountAux = accountRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("A conta não foi encontrada"));
 		Client clientAux = clientService.simpleSearchByCpfcnpj(cpfcnpj);
 		accountAux.setClient(clientAux);
 		return accountMapper.updateDtoFromAccount(accountRepository.save(accountAux), new AccountDTO());
 	}
 
 	@Transactional
-	public void deactivateAccountById(Long id) {
-		Account accountAux = accountRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Conta Inexistente"));
+	public void deactivateAccountById(Long id) throws ResourceNotFoundException{
+		Account accountAux = accountRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("A conta não foi encontrada"));
 		accountAux.setStatus(AccountStatusEnum.Inativa);
 		accountAux.setDateForReference(java.util.Calendar.getInstance().getTime());
 		accountRepository.save(accountAux);
 	}
 	
 	@Transactional
-	public void deactivateAccountsByClientCpfcnpj(String cpfcnpj) {
+	public void deactivateAccountsByClientCpfcnpj(String cpfcnpj) throws ResourceNotFoundException{
+		clientService.simpleSearchByCpfcnpj(cpfcnpj);
 		List<Account> listContaAux = accountRepository.findByClientId_Cpfcnpj(cpfcnpj);
 		for (Account accountAux : listContaAux) {
 			accountAux.setStatus(AccountStatusEnum.Inativa);
