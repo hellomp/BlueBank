@@ -48,14 +48,15 @@ public class LoanService {
   }
 
   @Transactional
-  public LoanDTO showLoanById(Long loanId) throws IllegalArgumentException{
-    Loan loan = loanRepository.findById(loanId).orElseThrow(() -> new IllegalArgumentException("Emprestimo não encontrado"));
+  public LoanDTO showLoanById(Long loanId) throws ResourceNotFoundException{
+    Loan loan = loanRepository.findById(loanId).orElseThrow(() -> new ResourceNotFoundException("O emprestímo não foi encontrado"));
     return loanMapper.updateEmprestimoDtoFromEmprestimo(loan, new LoanDTO());
   }
 
   @Transactional
-  public List<LoanDTO> showLoanByClientCpfcnpj(String cpfcnpj){
+  public List<LoanDTO> showLoanByClientCpfcnpj(String cpfcnpj) throws ResourceNotFoundException{
     List<LoanDTO> listLoanDTO = new ArrayList<LoanDTO>();
+    clientService.simpleSearchByCpfcnpj(cpfcnpj);
     for(Loan loan : loanRepository.findByClientId_Cpfcnpj(cpfcnpj)){
       listLoanDTO.add(loanMapper.updateEmprestimoDtoFromEmprestimo(loan, new LoanDTO()));
     }
@@ -63,8 +64,8 @@ public class LoanService {
   }
 
   @Transactional
-  public TransferenceDTO payLoan(Long loanId, Long accountId) throws IllegalArgumentException{
-    Loan loan = loanRepository.findById(loanId).orElseThrow(() -> new IllegalArgumentException("Emprestimo não encontrado"));
+  public TransferenceDTO payLoan(Long loanId, Long accountId) throws ResourceNotFoundException{
+    Loan loan = loanRepository.findById(loanId).orElseThrow(() -> new ResourceNotFoundException("O empréstimo não encontrado"));
     double moneyAmount = (loan.getBorrowedAmount() / loan.getInstallments()) + (loan.getBorrowedAmount() * loan.getFees());
     
     Transaction transaction = new Transaction();

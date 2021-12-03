@@ -45,7 +45,7 @@ public class LoanController {
   @GetMapping("/id/{emprestimoId}")
   @ApiOperation(value="Este método consulta um empréstimo pelo id")
   @ResponseStatus(HttpStatus.OK)
-  public LoanDTO consultLoanRegistryById(@PathVariable("emprestimoId") Long emprestimoId){
+  public LoanDTO consultLoanRegistryById(@PathVariable("emprestimoId") Long emprestimoId) throws ResourceNotFoundException{
     return emprestimoService.showLoanById(emprestimoId);
   }
 
@@ -53,7 +53,7 @@ public class LoanController {
   @GetMapping("/cpfcnpj/{cpfcnpj}")
   @ApiOperation(value="Este método consulta um empréstimo pelo cpf/cnpj")
   @ResponseStatus(HttpStatus.OK)
-  public List<LoanDTO> consultLoanRegistryByCpfcnpj(@PathVariable("cpfcnpj") String cpfcnpj){
+  public List<LoanDTO> consultLoanRegistryByCpfcnpj(@PathVariable("cpfcnpj") String cpfcnpj) throws ResourceNotFoundException{
     return emprestimoService.showLoanByClientCpfcnpj(cpfcnpj);
   }
 
@@ -61,7 +61,7 @@ public class LoanController {
   @PostMapping("/pagamento/{emprestimoId}/{contaId}")
   @ApiOperation(value="Este método faz o pagamento de um empréstimo")
   @ResponseStatus(HttpStatus.CREATED)
-  public TransferenceDTO payLoan(@PathVariable("emprestimoId") Long emprestimoId, @PathVariable("contaId") Long contaId){
+  public TransferenceDTO payLoan(@PathVariable("emprestimoId") Long emprestimoId, @PathVariable("contaId") Long contaId) throws ResourceNotFoundException{
     return emprestimoService.payLoan(emprestimoId, contaId);
   }
 }

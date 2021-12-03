@@ -11,6 +11,7 @@ import com.bluebank.project.dtos.TransactionDTO;
 import com.bluebank.project.dtos.WithdrawDTO;
 import com.bluebank.project.dtos.TransferenceDTO;
 import com.bluebank.project.enums.TransactionTypeEnum;
+import com.bluebank.project.exception.ResourceNotFoundException;
 import com.bluebank.project.mappers.TransactionMapper;
 import com.bluebank.project.models.Account;
 import com.bluebank.project.models.Transaction;
@@ -21,51 +22,58 @@ import com.bluebank.project.repositories.TransactionRepository;
 @Service
 public class TransactionService {
 
-  @Autowired
-  TransactionRepository transactionRepository;
+	@Autowired
+	TransactionRepository transactionRepository;
+	
+	@Autowired
+	AccountRepository accountRepository;
+
+	@Autowired
+	ClientRepository clientRepository;
+
+	@Autowired
+	TransactionMapper transactionMapper;
+
+	@Autowired
+	ClientService clientService;
+
+	@Autowired
+	AccountService accountService;
+
+	@Transactional
+	public Transaction createTransaction(Transaction transaction) {
+		return this.transactionRepository.save(transaction);
+	}
+
+	@Transactional
+	public List<Transaction> showAllTransactions() {
+		return this.transactionRepository.findAll();
+	}
+
+	@Transactional
+	public List<TransactionDTO> showTransactionsByClientCpfCnpj(String cpfcnpj) throws ResourceNotFoundException{
+		clientService.simpleSearchByCpfcnpj(cpfcnpj);
+		List <Transaction> transactions = transactionRepository.findByAccountId_ClientId_Cpfcnpj(cpfcnpj);
+		List <Transaction> receivedTransferences = transactionRepository.findByDestinationAccountId_ClientId_Cpfcnpj(cpfcnpj);
+		transactions.addAll(receivedTransferences);
+		return transactionMapper.updateDtoFromTransacoes(transactions);
+	}  
   
-  @Autowired
-  AccountRepository accountRepository;
-
-  @Autowired
-  ClientRepository clientRepository;
-
-  @Autowired
-  TransactionMapper transactionMapper;
-
-  @Transactional
-  public Transaction createTransaction(Transaction transaction) {
-	  return this.transactionRepository.save(transaction);
-  }
-
-  @Transactional
-  public List<Transaction> showAllTransactions() {
-    return this.transactionRepository.findAll();
-  }
-
-  @Transactional
-    public List<TransactionDTO> showTransactionsByClientCpfCnpj(String cpfcnpj) {
-	    List <Transaction> transactions = transactionRepository.findByAccountId_ClientId_Cpfcnpj(cpfcnpj);
-	    List <Transaction> receivedTransferences = transactionRepository.findByDestinationAccountId_ClientId_Cpfcnpj(cpfcnpj);
-	    transactions.addAll(receivedTransferences);
-	return transactionMapper.updateDtoFromTransacoes(transactions);
-    
-  }  
-  
-  	public List<TransactionDTO> showTransactionsByAccountId(Long id) {
+  	public List<TransactionDTO> showTransactionsByAccountId(Long id) throws ResourceNotFoundException{
+		accountService.simpleSearchById(id);
 		List <Transaction> transactions = transactionRepository.findByAccountId(id);
 		List <Transaction> receivedTransferences = transactionRepository.findByDestinationAccountId(id);
 		transactions.addAll(receivedTransferences);
 		return transactionMapper.updateDtoFromTransacoes(transactions);
 	}
 	
-	public double showAccountBalanceById(Long id) {
-		Account account = accountRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Conta Inexistente"));
+	public double showAccountBalanceById(Long id) throws ResourceNotFoundException{
+		Account account = accountService.simpleSearchById(id);
 		return account.getBalance();
 	}
 
-	public WithdrawDTO withdrawAmount(Long id, Transaction transaction) {
-		transaction.setAccount(accountRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Conta Inexistente")));
+	public WithdrawDTO withdrawAmount(Long id, Transaction transaction) throws ResourceNotFoundException{
+		transaction.setAccount(accountService.simpleSearchById(id));
 		transaction.setTransactionType(TransactionTypeEnum.SAQ);
 		transaction.setTransactionDate(java.util.Calendar.getInstance().getTime());
 		transaction.setPreviousBalance(transaction.getAccount().getBalance());
@@ -86,8 +94,8 @@ public class TransactionService {
 		return withdrawDTO;
 	}
 
-	public DepositDTO depositAmount(Long id, Transaction transaction) {
-		transaction.setAccount(accountRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Conta Inexistente")));
+	public DepositDTO depositAmount(Long id, Transaction transaction) throws ResourceNotFoundException{
+		transaction.setAccount(accountService.simpleSearchById(id));
 		transaction.setTransactionType(TransactionTypeEnum.DEP);
 		transaction.setTransactionDate(java.util.Calendar.getInstance().getTime());
 		transaction.setPreviousBalance(transaction.getAccount().getBalance());
@@ -108,14 +116,14 @@ public class TransactionService {
 		return depositDTO;
 	}
 
-	public TransferenceDTO transferAmount(Long accountId, Long destinationAccountId, Transaction transaction){
-		transaction.setAccount(accountRepository.findById(accountId).orElseThrow(() -> new IllegalArgumentException("Conta Inexistente")));
+	public TransferenceDTO transferAmount(Long accountId, Long destinationAccountId, Transaction transaction) throws ResourceNotFoundException{
+		transaction.setAccount(accountService.simpleSearchById(accountId));
 		transaction.setTransactionType(TransactionTypeEnum.TRA);
 		transaction.setTransactionDate(java.util.Calendar.getInstance().getTime());
 		transaction.setPreviousBalance(transaction.getAccount().getBalance());
 		transaction.setCurrentBalance(transaction.getAccount().getBalance());
 		transaction.setValue(transaction.getValue());
-		transaction.setDestinationAccount(accountRepository.findById(destinationAccountId).orElseThrow(() -> new IllegalArgumentException("Conta inexistente")));
+		transaction.setDestinationAccount(accountService.simpleSearchById(destinationAccountId));
 
 		TransferenceDTO transferenceDTO = new TransferenceDTO();
 		double moneyAmount = transaction.getValue();

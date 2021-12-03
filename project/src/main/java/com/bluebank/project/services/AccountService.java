@@ -14,7 +14,6 @@ import com.bluebank.project.mappers.AccountMapper;
 import com.bluebank.project.models.Account;
 import com.bluebank.project.models.Client;
 import com.bluebank.project.repositories.AccountRepository;
-import com.bluebank.project.repositories.ClientRepository;
 
 @Service
 public class AccountService {
@@ -28,6 +27,10 @@ public class AccountService {
 	@Autowired
 	AccountMapper accountMapper;
 	
+	public Account simpleSearchById(Long id) throws ResourceNotFoundException{
+		return accountRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("A conta não foi encontrada"));
+	}
+
 	@Transactional
 	public AccountDTO registerNewAccount(String cpfcnpj, Account account) throws ResourceNotFoundException {
 		account.setClient(clientService.simpleSearchByCpfcnpj(cpfcnpj));
@@ -41,7 +44,7 @@ public class AccountService {
 	
 	@Transactional
 	public AccountDTO showAccountById(Long id) throws ResourceNotFoundException {
-		Account accountAux = accountRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("A conta não foi encontrada"));
+		Account accountAux = simpleSearchById(id);
 		return accountMapper.updateDtoFromAccount(accountAux, new AccountDTO());
 	}
 	
@@ -57,7 +60,7 @@ public class AccountService {
 	
 	@Transactional
 	public AccountDTO changeAccountHolder(Long id, String cpfcnpj) throws ResourceNotFoundException {
-		Account accountAux = accountRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("A conta não foi encontrada"));
+		Account accountAux = simpleSearchById(id);
 		Client clientAux = clientService.simpleSearchByCpfcnpj(cpfcnpj);
 		accountAux.setClient(clientAux);
 		return accountMapper.updateDtoFromAccount(accountRepository.save(accountAux), new AccountDTO());
