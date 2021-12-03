@@ -43,14 +43,14 @@ public class AccountController {
 	@GetMapping("/id/{id}")
 	@ApiOperation(value="Consulta os dados da conta atraves do id")
 	@ResponseStatus(HttpStatus.OK)
-	public AccountDTO consultAccountRegistryById(@PathVariable("id") Long id){
+	public AccountDTO consultAccountRegistryById(@PathVariable("id") Long id) throws ResourceNotFoundException{
 		return contaService.showAccountById(id);
 	}
 	
 	@GetMapping("/cpfcnpj/{cpfcnpj}")
 	@ApiOperation(value="Consulta os dados da conta atraves do CPF ou CNPJ")
 	@ResponseStatus(HttpStatus.OK)
-	public List<AccountDTO> consultAccountRegistryByCpfcnpj(@PathVariable("cpfcnpj") String cpfcnpj){
+	public List<AccountDTO> consultAccountRegistryByCpfcnpj(@PathVariable("cpfcnpj") String cpfcnpj) throws ResourceNotFoundException{
 		return contaService.showAccountsByClientCpfcnpj(cpfcnpj);
 	}
 	
@@ -64,14 +64,14 @@ public class AccountController {
 	@DeleteMapping("/delete/id/{id}")
 	@ApiOperation(value="Desativa a conta do cliente pelo id")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deactivateAccountRegistryById(@PathVariable("id") Long id){
+	public void deactivateAccountRegistryById(@PathVariable("id") Long id) throws ResourceNotFoundException{
 		contaService.deactivateAccountById(id);
 	}
 	
 	@DeleteMapping("/delete/cpfcnpj/{cpfcnpj}")
 	@ApiOperation(value="Desativa a conta do cliente pelo CPF ou CNPJ")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deactivateAccountRegistryByCpfcnpj(@PathVariable("cpfcnpj") String cpfcnpj){
+	public void deactivateAccountRegistryByCpfcnpj(@PathVariable("cpfcnpj") String cpfcnpj) throws ResourceNotFoundException{
 		contaService.deactivateAccountsByClientCpfcnpj(cpfcnpj);
 	}
 
