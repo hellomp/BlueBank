@@ -4,7 +4,7 @@ Seguindo as recomendações da descrição do desafio optamos por usar a ferrame
 
 ### Quadro Kanban
 
-(gif do jira)
+![gif kanban jira](./assets/kanban.gif)
 
 O quadro utilizado pela equipe possui, além das colunas `to-do`, `doing` e `done`, as colunas de `revisão de código` e de `testes`. 
 
@@ -12,15 +12,17 @@ As tarefas podem passar ou não pelas colunas de revisão de código e de teste,
 
 Esse quadro é renovado ao começo de cada `Sprint` e pode conter tarefas de mais de um `Épico` por Sprint (seguindo o `SCRUM`, explicado mais a diante)
 
-### Backlog
+### Backlog e Roadmap
 
-![gif backlog jira](../assets/backlog.gif)
+![gif backlog jira](./assets/backlog.gif)
 
 O backlog deve ser entendido como um banco de `tarefas` por assim dizer, essas tarefas basicamente podem ser divididas seguindo uma hierarquia ou `níveis de abstração` do problema a ser resolvido. O nível mais alto e mais abstrato é o `Épico`, ele contém uma descrição genérica do que precisa ser feito e serve de base para a concepção das `Histórias`, que são o segundo nível na hierarquia.
 
 As Histórias já possuem um direcionamento mais claro das ações que devem ser tomadas pela equipe, elas tornam possível a visualização de um objetivo claro e tangível e servem de base para a elaboração de tarefas.
 
 As tarefas são o nível de abstração mais baixo da definição das ações que devem ser tomadas para a resolução do problema, elas descrevem ações simples, diretas e concisas que devem ser feitas de modo a resolver uma pequena parte do problema por vez.
+
+o roadmap que usamos no nosso projeto não foi interamente planejado de modo a obedecer a datas, ele é incrementado automaticamente pela plataforma de gestão que escolhemos,`Jira`, à medida que a conclusão de tarefas de cada épico vai ocorrendo ao longo do tempo.
 
 ### SCRUM
 
