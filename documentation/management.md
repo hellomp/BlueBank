@@ -24,7 +24,11 @@ o roadmap que usamos no nosso projeto não foi interamente planejado de modo a o
 
 ![gif kanban jira](./assets/kanban.gif)
 
-O quadro utilizado pela equipe possui, além das colunas `to-do`, `doing` e `done`, as colunas de `revisão de código` e de `testes`. 
+O quadro utilizado pela equipe possui, além das colunas `to-do`, `doing` e `done`, as colunas de `revisão de código` e de `testes`. Cada uma das tarefas, chamadas de `issues` no Jira possui data de entrega; descrição detalhada do que deve ser feito; membro responsável pela sua realização e um nível de prioridade.
+
+>_Nota: por padrão, o Jira permite delegar tarefas a apenas uma pessoa (um assignee), mas alteramos as configurações de card (issue) para que elas pudessem ser delegada a mais de um membro do squad (criamos a propriedade "assignees" que pode conter múltiplos membros)_
+
+>_Nota Nº2: usamos a propriedade de issue "prioridade" disponibilizada pelo próprio Jira, essa propriedade define até 5 níveis de prioridade para cada issue_
 
 As tarefas podem passar ou não pelas colunas de revisão de código e de teste, isso depende da sua natureza e da sua complexidade. Tarefas em revisão de código aguardam uma avaliação conjunta dos membros do grupo sobre a implementação das suas funcionalidades. Tarefas em testes aguardam a verificação das suas funcionalidades em testes práticos.
 
