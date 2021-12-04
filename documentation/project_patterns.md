@@ -17,7 +17,7 @@ anotações transactional
 - métodos especiais no repositorio (explicar vantagens dos derived query methods)
 - 
 
-
+explicar o uso da interface de transação
 
 funcionalidades
 
