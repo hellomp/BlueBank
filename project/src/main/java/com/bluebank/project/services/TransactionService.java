@@ -60,6 +60,7 @@ public class TransactionService {
 		return transactionMapper.updateDtoFromTransacoes(transactions);
 	}  
   
+	@Transactional
   public List<TransactionDTO> showTransactionsByAccountId(Long id) throws ResourceNotFoundException{
 		accountService.simpleSearchById(id);
 		List <Transaction> transactions = transactionRepository.findByAccountId(id);
@@ -73,6 +74,7 @@ public class TransactionService {
 		return account.getBalance();
 	}
 
+	@Transactional
 	public WithdrawDTO withdrawAmount(Long id, Transaction transaction) throws ResourceNotFoundException, TransactionException{
 		transaction.setAccount(accountService.simpleSearchById(id));
 		transaction.setTransactionType(TransactionTypeEnum.SAQ);
@@ -95,6 +97,7 @@ public class TransactionService {
 		return withdrawDTO;
 	}
 
+	@Transactional
 	public DepositDTO depositAmount(Long id, Transaction transaction) throws ResourceNotFoundException, TransactionException{
 		transaction.setAccount(accountService.simpleSearchById(id));
 		transaction.setTransactionType(TransactionTypeEnum.DEP);
@@ -117,6 +120,7 @@ public class TransactionService {
 		return depositDTO;
 	}
 
+	@Transactional
 	public TransferenceDTO transferAmount(Long accountId, Long destinationAccountId, Transaction transaction) throws ResourceNotFoundException, TransactionException{
 		transaction.setAccount(accountService.simpleSearchById(accountId));
 		transaction.setTransactionType(TransactionTypeEnum.TRA);
