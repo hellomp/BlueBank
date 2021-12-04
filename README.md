@@ -1,5 +1,3 @@
-=======
-
 # Desafio final da PanAcademy
 
 Um desafio que consiste em criar uma API para gerenciamento de contas bancárias e suas respectivas transações.
