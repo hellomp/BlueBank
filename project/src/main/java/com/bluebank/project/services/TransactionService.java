@@ -2,6 +2,8 @@ package com.bluebank.project.services;
 
 import java.util.List;
 
+import javax.persistence.PersistenceException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,6 +13,7 @@ import com.bluebank.project.dtos.TransactionDTO;
 import com.bluebank.project.dtos.WithdrawDTO;
 import com.bluebank.project.dtos.TransferenceDTO;
 import com.bluebank.project.enums.TransactionTypeEnum;
+import com.bluebank.project.exception.ConstraintException;
 import com.bluebank.project.exception.ResourceNotFoundException;
 import com.bluebank.project.exception.TransactionException;
 import com.bluebank.project.mappers.TransactionMapper;
@@ -41,7 +44,6 @@ public class TransactionService {
 	@Autowired
 	AccountService accountService;
 
-	@Transactional
 	public Transaction createTransaction(Transaction transaction) {
 		return this.transactionRepository.save(transaction);
 	}
@@ -60,6 +62,7 @@ public class TransactionService {
 		return transactionMapper.updateDtoFromTransacoes(transactions);
 	}  
   
+	@Transactional
   public List<TransactionDTO> showTransactionsByAccountId(Long id) throws ResourceNotFoundException{
 		accountService.simpleSearchById(id);
 		List <Transaction> transactions = transactionRepository.findByAccountId(id);
@@ -73,7 +76,8 @@ public class TransactionService {
 		return account.getBalance();
 	}
 
-	public WithdrawDTO withdrawAmount(Long id, Transaction transaction) throws ResourceNotFoundException, TransactionException{
+	@Transactional
+	public WithdrawDTO withdrawAmount(Long id, Transaction transaction) throws ResourceNotFoundException, TransactionException, PersistenceException, ConstraintException{
 		transaction.setAccount(accountService.simpleSearchById(id));
 		transaction.setTransactionType(TransactionTypeEnum.SAQ);
 		transaction.setTransactionDate(java.util.Calendar.getInstance().getTime());
@@ -91,11 +95,12 @@ public class TransactionService {
 			transaction.setCurrentBalance(conta.getBalance());
 		}
 		transactionMapper.updateWithdrawDtoFromTransaction(transaction, withdrawDTO);
-		transactionRepository.save(transaction);
+		createTransaction(transaction);
 		return withdrawDTO;
 	}
 
-	public DepositDTO depositAmount(Long id, Transaction transaction) throws ResourceNotFoundException, TransactionException{
+	@Transactional
+	public DepositDTO depositAmount(Long id, Transaction transaction) throws ResourceNotFoundException, TransactionException, PersistenceException{
 		transaction.setAccount(accountService.simpleSearchById(id));
 		transaction.setTransactionType(TransactionTypeEnum.DEP);
 		transaction.setTransactionDate(java.util.Calendar.getInstance().getTime());
@@ -113,11 +118,12 @@ public class TransactionService {
 			transaction.setCurrentBalance(account.getBalance());
 		}
 		transactionMapper.updateDepositDtoFromTransaction(transaction, depositDTO);
-		transactionRepository.save(transaction);
+		createTransaction(transaction);
 		return depositDTO;
 	}
 
-	public TransferenceDTO transferAmount(Long accountId, Long destinationAccountId, Transaction transaction) throws ResourceNotFoundException, TransactionException{
+	@Transactional
+	public TransferenceDTO transferAmount(Long accountId, Long destinationAccountId, Transaction transaction) throws ResourceNotFoundException, TransactionException, PersistenceException{
 		transaction.setAccount(accountService.simpleSearchById(accountId));
 		transaction.setTransactionType(TransactionTypeEnum.TRA);
 		transaction.setTransactionDate(java.util.Calendar.getInstance().getTime());
@@ -140,7 +146,7 @@ public class TransactionService {
 			transaction.setCurrentBalance(account.getBalance());
 		}
 		transactionMapper.updateTransferenceDtoFromTransaction(transaction, transferenceDTO);
-		transactionRepository.save(transaction);
+		createTransaction(transaction);
 		return transferenceDTO;
 	}
 }

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.bluebank.project.dtos.AccountDTO;
 import com.bluebank.project.enums.AccountStatusEnum;
+import com.bluebank.project.exception.ConstraintException;
 import com.bluebank.project.exception.ResourceNotFoundException;
 import com.bluebank.project.mappers.AccountMapper;
 import com.bluebank.project.models.Account;
@@ -32,7 +33,7 @@ public class AccountService {
 	}
 
 	@Transactional
-	public AccountDTO registerNewAccount(String cpfcnpj, Account account) throws ResourceNotFoundException {
+	public AccountDTO registerNewAccount(String cpfcnpj, Account account) throws ResourceNotFoundException, ConstraintException {
 		account.setClient(clientService.simpleSearchByCpfcnpj(cpfcnpj));
 		account.setDateForReference(java.util.Calendar.getInstance().getTime());
 		account.setStatus(AccountStatusEnum.Ativa);
