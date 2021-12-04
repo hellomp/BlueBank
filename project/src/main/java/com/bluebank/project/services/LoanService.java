@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.bluebank.project.dtos.LoanDTO;
 import com.bluebank.project.dtos.TransferenceDTO;
+import com.bluebank.project.exception.ConstraintException;
 import com.bluebank.project.exception.ResourceNotFoundException;
 import com.bluebank.project.exception.TransactionException;
 import com.bluebank.project.mappers.LoanMapper;
@@ -40,7 +41,7 @@ public class LoanService {
   TransactionService transactionService;
 
   @Transactional
-  public LoanDTO createLoan(String cpfcnpj, Loan loan) throws ResourceNotFoundException {
+  public LoanDTO createLoan(String cpfcnpj, Loan loan) throws ResourceNotFoundException, ConstraintException{
     loan.setClient(clientService.simpleSearchByCpfcnpj(cpfcnpj));
 
     LoanDTO loanDTO = new LoanDTO();

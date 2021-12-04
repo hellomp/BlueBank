@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bluebank.project.dtos.LoanDTO;
 import com.bluebank.project.dtos.TransferenceDTO;
+import com.bluebank.project.exception.ConstraintException;
+import com.bluebank.project.exception.PersistenceException;
 import com.bluebank.project.exception.ResourceNotFoundException;
 import com.bluebank.project.exception.TransactionException;
 import com.bluebank.project.models.Loan;
@@ -38,8 +41,15 @@ public class LoanController {
   @PostMapping("/{cpfcnpj}")
   @ApiOperation(value="Este método cria um empréstimo")
   @ResponseStatus(HttpStatus.CREATED)
-	public LoanDTO registerLoan(@PathVariable("cpfcnpj") String cpfcnpj, @Validated @RequestBody Loan emprestimo) throws ResourceNotFoundException {
-    return loanService.createLoan(cpfcnpj, emprestimo);
+	public LoanDTO registerLoan(@PathVariable("cpfcnpj") String cpfcnpj, @Validated @RequestBody Loan emprestimo, BindingResult br) throws ResourceNotFoundException, ConstraintException, PersistenceException {
+    if(br.hasErrors()) throw new ConstraintException("Não foi possível criar o empréstimo: " + br.getAllErrors().get(0).getDefaultMessage());			
+    try {
+      return loanService.createLoan(cpfcnpj, emprestimo);
+		} catch (ConstraintException e){
+			throw new ConstraintException(e.getMessage());
+		} catch (Exception e) {
+			throw new PersistenceException("Um erro ocorrou ao cadastrar o cliente: " + e.getMessage());
+		}
   }
 
   //consultar emprestimo pelo id
