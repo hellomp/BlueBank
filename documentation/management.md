@@ -14,7 +14,7 @@ Esse quadro é renovado ao começo de cada `Sprint` e pode conter tarefas de mai
 
 ### Backlog
 
-(imagem ilustrativa do backlog)
+![gif backlog jira](../assets/backlog.gif)
 
 O backlog deve ser entendido como um banco de `tarefas` por assim dizer, essas tarefas basicamente podem ser divididas seguindo uma hierarquia ou `níveis de abstração` do problema a ser resolvido. O nível mais alto e mais abstrato é o `Épico`, ele contém uma descrição genérica do que precisa ser feito e serve de base para a concepção das `Histórias`, que são o segundo nível na hierarquia.
 
