@@ -71,7 +71,7 @@ public class LoanController {
   //pagar emprestimo
   @PostMapping("/pagamento/{emprestimoId}/{contaId}")
   @ApiOperation(value="Este método faz o pagamento de um empréstimo")
-  @ResponseStatus(HttpStatus.CREATED)
+  @ResponseStatus(HttpStatus.ACCEPTED)
   public TransferenceDTO payLoan(@PathVariable("emprestimoId") Long loanId, @PathVariable("contaId") Long accountId) throws ResourceNotFoundException, TransactionException {
     return loanService.payLoan(loanId, accountId);
   }
