@@ -1,7 +1,5 @@
 # Descrição do desafio final do bootcamp Pan Academy
 
-## BlueBank
-
 O banco fictício BlueBank está construindo uma nova plataforma e precisa de uma API para gerenciar as transações. Utilize suas novas habilidades com Java, Banco
 de dados e AWS.
 
