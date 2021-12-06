@@ -18,10 +18,15 @@ Neste arquivo estão descritas algumas ferramentas que usamos ao longo do projet
 
 - **Exception Handling**: é um _must have_ em qualquer código bem escrito, nos atentamos a isso não só com o objetivo de manter o código funcionando corretamente mesmo com eventuais adversidades, mas também com o objetivo de informar ao usuário e ao administrador do sistema as possíveis causas dos erros ocorridos. Criamos um pacote exclusivo para as classes de `exception handling` e tentamos enquadrar todos os erros encontrados pelo nosso time nas categorias de exception definidas nesse pacote bem como retornar ao endpoint uma mensagem explicativa e um `status HTTP` adequado.
 
-### Documentação
-javadoc
-testes com postman insomnia swagger e vscode
-teste com junit
+### Documentação e Testes
+
+- **Javadoc**: usamos o ja conhecido `javadoc` por ser uma ferramenta completa quanse se diz respeito a documentação de referência de código, decidimos incluir nele explicações sobre os métodos criados em inglês, para que seja mais acessível. Por boa prática, decidimos restringir a anotação `@author` apenas às classes, pois ela poluiria o código com muitas linhas desnecessárias. Na verdade o uso dessa anotaçao não é necessário já que usamos `git` para controle de versão, mas ela ajuda a entender mais facilmente a distribuição de tarefas ao longo do código.
+ 
+- **Swagger**:
+ 
+- **Testes**: foram realizados usando tanto o console da `IDE` quanto ferramentas para testes nos [`endpoints`](link para a listagem de enpoints) especificados no código, dentre elas: `Postman`, `Insomnia`, `Swagger` e até mesmo extensões do `VScode`. Além delas tembém usamos `Junit` para realizar testes na aplicação de maneira direta, sem enviar requisições aos endpoints, e permitindo que eles fossem facilmente documentados.
+
+listagem de endpoints
 
 anotações transactional
 
