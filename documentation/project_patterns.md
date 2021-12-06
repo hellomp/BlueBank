@@ -16,7 +16,7 @@ Neste arquivo estão descritas algumas ferramentas que usamos ao longo do projet
 
 - **Mappers**: em certos pontos do código, precisamos passar a informação contida nas entidades difinidas pelo já mencionado `model` aos também já mencionados `DTOs`, há alguns frameworks que realizam essa função com um alto grau de customização até. Porém, por problemas de compatibilidade decidimos implementar nossas próprias classes de `mapping`, elas estão divididas correspondentemente aos models e seus respectivos DTOs.
 
-- exception handling
+- **Exception Handling**: é um _must have_ em qualquer código bem escrito, nos atentamos a isso não só com o objetivo de manter o código funcionando corretamente mesmo com eventuais adversidades, mas também com o objetivo de informar ao usuário e ao administrador do sistema as possíveis causas dos erros ocorridos. Criamos um pacote exclusivo para as classes de `exception handling` e tentamos enquadrar todos os erros encontrados pelo nosso time nas categorias de exception definidas nesse pacote bem como retornar ao endpoint uma mensagem explicativa e um `status HTTP` adequado.
 
 ### Documentação
 javadoc
