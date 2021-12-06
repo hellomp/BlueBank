@@ -1,8 +1,12 @@
-// Padrões e dependências/pacotes/bibliotecas/plugins
-
 ## Ferramentas e Técnicas
 
 Neste arquivo estão descritas algumas ferramentas que usamos ao longo do projeto assim como as razões para a sua aplicação
+
+### Stack
+
+- Java spring boot my sql aws Eclipse, IntelliJ
+- Git e Github Banco de dados: MySQL 
+- Cliente para banco de dados: DBeaver
 
 ### Padrões de Projeto e Boas Práticas
 
@@ -22,27 +26,12 @@ Neste arquivo estão descritas algumas ferramentas que usamos ao longo do projet
 
 - **Javadoc**: usamos o ja conhecido `javadoc` por ser uma ferramenta completa quanse se diz respeito a documentação de referência de código, decidimos incluir nele explicações sobre os métodos criados em inglês, para que seja mais acessível. Por boa prática, decidimos restringir a anotação `@author` apenas às classes, pois ela poluiria o código com muitas linhas desnecessárias. Na verdade o uso dessa anotaçao não é necessário já que usamos `git` para controle de versão, mas ela ajuda a entender mais facilmente a distribuição de tarefas ao longo do código.
  
-- **Swagger**:
+- **Swagger**: seguindo a sugestão do desafio, usamos o `Swagger` para documentar os [`endpoints`](link para a listagem de enpoints) da aplicação. Usamos uma integração do Swagger com Javadoc atravś da ferramenta [`Enunciate`](http://enunciate.webcohesion.com/) para que as anotaçõs do Javadoc descrevessem os endpoints exibidos no Jwagger.
  
-- **Testes**: foram realizados usando tanto o console da `IDE` quanto ferramentas para testes nos [`endpoints`](link para a listagem de enpoints) especificados no código, dentre elas: `Postman`, `Insomnia`, `Swagger` e até mesmo extensões do `VScode`. Além delas tembém usamos `Junit` para realizar testes na aplicação de maneira direta, sem enviar requisições aos endpoints, e permitindo que eles fossem facilmente documentados.
+- **Testes**: foram realizados usando tanto o console da `IDE` quanto ferramentas para testes nos [`endpoints`](link para a listagem de enpoints) especificados no código, dentre elas: `Postman`, `Insomnia`, `Swagger` e até mesmo extensões do `VScode`. Além delas tembém usamos `Junit` para realizar testes na aplicação de maneira direta (sem envio de requisições) e permitindo que eles fossem facilmente documentados.
 
-listagem de endpoints
+### Menções Honrosas
 
-anotações transactional
-
+- anotações transactional
 - métodos especiais no repositorio (explicar vantagens dos derived query methods)
-- 
-
-explicar o uso da interface de transação
-
-funcionalidades
-
-realizar empréstimo
-- clientes, contas e transações só poderão ser criadas e consultadas, nunca deletadas ou editadas
-- 
-- fazemos consultas por cpf ou cnpj
-
-## Ferramentas
-Java spring boot my sql aws
-
-IDE de desenvolvimento: Eclipse, IntelliJ Versionamento de código:Git e Github Banco de dados: MySQL Software Cliente para banco de dados: DBeaver Hospedagem: Amazon Web Services (AWS) Postman Swagger Cliente SSH: Putty, MobaXTerm Jira: https://dbluebank.atlassian.net/jira/software/projects/DBLUEB/boards/1/roadmap
+- explicar o uso da interface de transação
