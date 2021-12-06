@@ -34,13 +34,13 @@ Apesar de poder ser executado localmente, este projeto foi feito para ser implan
 
 ## Documentação
 
-[Javadoc](./project/doc/index.html)
-swagger
+- [Javadoc](./project/doc/index.html)
+- Swagger
 
-[Descrição do desafio](./documentation/challenge_description.md)
-[gestão](./documentation/management.md)
-[Ferramentas e técnicas](./documentation/project_patterns.md)
-[Lista de Endpoints](./documentation/endpoint_list)
+- [Descrição do desafio](./documentation/challenge_description.md)
+- [Estratégias de gestão e fluxo de trabalho](./documentation/management.md)
+- [Ferramentas e técnicas usadas no código](./documentation/project_patterns.md)
+- [Lista de endpoints da aplicação](./documentation/endpoint_list)
 
 ## Como contribuir
 
