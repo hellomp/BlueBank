@@ -25,10 +25,22 @@ Caso você já tenha o JDK instalado e já esteja familiarizado com o uso de uma
 
 Uma página descrevendo cada possível `requisição` em cada possível `endpoint` deverá estar acessível a partir do endereço [127.0.0.1:8080](http://127.0.0.1:8080) no seu navegador.
 
+(to-do: instalação do banco de dados)
+
 Apesar de poder ser executado localmente, este projeto foi feito para ser implantado em um servidor remoto da AWS
 (to-do: isso deveria ter uma marcação de anotação ?)
 
 (to-do: explicar rapidamente o processo de deploy na AWS)
+
+## Documentação
+
+[Javadoc](./project/doc/index.html)
+swagger
+
+[Descrição do desafio](./documentation/challenge_description.md)
+[gestão](./documentation/management.md)
+[Ferramentas e técnicas](./documentation/project_patterns.md)
+[Lista de Endpoints](./documentation/endpoint_list)
 
 ## Como contribuir
 
