@@ -1,4 +1,4 @@
-## Gestão do projeto
+## Gestão e fluxo de trabalho do projeto
 
 Seguindo as recomendações da descrição do desafio optamos por usar a ferramenta `Jira`. Pois assim seria mais fácil gerenciar as tarefas tanto com um quadro Kanban para cada sprint quanto para a elaboração de um backlog consistente e bem definido.
 
@@ -35,3 +35,15 @@ Cada uma das tarefas, chamadas de `issues` no Jira possui data de entrega; descr
 >_Nota Nº2: usamos a propriedade de issue "prioridade" disponibilizada pelo próprio Jira, essa propriedade define até 5 níveis de prioridade para cada issue_
 
 Esse quadro é renovado ao começo de cada `Sprint` e pode conter tarefas de mais de um `Épico` por Sprint.
+
+### Fluxo de Trabalho
+
+Optamos por adotar uma solução mais prática em relação ao famoso `Gitflow` e seu modelo de divisão de branches. Nosso projeto consiste em apenas uma única entrega (na qual deverão ser priorizados o aprendizado e a aplicação de conceitos fundamentais) e não em um software para distribuição em massa.
+
+Nosso fluxo de trabalho consiste em criar branches para cada membro do grupo e o escopo de atuação dessas branches varia de acordo com as tarefas assumidas pelos seus respectivos mantenedores ao longo do projeto.
+
+![screenshot gitlog](./assets/gitlog.png)
+
+Cada membro, após fazer as modificações necessárias na sua branch, criará um `pull request` para a branch principal que deverá ser revisado e avaliado pelo _"tech lead"_ do grupo. Eventuais conflitos e correções serão discutidos e realizados com toda a equipe.
+
+Com tarefas bem divididas e escopos de atuação bem definidos, garantimos o mínimo de conflito possível nos `merges` com a branch principal.
