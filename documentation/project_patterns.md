@@ -10,7 +10,7 @@ Neste arquivo estão descritas algumas ferramentas que usamos ao longo do projet
 
 ### Padrões de Projeto e Boas Práticas
 
-- **DTO**: do inglês, Data transfer object, é um padrão de projeto de software usado para transferir dados entre subsistemas de um software. Usar um `DTO` nos permite enviar aos endpoints da aplicação apenas as informações pertinentes sobre as entidades consultadas ou até mesmo alterá-las para que facilitem a compreensão geral do usuário.
+- **DTO**: do inglês, Data transfer object, é um padrão de projeto de software usado para transferir dados entre subsistemas de um software. Usar um `DTO` nos permite enviar aos [`endpoints`](./assets/endpoint_list.md) da aplicação apenas as informações pertinentes sobre as entidades consultadas ou até mesmo alterá-las para que facilitem a compreensão geral do usuário.
 
 - **MVC**: do inglês, Model View Controller, é um padrão de arquitetura de software que define 3 camadas com responsabilidades distintas em uma aplicação. Model, uma estrutura para gerenciar e agrupar os dados que serão utilizados na aplicação. View, uma interface de interação para o usuário que o permitirá acessar os serviços da aplicação de maneira ágiil e prática. Controller, a camada responsável por intermediar as requisições recebidas pelo usuário e chamar os métodos necessários para seu processamento. Essa arquitetura é usada pelo framework que utilizamos, o `Spring`, que será explicado mais a diante.
 
@@ -26,9 +26,9 @@ Neste arquivo estão descritas algumas ferramentas que usamos ao longo do projet
 
 - **Javadoc**: usamos o ja conhecido `javadoc` por ser uma ferramenta completa quanse se diz respeito a documentação de referência de código, decidimos incluir nele explicações sobre os métodos criados em inglês, para que seja mais acessível. Por boa prática, decidimos restringir a anotação `@author` apenas às classes, pois ela poluiria o código com muitas linhas desnecessárias. Na verdade o uso dessa anotaçao não é necessário já que usamos `git` para controle de versão, mas ela ajuda a entender mais facilmente a distribuição de tarefas ao longo do código.
  
-- **Swagger**: seguindo a sugestão do desafio, usamos o `Swagger` para documentar os [`endpoints`](link para a listagem de enpoints) da aplicação. Usamos uma integração do Swagger com Javadoc atravś da ferramenta [`Enunciate`](http://enunciate.webcohesion.com/) para que as anotaçõs do Javadoc descrevessem os endpoints exibidos no Jwagger.
+- **Swagger**: seguindo a sugestão do desafio, usamos o `Swagger` para documentar os [`endpoints`](./assets/endpoint_list.md) da aplicação. Usamos uma integração do Swagger com Javadoc atravś da ferramenta [`Enunciate`](http://enunciate.webcohesion.com/) para que as anotaçõs do Javadoc descrevessem os endpoints exibidos no Jwagger.
  
-- **Testes**: foram realizados usando tanto o console da `IDE` quanto ferramentas para testes nos [`endpoints`](link para a listagem de enpoints) especificados no código, dentre elas: `Postman`, `Insomnia`, `Swagger` e até mesmo extensões do `VScode`. Além delas tembém usamos `Junit` para realizar testes na aplicação de maneira direta (sem envio de requisições) e permitindo que eles fossem facilmente documentados.
+- **Testes**: foram realizados usando tanto o console da `IDE` quanto ferramentas para testes nos [`endpoints`](./assets/endpoint_list.md) especificados no código, dentre elas: `Postman`, `Insomnia`, `Swagger` e até mesmo extensões do `VScode`. Além delas tembém usamos `Junit` para realizar testes na aplicação de maneira direta (sem envio de requisições) e permitindo que eles fossem facilmente documentados.
 
 ### Menções Honrosas
 
