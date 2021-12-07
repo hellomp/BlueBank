@@ -44,10 +44,12 @@ Para a instalação do MySQL, há os seguintes meios:
 - [Website para download do MariaDB](https://mariadb.org/download/)
 - A versão de MySQL ou de MariaDB do gerenciador de pacotes do seu sistema `Linux`
 
->_Nota: em caso de distribuições Linux que usam Systemd, não esqueça de iniciar o `daemon` do banco de dados com os comandos
->`sudo systemctl start mysql`
->ou
->`sudo systemctl start mariadb`_
+>_Nota: em caso de distribuições Linux que usam Systemd, não esqueça de iniciar o `daemon` do banco de dados com os comandos: <br>
+`sudo systemctl start mysql` <br>
+ou <br>
+`sudo systemctl start mariadb`_
+
+Crie um usuário e senha no seu banco de dados e altere as linhas do arquivo [appllication.properties](./project/src/main/resources/application.properties) correspondentes a estas informações.
 
 Com o JDK instalado e o banco de dados instalado e devidamente configurado, basta importar o projeto na sua IDE e executar a classe principal.
 
