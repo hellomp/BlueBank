@@ -26,7 +26,7 @@ No índice de links a seguir estão detalhes sobre o desafio proposto, o desenvo
 
 ## Instruções para instalação e execução local
 
-Caso vocẽ queira executar o projeto na sua própria máquina basta ter pelo menos o `JDK` instalado e alguma `IDE` de sua preferência
+Caso vocẽ queira executar o projeto na sua própria máquina basta ter pelo menos o `JDK` instalado, alguma `IDE` de sua preferência e um banco de dados MySQL devidamente configurado.
 
 Você poderá obter o JDK pelos seguintes meios:
 - [Website da Oracle](https://www.oracle.com/java/technologies/downloads/)
@@ -35,7 +35,19 @@ Você poderá obter o JDK pelos seguintes meios:
 
 >_Guiá-lo por todo o processo de instalação dessa ferramenta e correção de eventuais problemas estão além do escopo deste guia._
 
-(to-do: instalação do banco de dados)
+Recomendamos o uso das seguintes IDEs:
+- [Eclipse](https://www.eclipse.org/downloads/)
+- [Intellij](https://www.jetbrains.com/idea/download)
+
+Para a instalação do MySQL, há os seguintes meios:
+- [Website oficial para download do MySQL](https://dev.mysql.com/downloads/)
+- [Website para download do MariaDB](https://mariadb.org/download/)
+- A versão de MySQL ou de MariaDB do gerenciador de pacotes do seu sistema `Linux`
+
+>_Nota: em caso de distribuições Linux que usam Systemd, não esqueça de iniciar o `daemon` do banco de dados com os comandos
+>`sudo systemctl start mysql`
+>ou
+>`sudo systemctl start mariadb`_
 
 Com o JDK instalado e o banco de dados instalado e devidamente configurado, basta importar o projeto na sua IDE e executar a classe principal.
 
