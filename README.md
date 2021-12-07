@@ -49,7 +49,7 @@ Para a instalação do MySQL, há os seguintes meios:
 ou <br>
 `sudo systemctl start mariadb`_
 
-Crie um usuário e senha no seu banco de dados e altere as linhas do arquivo [appllication.properties](./project/src/main/resources/application.properties) correspondentes a estas informações.
+Crie um usuário e senha no seu banco de dados e altere o valor das chaves `spring.datasource.username` e `spring.datasource.password` do arquivo [appllication.properties](./project/src/main/resources/application.properties) com as suas credenciais.
 
 Com o JDK instalado e o banco de dados instalado e devidamente configurado, basta importar o projeto na sua IDE e executar a classe principal.
 
