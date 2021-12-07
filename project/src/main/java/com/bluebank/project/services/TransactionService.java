@@ -82,7 +82,8 @@ public class TransactionService {
 		transaction.setTransactionType(TransactionTypeEnum.SAQ);
 		transaction.setTransactionDate(java.util.Calendar.getInstance().getTime());
 		transaction.setPreviousBalance(transaction.getAccount().getBalance());
-		transaction.setCurrentBalance(transaction.getAccount().getBalance());
+//		transaction.setCurrentBalance(transaction.getAccount().getBalance());
+		transaction.setValue(transaction.getValue());
 		
 		WithdrawDTO withdrawDTO = new WithdrawDTO();
 		double valorSaque = transaction.getValue();
