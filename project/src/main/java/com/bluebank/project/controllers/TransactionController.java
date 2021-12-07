@@ -66,13 +66,14 @@ public class TransactionController {
 	}
 	
 	@GetMapping("/saldo/{id}")
-	@ApiOperation(value="Este método consulta o saldo do cliente")
+	@ApiOperation(value="Este método consulta o saldo de uma conta")
 	@ResponseStatus(HttpStatus.OK)
 	public double balance(@PathVariable("id") Long id) throws ResourceNotFoundException, TransactionException{
 		return transacaoService.showAccountBalanceById(id);
 	}
 	
 	@GetMapping("/extrato/{id}")
+	@ApiOperation(value="Este método consulta o extrato de uma conta")
 	@ResponseStatus(HttpStatus.OK)
 	public List<TransactionDTO> extract(@PathVariable("id") Long id) throws ResourceNotFoundException, TransactionException{
 		return transacaoService.showTransactionsByAccountId(id);

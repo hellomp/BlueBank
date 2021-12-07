@@ -37,7 +37,6 @@ public class LoanController {
   @Autowired
   LoanService loanService;
 
-  //criar emprestimo
   @PostMapping("/{cpfcnpj}")
   @ApiOperation(value="Este método cria um empréstimo")
   @ResponseStatus(HttpStatus.CREATED)
@@ -52,7 +51,6 @@ public class LoanController {
 		}
   }
 
-  //consultar emprestimo pelo id
   @GetMapping("/id/{emprestimoId}")
   @ApiOperation(value="Este método consulta um empréstimo pelo id")
   @ResponseStatus(HttpStatus.OK)
@@ -60,7 +58,6 @@ public class LoanController {
     return loanService.showLoanById(emprestimoId);
   }
 
-  //consultar emprestimo pelo cpfcnpj
   @GetMapping("/cpfcnpj/{cpfcnpj}")
   @ApiOperation(value="Este método consulta um empréstimo pelo cpf/cnpj")
   @ResponseStatus(HttpStatus.OK)
@@ -68,7 +65,6 @@ public class LoanController {
     return loanService.showLoanByClientCpfcnpj(cpfcnpj);
   }
 
-  //pagar emprestimo
   @PostMapping("/pagamento/{emprestimoId}/{contaId}")
   @ApiOperation(value="Este método faz o pagamento de um empréstimo")
   @ResponseStatus(HttpStatus.ACCEPTED)
