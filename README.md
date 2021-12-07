@@ -69,7 +69,7 @@ Este repositório foi construído colaborativamente pelos seguintes membros: [Al
 
 ## Licença
 
-Este projeto está licenciado sob a licensa **GPLv3**, veja o arquivo [LICENSE](./LICENSE) para mais detalhes.
+Este projeto está licenciado sob a licença **GPLv3**, veja o arquivo [LICENSE](./LICENSE) para mais detalhes.
 
 ## Agradecimentos
 
