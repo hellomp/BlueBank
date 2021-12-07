@@ -2,11 +2,23 @@
 
 Neste arquivo estão descritas algumas ferramentas que usamos ao longo do projeto assim como as razões para a sua aplicação
 
-### Stack
+### Stack das principais tecnologias usadas no projeto 
 
-- Java spring boot my sql aws Eclipse, IntelliJ
-- Git e Github Banco de dados: MySQL 
-- Cliente para banco de dados: DBeaver
+![Java](https://img.shields.io/badge/-Java-black?style=flat-square&logo=Java)
+![Spring](https://img.shields.io/badge/-Spring-black?style=flat-square&logo=Spring)
+![MySQL](https://img.shields.io/badge/-MySQL-black?style=flat-square&logo=MySQL)
+![AWS](https://img.shields.io/badge/-AWS-black?style=flat-square&logo=amazon-aws)
+![Eclipse](https://img.shields.io/badge/-Eclipse-black?style=flat-square&logo=Eclipse)
+![Intellij](https://img.shields.io/badge/-Intellij-black?style=flat-square&logo=Intellij-IDEA)
+![Git](https://img.shields.io/badge/-Git-black?style=flat-square&logo=Git)
+![Github](https://img.shields.io/badge/-Github-black?style=flat-square&logo=Github)
+
+- Java
+- Spring framework
+- Banco de dados: MySQL
+- AWS
+- IDEs Eclipse e IntelliJ
+- Git e Github 
 
 ### Padrões de Projeto e Boas Práticas
 
@@ -26,12 +38,14 @@ Neste arquivo estão descritas algumas ferramentas que usamos ao longo do projet
 
 - **Javadoc**: usamos o ja conhecido `javadoc` por ser uma ferramenta completa quanse se diz respeito a documentação de referência de código, decidimos incluir nele explicações sobre os métodos criados em inglês, para que seja mais acessível. Por boa prática, decidimos restringir a anotação `@author` apenas às classes, pois ela poluiria o código com muitas linhas desnecessárias. Na verdade o uso dessa anotaçao não é necessário já que usamos `git` para controle de versão, mas ela ajuda a entender mais facilmente a distribuição de tarefas ao longo do código.
  
-- **Swagger**: seguindo a sugestão do desafio, usamos o `Swagger` para documentar os [`endpoints`](./assets/endpoint_list.md) da aplicação. Usamos uma integração do Swagger com Javadoc atravś da ferramenta [`Enunciate`](http://enunciate.webcohesion.com/) para que as anotaçõs do Javadoc descrevessem os endpoints exibidos no Jwagger.
+- **Swagger**: seguindo a sugestão do desafio, usamos o `Swagger` para documentar os [`endpoints`](./endpoint_list.md) da aplicação. Usamos uma integração do Swagger com Javadoc através da ferramenta [`Enunciate`](http://enunciate.webcohesion.com/) para que as anotaçõs do Javadoc descrevessem os endpoints exibidos no Jwagger.
  
-- **Testes**: foram realizados usando tanto o console da `IDE` quanto ferramentas para testes nos [`endpoints`](./assets/endpoint_list.md) especificados no código, dentre elas: `Postman`, `Insomnia`, `Swagger` e até mesmo extensões do `VScode`. Além delas tembém usamos `Junit` para realizar testes na aplicação de maneira direta (sem envio de requisições) e permitindo que eles fossem facilmente documentados.
+- **Testes**: foram realizados usando tanto o console da `IDE` quanto ferramentas para testes nos [`endpoints`](./endpoint_list.md) especificados no código, dentre elas: `Postman`, `Insomnia`, `Swagger` e até mesmo extensões do `VScode`. Além delas tembém usamos `Junit` para realizar testes na aplicação de maneira direta (sem envio de requisições) e permitindo que eles fossem facilmente documentados.
 
 ### Menções Honrosas
 
-- anotações transactional
-- métodos especiais no repositorio (explicar vantagens dos derived query methods)
-- explicar o uso da interface de transação
+- **Anotação _@Transactional_**: esta anotação é usada em nossos métodos no pacote de service e ela garante que todo o processo siga o princípio da atomicidade, ou seja, ele não pode ser fracionado, feito parcialmente (é "tudo ou nada"). Assim quando forem realizados procedimentos bancários, temos a garantia que nenhuma informação será persistida a menos que todo o processo tenha 100% de êxito. Isso evita inconsistência no banco de dados.
+
+- **Derived Query Methods**: são usados nas interfaces do pacote de `repositories`, pois eles descrevem queries específicas. Isso mesmo, nós não precisamos escrever queries usando `SQL` caso elas não estejam definidas pelos métodos básicos da JPA. Usando este recurso muito útil, os `Derived Query Methods`, deixamos que a própria JPA se baseie na assinatura do método em java e crie as queries no dialeto SQL adequado ao banco usado. A vantagem de se usar esse recurso é que ele aumenta a portabilidade do código.
+
+- **Interface para transações na conta**: buscando uma maior elegância e legibilidade no código, criamos uma interface que deve ser implementada por todos os DTOs de transações. Esta interface não possui nenhum método, ela serve simplesmente para uso de polimorfismo em alguns casos pertinentes, assim todos os DTOs de transações serão relacionados apesar de possuírem estruturas bastante distintas. Optamos por usar interface em vez de herança por boa prática já que, assim, o código se torna mais desacoplado e maleável.
