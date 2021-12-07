@@ -45,7 +45,7 @@ Uma página descrevendo cada possível `requisição` em cada possível `endpoin
 
 ## Como contribuir
 
-1. Faça um `fork` deste repositório clicando [aqui](https://github.com/alanomenezes/BlueBank/fork) e clone-o na sua máquina pessoal
+1. Faça um [`fork`](https://github.com/alanomenezes/BlueBank/fork) deste repositório e clone-o na sua máquina pessoal
 ```console
 $ git clone https://github.com/alanomenezes/BlueBank.git
 ```
