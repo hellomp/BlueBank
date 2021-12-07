@@ -38,9 +38,9 @@ Neste arquivo estão descritas algumas ferramentas que usamos ao longo do projet
 
 - **Javadoc**: usamos o ja conhecido `javadoc` por ser uma ferramenta completa quanse se diz respeito a documentação de referência de código, decidimos incluir nele explicações sobre os métodos criados em inglês, para que seja mais acessível. Por boa prática, decidimos restringir a anotação `@author` apenas às classes, pois ela poluiria o código com muitas linhas desnecessárias. Na verdade o uso dessa anotaçao não é necessário já que usamos `git` para controle de versão, mas ela ajuda a entender mais facilmente a distribuição de tarefas ao longo do código.
  
-- **Swagger**: seguindo a sugestão do desafio, usamos o `Swagger` para documentar os [`endpoints`](./assets/endpoint_list.md) da aplicação. Usamos uma integração do Swagger com Javadoc através da ferramenta [`Enunciate`](http://enunciate.webcohesion.com/) para que as anotaçõs do Javadoc descrevessem os endpoints exibidos no Jwagger.
+- **Swagger**: seguindo a sugestão do desafio, usamos o `Swagger` para documentar os [`endpoints`](./endpoint_list.md) da aplicação. Usamos uma integração do Swagger com Javadoc através da ferramenta [`Enunciate`](http://enunciate.webcohesion.com/) para que as anotaçõs do Javadoc descrevessem os endpoints exibidos no Jwagger.
  
-- **Testes**: foram realizados usando tanto o console da `IDE` quanto ferramentas para testes nos [`endpoints`](./assets/endpoint_list.md) especificados no código, dentre elas: `Postman`, `Insomnia`, `Swagger` e até mesmo extensões do `VScode`. Além delas tembém usamos `Junit` para realizar testes na aplicação de maneira direta (sem envio de requisições) e permitindo que eles fossem facilmente documentados.
+- **Testes**: foram realizados usando tanto o console da `IDE` quanto ferramentas para testes nos [`endpoints`](./endpoint_list.md) especificados no código, dentre elas: `Postman`, `Insomnia`, `Swagger` e até mesmo extensões do `VScode`. Além delas tembém usamos `Junit` para realizar testes na aplicação de maneira direta (sem envio de requisições) e permitindo que eles fossem facilmente documentados.
 
 ### Menções Honrosas
 
