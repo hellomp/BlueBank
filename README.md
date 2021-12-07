@@ -21,7 +21,8 @@ No índice de links a seguir estão detalhes sobre o desafio proposto, o desenvo
 - [Descrição do desafio](./documentation/challenge_description.md)
 - [Estratégias de gestão e fluxo de trabalho](./documentation/management.md)
 - [Ferramentas e técnicas usadas no código](./documentation/project_patterns.md)
-- [Lista de endpoints da aplicação](./documentation/endpoint_list)
+- [Lista de endpoints da aplicação](./documentation/endpoint_list.md)
+- [Deploy na AWS](./documentation/AWS_deploy.md)
 
 ## Instruções para instalação e execução
 
@@ -40,10 +41,7 @@ Uma página descrevendo cada possível `requisição` em cada possível `endpoin
 
 (to-do: instalação do banco de dados)
 
-Apesar de poder ser executado localmente, este projeto foi feito para ser implantado em um servidor remoto da AWS
-(to-do: isso deveria ter uma marcação de anotação ?)
-
-(to-do: explicar rapidamente o processo de deploy na AWS)
+>_Apesar de poder ser executado localmente, este projeto foi feito para ser implantado em um servidor remoto da AWS, a descrição do processo está no arquivo [documentation/AWS_deploy.md](./documentation/AWS_deploy.md)_
 
 ## Como contribuir
 
@@ -65,8 +63,14 @@ $ git push origin my-new-feature-branch
 ```
 5. Crie um novo pull request para este repositório a partir do repositório do seu fork
 
-(to-do: tópicos para licença e agradecimentos, localizar o índice da documentação)
-
 ## Autores
 
 Este repositório foi construído colaborativamente pelos seguintes membros: [Alano Menezes](https://github.com/alanomenezes), [Marcos Paulo](https://github.com/hellomp), [Hellimateas Chaves](https://github.com/Hellimateas), [Pedro Henrique](https://github.com/PedroHenriquebc) e [Ícaro Pablo](https://github.com/IcaroPablo).
+
+## Licença
+
+Este projeto está licenciado sob a licensa **GPLv3**, veja o arquivo [LICENSE](./LICENSE) para mais detalhes.
+
+## Agradecimentos
+
+Gama academy e banco Pan, por todas essas aulas interessantes, pelos desafios propostos e pela excelente orientação durante todo o percurso do treinamento. Agradecemos especialmente nossos instrutores [Jenifer Plácido](https://www.linkedin.com/in/jenifer-pl%C3%A1cido-00b5611ab/), [Jonathan Ferreira](https://www.linkedin.com/in/jferreira33/) e [Ana Verônica](https://www.linkedin.com/in/ana-ver%C3%B4nica-nascimento-cruz-1896a0158/)
