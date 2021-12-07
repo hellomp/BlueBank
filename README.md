@@ -16,13 +16,13 @@ As funcionalidades do código estão descritas em uma série de páginas web con
 
 As descrições de cada endpoint estão em uma página web construída pela ferramenta [`Swagger`](https://swagger.io/), esta página pode ser acessada através do link [endpoint do swagger](endpoint do swagger) quando a aplicação estiver em execução ;D
 
-No índice de links a seguir estão detalhes sobre o desafio proposto, o desenvolvimento do projeto e um guia rápido por todos os endpoints que poderão ser igualmente acessado pelo `Swagger`.
+No índice de links a seguir estão detalhes sobre o desafio proposto, o desenvolvimento do projeto e um guia rápido para todos os endpoints que poderão ser igualmente acessado pelo `Swagger`.
 
 - [Descrição do desafio](./documentation/challenge_description.md)
 - [Estratégias de gestão e fluxo de trabalho](./documentation/management.md)
 - [Ferramentas e técnicas usadas no código](./documentation/project_patterns.md)
-- [Lista de endpoints da aplicação](./documentation/endpoint_list.md)
 - [Deploy na AWS](./documentation/AWS_deploy.md)
+- [Lista de endpoints da aplicação](./documentation/endpoint_list.md)
 
 ## Instruções para instalação e execução
 
