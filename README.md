@@ -24,7 +24,7 @@ No índice de links a seguir estão detalhes sobre o desafio proposto, o desenvo
 - [Deploy na AWS](./documentation/AWS_deploy.md)
 - [Lista de endpoints da aplicação](./documentation/endpoint_list.md)
 
-## Instruções para instalação e execução
+## Instruções para instalação e execução local
 
 Caso vocẽ queira executar o projeto na sua própria máquina basta ter pelo menos o `JDK` instalado e alguma `IDE` de sua preferência
 
@@ -35,11 +35,11 @@ Você poderá obter o JDK pelos seguintes meios:
 
 >_Guiá-lo por todo o processo de instalação dessa ferramenta e correção de eventuais problemas estão além do escopo deste guia._
 
-Caso você já tenha o JDK instalado e já esteja familiarizado com o uso de uma IDE basta importar o projeto e executar sua classe principal.
-
-Uma página descrevendo cada possível `requisição` em cada possível `endpoint` deverá estar acessível a partir do endereço [127.0.0.1:8080](http://127.0.0.1:8080) no seu navegador.
-
 (to-do: instalação do banco de dados)
+
+Com o JDK instalado e o banco de dados instalado e devidamente configurado, basta importar o projeto na sua IDE e executar a classe principal.
+
+Uma página descrevendo cada possível `requisição` em cada possível `endpoint` deverá estar acessível a partir do endereço [link do swagger](link do swagger) no seu navegador.
 
 >_Apesar de poder ser executado localmente, este projeto foi feito para ser implantado em um servidor remoto da AWS, a descrição do processo está no arquivo [documentation/AWS_deploy.md](./documentation/AWS_deploy.md)_
 
