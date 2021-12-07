@@ -44,7 +44,7 @@ public class Transaction {
   
   private Date dataExecTransacao; // TODO: depende do lambda
 
-	@NotBlank
+  @NotNull
   private Double value;
 
   public Transaction() {
