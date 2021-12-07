@@ -1,6 +1,6 @@
 # Desafio final da PanAcademy
 
-Um desafio que consiste em criar uma API REST para gerenciamento de contas bancárias e suas respectivas transações.
+Um desafio que consiste em criar uma `API REST` para gerenciamento de contas bancárias e suas respectivas transações.
 
 ## Sobre este repositório
 
