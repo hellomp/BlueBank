@@ -10,6 +10,19 @@ Este repositório contém não só o código principal da aplicação, mas tamb�
 
 >_Logo abaixo você encontrará um índice com explicações mais detalhadas sobre o que foi mencionado :)_
 
+## Documentação
+
+As funcionalidades do código estão descritas em uma série de páginas web construídas pela ferramenta [Javadoc](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/javadoc.html), para ter acesso à documentação do código basta entrar na pasta [/project/doc](./project/doc/) e dar dois clicks no arquivo [`index.html`](./project/doc/index.html), seu navegador deverá fazer o resto ;)
+
+As descrições de cada endpoint estão em uma página web construída pela ferramenta [`Swagger`](https://swagger.io/), esta página pode ser acessada através do link [endpoint do swagger](endpoint do swagger) quando a aplicação estiver em execução ;D
+
+Nos links abaixo estão detalhes sobre o desenvolvimento do projeto e um guia rápido por todos os endpoints que poderão ser igualmente acessado pelo `Swagger`.
+
+- [Descrição do desafio](./documentation/challenge_description.md)
+- [Estratégias de gestão e fluxo de trabalho](./documentation/management.md)
+- [Ferramentas e técnicas usadas no código](./documentation/project_patterns.md)
+- [Lista de endpoints da aplicação](./documentation/endpoint_list)
+
 ## Instruções para instalação e execução
 
 Caso vocẽ queira executar o projeto na sua própria máquina basta ter pelo menos o `JDK` instalado e alguma `IDE` de sua preferência
@@ -31,16 +44,6 @@ Apesar de poder ser executado localmente, este projeto foi feito para ser implan
 (to-do: isso deveria ter uma marcação de anotação ?)
 
 (to-do: explicar rapidamente o processo de deploy na AWS)
-
-## Documentação
-
-- [Javadoc](./project/doc/index.html)
-- Swagger
-
-- [Descrição do desafio](./documentation/challenge_description.md)
-- [Estratégias de gestão e fluxo de trabalho](./documentation/management.md)
-- [Ferramentas e técnicas usadas no código](./documentation/project_patterns.md)
-- [Lista de endpoints da aplicação](./documentation/endpoint_list)
 
 ## Como contribuir
 
