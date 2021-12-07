@@ -2,11 +2,23 @@
 
 Neste arquivo estão descritas algumas ferramentas que usamos ao longo do projeto assim como as razões para a sua aplicação
 
-### Stack
+### Stack das principais tecnologias usadas no projeto 
 
-- Java spring boot my sql aws Eclipse, IntelliJ
-- Git e Github Banco de dados: MySQL 
-- Cliente para banco de dados: DBeaver
+![Java](https://img.shields.io/badge/-Java-black?style=flat-square&logo=Java)
+![Spring](https://img.shields.io/badge/-Spring-black?style=flat-square&logo=Spring)
+![MySQL](https://img.shields.io/badge/-MySQL-black?style=flat-square&logo=MySQL)
+![AWS](https://img.shields.io/badge/-AWS-black?style=flat-square&logo=amazon-aws)
+![Eclipse](https://img.shields.io/badge/-Eclipse-black?style=flat-square&logo=Eclipse)
+![Intellij](https://img.shields.io/badge/-Intellij-black?style=flat-square&logo=Intellij-IDEA)
+![Git](https://img.shields.io/badge/-Git-black?style=flat-square&logo=Git)
+![Github](https://img.shields.io/badge/-Github-black?style=flat-square&logo=Github)
+
+- Java
+- Spring framework
+- Banco de dados: MySQL
+- AWS
+- IDEs Eclipse e IntelliJ
+- Git e Github 
 
 ### Padrões de Projeto e Boas Práticas
 
@@ -32,6 +44,8 @@ Neste arquivo estão descritas algumas ferramentas que usamos ao longo do projet
 
 ### Menções Honrosas
 
-- anotações transactional
-- métodos especiais no repositorio (explicar vantagens dos derived query methods)
+- **Anotação _@Transactional_**: esta anotação é usada em nossos métodos no pacote de service e ela garante que todo o processo siga o princípio da atomicidade, ou seja, ele não pode ser fracionado, feito parcialmente (é "tudo ou nada"). Assim quando forem realizados procedimentos bancários, temos a garantia que nenhuma informação será persistida a menos que todo o processo tenha 100% de êxito. Isso evita inconsistência no banco de dados.
+
+- **Derived Query Methods**: são usados nas interfaces do pacote de `repositories`, pois eles descrevem queries específicas. Isso mesmo, nós não precisamos escrever queries usando `SQL` caso elas não estejam definidas pelos métodos básicos da JPA. Usando este recurso muito útil, os `Derived Query Methods`, deixamos que a própria JPA se baseie na assinatura do método em java e crie as queries no dialeto SQL adequado ao banco usado. A vantagem de se usar esse recurso é que ele aumenta a portabilidade do código.
+
 - explicar o uso da interface de transação
