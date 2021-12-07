@@ -48,4 +48,4 @@ Neste arquivo estão descritas algumas ferramentas que usamos ao longo do projet
 
 - **Derived Query Methods**: são usados nas interfaces do pacote de `repositories`, pois eles descrevem queries específicas. Isso mesmo, nós não precisamos escrever queries usando `SQL` caso elas não estejam definidas pelos métodos básicos da JPA. Usando este recurso muito útil, os `Derived Query Methods`, deixamos que a própria JPA se baseie na assinatura do método em java e crie as queries no dialeto SQL adequado ao banco usado. A vantagem de se usar esse recurso é que ele aumenta a portabilidade do código.
 
-- explicar o uso da interface de transação
+- **Interface para transações na conta**: buscando uma maior elegância e legibilidade no código, criamos uma interface que deve ser implementada por todos os DTOs de transações. Esta interface não possui nenhum método, ela serve simplesmente para uso de polimorfismo em alguns casos pertinentes, assim todos os DTOs de transações serão relacionados apesar de possuírem estruturas bastante distintas. Optamos por usar interface em vez de herança por boa prática já que, assim, o código se torna mais desacoplado e maleável.
