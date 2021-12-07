@@ -14,7 +14,7 @@ Este repositório contém não só o código principal da aplicação, mas tamb�
 
 As funcionalidades do código estão descritas em uma série de páginas web construídas pela ferramenta [Javadoc](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/javadoc.html), para ter acesso à documentação do código basta entrar na pasta [/project/doc](./project/doc/) e dar dois clicks no arquivo [`index.html`](./project/doc/index.html), seu navegador deverá fazer o resto ;)
 
-As descrições de cada endpoint estão em uma página web construída pela ferramenta [`Swagger`](https://swagger.io/), esta página pode ser acessada através do link [endpoint do swagger](endpoint do swagger) quando a aplicação estiver em execução ;D
+As descrições de cada endpoint estão em uma página web construída pela ferramenta [`Swagger`](https://swagger.io/), esta página pode ser acessada através do link [localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html) quando a aplicação estiver em execução ;D
 
 No índice de links a seguir estão detalhes sobre o desafio proposto, o desenvolvimento do projeto e um guia rápido para todos os endpoints que poderão ser igualmente acessado pelo `Swagger`.
 
@@ -39,7 +39,7 @@ Você poderá obter o JDK pelos seguintes meios:
 
 Com o JDK instalado e o banco de dados instalado e devidamente configurado, basta importar o projeto na sua IDE e executar a classe principal.
 
-Uma página descrevendo cada possível `requisição` em cada possível `endpoint` deverá estar acessível a partir do endereço [link do swagger](link do swagger) no seu navegador.
+Uma página descrevendo cada possível `requisição` em cada possível `endpoint` deverá estar acessível a partir do endereço [localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html) no seu navegador.
 
 >_Apesar de poder ser executado localmente, este projeto foi feito para ser implantado em um servidor remoto da AWS, a descrição do processo está no arquivo [documentation/AWS_deploy.md](./documentation/AWS_deploy.md)_
 
