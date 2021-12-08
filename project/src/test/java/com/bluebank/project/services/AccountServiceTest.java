@@ -82,12 +82,8 @@ public class AccountServiceTest {
 	@Order(3)
 	public void testShowAccountById_Exception() {
 		assertThrows(ResourceNotFoundException.class, () -> accountService.showAccountById(3L));
-//		IllegalArgumentException exception =
-//				assertThrows(IllegalArgumentException.class, () -> accountService.showAccountById(2L));
-//		assertEquals("Conta Inexistente", exception.getMessage());
 	}
 
-//
 	@Test
 	@DisplayName("Conta(s) deverá(ão) ser encontrada(s) pelo CPF/CNPJ do seu titular")
 	@Order(4)
@@ -100,9 +96,6 @@ public class AccountServiceTest {
 	@Order(5)
 	public void testShowAccountsByClientCpfcnpj_Exception() {
 		assertThrows(ResourceNotFoundException.class, () -> accountService.showAccountsByClientCpfcnpj("1111111111"));
-//		IllegalArgumentException exception =
-//				assertThrows(IllegalArgumentException.class, () -> accountService.showAccountsByClientCpfcnpj("111111111"));
-//		assertEquals("Cliente Inexistente", exception.getMessage());
 	}
 
 	@Test
@@ -133,9 +126,6 @@ public class AccountServiceTest {
 	@Order(7)
 	public void testChangeAccountHolder_Exception() {
 		assertThrows(ResourceNotFoundException.class, () -> accountService.changeAccountHolder(3L, client2.getCpfcnpj()));
-//		IllegalArgumentException exception =
-//				assertThrows(IllegalArgumentException.class, () -> accountService.changeAccountHolder(3L, client2.getCpfcnpj()));
-//		assertEquals("Conta Inexistente", exception.getMessage());
 	}
 	
 	@Test
@@ -160,10 +150,6 @@ public class AccountServiceTest {
 	@Order(10)
 	public void testDeactivateAccountById_Exception() {
 		assertThrows(ResourceNotFoundException.class, () -> accountService.deactivateAccountById(3L));
-//		IllegalArgumentException exception =
-//				assertThrows(IllegalArgumentException.class, () -> accountService.deactivateAccountById(3L));
-//		assertEquals("Conta Inexistente", exception.getMessage());
-		
 	}
 
 	@Test
@@ -182,9 +168,5 @@ public class AccountServiceTest {
 	@Order(12)
 	public void testDeactivateAccountsByClientCpfcnpj_Exception() {
 		assertThrows(ResourceNotFoundException.class, () -> accountService.deactivateAccountsByClientCpfcnpj("11111111"));
-//		IllegalArgumentException exception =
-//				assertThrows(IllegalArgumentException.class, () -> accountService.deactivateAccountsByClientCpfcnpj("111111111"));
-//		assertEquals("Cliente Inexistente", exception.getMessage());
-		
 	}
 }
