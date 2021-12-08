@@ -102,11 +102,8 @@ public class TransactionServiceTest {
 	@Order(2)
 	public void testExceptionWithdrawAmount_Exception() {
 		assertThrows(ResourceNotFoundException.class, () -> transactionService.withdrawAmount(3L, transaction));
-//		IllegalArgumentException exception =
-//				assertThrows(IllegalArgumentException.class, () -> transactionService.withdrawAmount(3L, transaction));
-//		assertEquals("Conta Inexistente", exception.getMessage());
-		
 	}
+	
 	@Test
 	@DisplayName("Uma exceção de saldo insuficiente na operação saque deverá ser lançada")
 	@Order(3)
@@ -114,10 +111,6 @@ public class TransactionServiceTest {
 		transaction.setId(2L);
 		transaction.setValue(10000.0);
 		assertThrows(TransactionException.class, () -> transactionService.withdrawAmount(2L, transaction));
-//		IllegalArgumentException exception =
-//				assertThrows(IllegalArgumentException.class, () -> transactionService.withdrawAmount(1L, transaction));
-//		assertEquals("Valor de saque maior que o saldo disponível", exception.getMessage());
-		
 	}
 
 	@Test
@@ -133,9 +126,6 @@ public class TransactionServiceTest {
 	@Order(5)
 	public void testDepositAmount_Exception() {
 		assertThrows(ResourceNotFoundException.class, () -> transactionService.depositAmount(3L, transaction));
-//		IllegalArgumentException exception =
-//				assertThrows(IllegalArgumentException.class, () -> transactionService.depositAmount(3L, transaction));
-//		assertEquals("Conta Inexistente", exception.getMessage());
 	}
 	
 	@Test
@@ -145,9 +135,6 @@ public class TransactionServiceTest {
 		transaction.setId(2L);
 		transaction.setValue(-100.0);
 		assertThrows(TransactionException.class, () -> transactionService.depositAmount(2L, transaction));
-//		IllegalArgumentException exception =
-//				assertThrows(IllegalArgumentException.class, () -> transactionService.depositAmount(1L, transaction));
-//		assertEquals("Valor de depósito inválido", exception.getMessage());
 	}
 
 	@Test
@@ -162,9 +149,6 @@ public class TransactionServiceTest {
 	@Order(8)
 	public void testShowTransactionsByAccountId_Exception() {
 		assertThrows(ResourceNotFoundException.class, () -> transactionService.showTransactionsByAccountId(3L));
-//		IllegalArgumentException exception =
-//				assertThrows(IllegalArgumentException.class, () -> transactionService.showTransactionsByAccountId(3L));
-//		assertEquals("Conta Inexistente", exception.getMessage());
 	}
 	
 	@Test
@@ -180,9 +164,6 @@ public class TransactionServiceTest {
 	@Order(10)
 	public void testShowAccountBalanceById_Exception() {
 		assertThrows(ResourceNotFoundException.class, () -> transactionService.showAccountBalanceById(3L));
-//		IllegalArgumentException exception =
-//				assertThrows(IllegalArgumentException.class, () -> transactionService.showAccountBalanceById(3L));
-//		assertEquals("Conta Inexistente", exception.getMessage());
 	}
 
 	@Test
@@ -204,9 +185,6 @@ public class TransactionServiceTest {
 	@Order(12)
 	public void testTransferAmmount_Exception() {
 		assertThrows(ResourceNotFoundException.class, () -> transactionService.transferAmount(3L, 2L, transaction));
-//		IllegalArgumentException exception =
-//				assertThrows(IllegalArgumentException.class, () -> transactionService.transferAmount(3L, 2L, transaction));
-//		assertEquals("Conta Inexistente", exception.getMessage());
 	}
 	
 	@Test
@@ -216,9 +194,6 @@ public class TransactionServiceTest {
 		transaction.setId(3L);
 		transaction.setValue(10000.0);
 		assertThrows(TransactionException.class, () -> transactionService.transferAmount(1L, 2L, transaction));
-//		IllegalArgumentException exception =
-//				assertThrows(IllegalArgumentException.class, () -> transactionService.transferAmount(1L, 2L, transaction));
-//		assertEquals("Valor de saque maior que o saldo disponível", exception.getMessage());
 	}
 	
 	@Test
@@ -228,9 +203,6 @@ public class TransactionServiceTest {
 		transaction.setId(4L);
 		transaction.setValue(-100.0);
 		assertThrows(TransactionException.class, () -> transactionService.transferAmount(1L, 2L, transaction));
-//		IllegalArgumentException exception =
-//				assertThrows(IllegalArgumentException.class, () -> transactionService.transferAmount(1L, 2L, transaction));
-//		assertEquals("Valor de transferência inválido", exception.getMessage());
 	}
 
 }
